@@ -1,5 +1,14 @@
 # Krown directional-view extraction
 
+## Known source interpretation failures
+
+The [completed study](../experiments/krown-20261114/README.md) found serious source
+interpretation failures in both profitable strict-rule holdout cases. An indicator
+comparison and conditional future stance became current long views; MSTR/MSTZ and
+Monero commentary became a Bitcoin short. The frozen rules and features remain intact
+for reproduction. The synthetic checks below establish only the cases they exercise;
+they do not validate these empirical source interpretations.
+
 ## Purpose and boundary
 
 `signal_lab/krown_extract.py` extracts auditable research features from English
@@ -117,7 +126,7 @@ The shared vocabulary includes bullish/bearish, upside/downside, higher/lower,
 rally/sell-off, bounce/pullback, breakout/breakdown, dump, and explicit go-long
 or go-short phrases. Vocabulary matching alone is the intentionally naive
 `lexical` comparator. All variants still require a bounded Bitcoin reference
-and reject an explicitly competing or ambiguous asset binding.
+and reject recognized competing asset names or ambiguous recognized bindings.
 
 Contextual variants additionally require a supported present stance,
 expectation, probability/bias phrase, or configured descriptive rule. They
@@ -242,3 +251,32 @@ revision. It does not establish recall, precision on all Krown speech, market
 profitability, live transcript availability, or execution feasibility. The
 runner records the frozen extraction-file hash separately before its holdout
 evaluation.
+
+### Observed pre-holdout verification
+
+At extraction SHA-256
+`d14bdd6e2cbf1e09541cdbc28d25582a5a5427995548cbf78678099621ae8d62`,
+all 27 focused tests passed, Ruff reported no findings, and mypy reported no
+issues. The independent reviewer reran its fixed 21 abstention cases across
+the three contextual variants: all 63 returned flat. Its two directional
+controls across those variants produced all six expected directions. It also
+verified decimal-timeframe abstention, identical-caption deduplication, exact
+source provenance, and rejection of the demonstrated direction/weight
+forgeries. The reviewed file hash was unchanged before and after that run.
+
+The author then ran the final extractor on the twelve development sources,
+without prices or returns:
+
+| Variant | Long summaries | Short summaries | Flat summaries | Accepted candidate cues |
+|---|---:|---:|---:|---:|
+| `lexical` | 10 | 0 | 2 | 339 |
+| `context_strict` | 2 | 0 | 10 | 10 |
+| `context_standard` | 6 | 0 | 6 | 12 |
+| `context_broad` | 8 | 1 | 3 | 25 |
+
+Each variant examined the same 1,864 vocabulary cues. Accepted cues are counted
+before clause aggregation, so they are not the number of trades or distinct
+forecasts. All retained evidence and cue spans passed exact source validation;
+the four variants checked 11,343, 10,769, 11,343, and 11,972 spans respectively.
+These are development coverage and provenance results, not a forecast-quality
+or trading-performance score.

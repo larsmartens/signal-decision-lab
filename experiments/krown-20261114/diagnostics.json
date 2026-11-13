@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "study_id": "krown-20261114",
+  "reviewed_at": "2026-11-13T23:35:38.429033Z",
+  "review_type": "post_outcome_assistant_context_review",
+  "selection": "Both profitable context_strict holdout trades; all six accepted textual units reviewed with surrounding captions.",
+  "blind": false,
+  "human_reference_labels": false,
+  "audio_or_video_verified": false,
+  "rules_changed_after_review": false,
+  "backtest_results_changed_after_review": false,
+  "audited_video_outputs": 2,
+  "supported_under_current_unconditional_btc_contract": 0,
+  "chart_note": "Post-outcome source review: both strict-variant trades fail the intended current-BTC interpretation. See the report.",
+  "findings": [
+    {
+      "video_id": "_mBMq8jYOY8",
+      "frozen_direction": "long",
+      "verdict": "unsupported",
+      "reason": "One positive cue describes an indicator midband position. The other bullish stance depends on a future reclaim. Neither supports an unconditional current Bitcoin long view.",
+      "source_links": [
+        "https://www.youtube.com/watch?v=_mBMq8jYOY8&t=845s",
+        "https://www.youtube.com/watch?v=_mBMq8jYOY8&t=5986s"
+      ],
+      "failure_modes": [
+        "wrong_semantic_subject",
+        "unrecognized_conditional_construction"
+      ]
+    },
+    {
+      "video_id": "_vVNNnKqdDw",
+      "frozen_direction": "short",
+      "verdict": "unsupported",
+      "reason": "All three negative units concern MSTR/MSTZ or Monero, with Bitcoin mentioned as a comparison or explicitly separate subject. A remaining Bitcoin bounce expectation does not support the aggregate short.",
+      "source_links": [
+        "https://www.youtube.com/watch?v=_vVNNnKqdDw&t=520s",
+        "https://www.youtube.com/watch?v=_vVNNnKqdDw&t=2796s",
+        "https://www.youtube.com/watch?v=_vVNNnKqdDw&t=2807s",
+        "https://www.youtube.com/watch?v=_vVNNnKqdDw&t=4749s"
+      ],
+      "failure_modes": [
+        "unknown_asset_attribution",
+        "comparison_anchor_mistaken_for_subject",
+        "repeated_economic_proposition_counted_twice"
+      ]
+    }
+  ],
+  "interpretation": "The frozen positive return is a numerical result of the heuristic, not evidence that correctly extracted Krown Bitcoin views were profitable. This targeted diagnostic cannot estimate corpus-wide precision or recall.",
+  "next_gate": "Fix subject, condition and proposition representation, then measure extraction accuracy against independent labels on fresh unseen sources before further performance claims."
+}

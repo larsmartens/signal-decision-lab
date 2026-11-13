@@ -1,6 +1,6 @@
 # Validation record
 
-Updated 13 November 2026. This record separates software tests, real source acquisition
+Updated 14 November 2026 (study data cut off at November 13, 23:00 UTC). This record separates software tests, real source acquisition
 and model inference. The project has not established a profitable trading strategy.
 
 ## Current checks
@@ -12,17 +12,21 @@ It runs with resource warnings treated as errors.
 
 | Check | Result | What it establishes |
 |---|---|---|
-| Behavioral tests | 160 passed, no failures, errors or skips on Python 3.12.14 | Behavior on specified cases; no estimate of extraction accuracy on a Krown corpus. |
-| Ruff and Mypy | Passed; 12 source modules checked | Lint and type checks on the maintained implementation. |
+| Behavioral tests | 232 passed, no failures, errors or skips on Python 3.12.14 | Behavior on specified cases; no estimate of extraction accuracy on a Krown corpus. |
+| Ruff and Mypy | Passed; 16 source modules checked | Lint and type checks on the maintained implementation. |
 | Offline demo | Six synthetic claims, one reviewed setup, one completed paper trade | The pipeline runs and records its evidence and execution assumptions. |
 | Jev HTTP contract | Local server tests exercise real HTTP requests and controlled responses | Client behavior against the published contract, including distinct probability and confidence fields. |
 | Jev live inference | Not run; no TypeSafe API key was configured | No claims about live responses, latency, calibration or trading value. |
-| Real YouTube retrieval | 646 automatically generated English caption segments | One source could be acquired with timestamps and provenance. |
-| Rule extraction on that source | 46 asset mentions, all commentary; no complete supported setups | A processing check, not a labeled accuracy benchmark. |
+| Own-channel acquisition | 36/36 selected videos and completed streams; 66,992 caption segments | Verified source identity, metadata, retrieval and hashes; no audio verification. |
+| Literal setup coverage | 1,950 asset mentions and zero complete supported setups across the 36 sources | Coverage of the limited grammar, not proof that the source contains no actionable views. |
+| Directional experiment | 24 strategy runs and 12 distinct controls on actual BTCUSDT candles | Reproducible fixed-rule historical calculations, not validated source interpretation. |
+| Independent accounting audit | 36 result blocks, 284 completed trades and 28,638 hourly equity points reconciled | Quantities, costs, P&L, exposure, drawdown and all controls independently recomputed. |
+| Post-outcome semantic audit | Both profitable strict-rule holdout outputs failed source-context review | Known subject and condition errors; selected cases cannot estimate corpus-wide accuracy. |
+| Study figures | Four PNG/SVG pairs generated with Matplotlib and visually checked | Counts, loss signs, axes, controls, costs and semantic-audit note are visible. |
 | Independent review | Findings and verification are recorded in [REVIEW.md](REVIEW.md) | Targeted checks by a reviewer who did not write the revised implementation. |
 
 [GitHub Actions](https://github.com/larsmartens/signal-decision-lab/actions) runs the suite,
-Ruff, Mypy and the demo on Python 3.11 and 3.13. The workflow definition is not evidence of a
+Ruff, Mypy, the demo and exact offline reproduction of the Krown study on Python 3.11 and 3.13. The workflow definition is not evidence of a
 successful run; use the check attached to the commit being assessed.
 
 ## Behaviors covered
@@ -52,6 +56,15 @@ successful run; use the check attached to the commit being assessed.
 - Source text is escaped in HTML. Report statistics containing executable markup are rejected.
 
 ## Real source acquisition
+
+The [channel study](experiments/krown-20261114/README.md) now uses 18 normal videos and
+18 completed streams from `@ECKrown`, with twelve development sources and 24 holdout
+sources. Its [validation receipt](../experiments/krown-20261114/validation.json) records
+the performed checks. Source selection, numeric policy and extractor code were frozen
+before empirical returns. The later context review is explicitly post-outcome and leaves
+the frozen results intact. Its failure prevents treating those labels as reviewed entries.
+
+The following earlier interview acquisition remains a separate smoke test.
 
 [youtube-smoke.json](validation/youtube-smoke.json) records the actual retrieval time,
 language, caption hash and processing result for the
@@ -87,8 +100,12 @@ review was not completed: local Chromium could not start under the environment's
 restriction, and the separate cloud browser could not reach the local server. The responsive
 CSS is therefore present but not visually verified.
 
-There is no labeled historical Krown strategy backtest, prospective performance sample or
-measured trading advantage. The simulator has no broker connection, funding or borrow costs,
+That limitation concerns the earlier HTML replay report. The new Matplotlib study charts
+were rendered and directly inspected as images.
+
+The new historical experiment is a directional heuristic with known semantic errors;
+there is still no labeled reconstruction of Krown's strategy, prospective performance sample
+or measured trading advantage. The simulator has no broker connection, funding or borrow costs,
 order-book liquidity model or margin liquidation model. Short positions are optional simulations.
 
 The next measurements and acceptance criteria are in [PLAN.md](PLAN.md) and
