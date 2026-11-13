@@ -1,0 +1,1585 @@
+{
+  "schema_version": 1,
+  "study_id": "krown-20261114",
+  "frozen_at": "2026-11-13T23:14:18.026371Z",
+  "channel_id": "UCnwxzpFzZNtLH8NgTeAROFA",
+  "channel_url": "https://www.youtube.com/@ECKrown",
+  "purpose": "Original-channel daily Bitcoin analysis and completed livestreams; no guest interviews",
+  "selection_rule": {
+    "title": "Bitcoin or BTC; exclude educational explainer patterns",
+    "minimum_duration_seconds": 300,
+    "sampling": "Chronologically sort eligible rows per split and content type; choose rounded equally spaced indices, including both endpoints",
+    "development_range": [
+      "2026-09-08",
+      "2026-09-29"
+    ],
+    "holdout_range": [
+      "2026-10-01",
+      "2026-11-11"
+    ],
+    "per_type": {
+      "development": 6,
+      "holdout": 12
+    },
+    "return_based_selection": false,
+    "replace_failed_caption_downloads": false
+  },
+  "inventory_sha256": "a912ed9e2da3e66f2535beeffb83a1c9e3e21f713630f43f6278a5974ebd16cf",
+  "metadata_failure_count": 2,
+  "metadata_failure_ids": [
+    "wvu0onib6WU",
+    "BrF-Qz1Hur0"
+  ],
+  "market_cutoff": "2026-11-13T23:00:00Z",
+  "availability_note": "Retrospective reconstruction. Actual acquisition remains recorded separately; this is not a contemporaneous trading record.",
+  "entries": [
+    {
+      "source_id": "DyB0RL8GnhA",
+      "url": "https://www.youtube.com/watch?v=DyB0RL8GnhA",
+      "listing_title": "Bitcoin Golden Cross Just Happened. History Says a Dip Comes First.",
+      "listing_tab": "videos",
+      "listing_page": 2,
+      "listing_labels": [
+        "2 months ago"
+      ],
+      "listing_duration": [
+        "18:58"
+      ],
+      "listing_evidence": {
+        "url": "https://www.youtube.com/youtubei/v1/browse",
+        "retrieved_at": "2026-11-13T23:10:11.715414Z",
+        "sha256": "2a32abb632a56d5f710cbbb699e242fa0bc586ac954c1fe777c1ab357bbeda33",
+        "request_method": "POST",
+        "request_body_sha256": "81ef2d33aea01f7805b8b8bd85e4dd9e37393387790c35e3c6a4c74a3185f01d"
+      },
+      "channel_id": "UCnwxzpFzZNtLH8NgTeAROFA",
+      "channel": "Krown",
+      "title": "Bitcoin Golden Cross Just Happened. History Says a Dip Comes First.",
+      "duration_seconds": 1138,
+      "microformat_duration_seconds": "1138",
+      "published_at": "2026-09-08T17:53:50Z",
+      "publication_precision": "timestamp",
+      "publish_date_raw": "2026-09-08T10:53:50-07:00",
+      "upload_date_raw": "2026-09-08T10:53:50-07:00",
+      "content_type": "normal_video",
+      "live_start_at": null,
+      "live_end_at": null,
+      "is_shorts_eligible": false,
+      "metadata_evidence": {
+        "url": "https://www.youtube.com/watch?v=DyB0RL8GnhA",
+        "retrieved_at": "2026-11-13T23:11:15.143673Z",
+        "sha256": "3f38afa4d64bc104afe2e27c1728b698ee9412b4ec72b1804eb6d73ab8ba4f68",
+        "request_method": "GET"
+      },
+      "playability_status": "OK",
+      "split": "development",
+      "research_available_at": "2026-09-08T18:27:48Z",
+      "research_time_basis": "publication+full_video_duration+15_minutes"
+    },
+    {
+      "source_id": "Wo7tnwTMYNQ",
+      "url": "https://www.youtube.com/watch?v=Wo7tnwTMYNQ",
+      "listing_title": "After the Golden Cross, the Dip Comes First: Bitcoin's Next 14 Days, Mapped",
+      "listing_tab": "streams",
+      "listing_page": 1,
+      "listing_labels": [
+        "12 thousand views",
+        "Streamed 2 months ago"
+      ],
+      "listing_duration": [
+        "1:52:21"
+      ],
+      "listing_evidence": {
+        "url": "https://www.youtube.com/@ECKrown/streams",
+        "retrieved_at": "2026-11-13T23:10:16.888367Z",
+        "sha256": "c580f6955086134b74aec2603c211ac6aabaa06ef7d8d0f27362fa5baece1e5d",
+        "request_method": "GET"
+      },
+      "channel_id": "UCnwxzpFzZNtLH8NgTeAROFA",
+      "channel": "Krown",
+      "title": "After the Golden Cross, the Dip Comes First: Bitcoin's Next 14 Days, Mapped",
+      "duration_seconds": 6741,
+      "microformat_duration_seconds": "6741",
+      "published_at": "2026-09-10T06:29:23Z",
+      "publication_precision": "timestamp",
+      "publish_date_raw": "2026-09-09T23:29:23-07:00",
+      "upload_date_raw": "2026-09-09T23:29:23-07:00",
+      "content_type": "completed_livestream",
+      "live_start_at": "2026-09-09T16:22:15Z",
+      "live_end_at": "2026-09-09T18:14:45Z",
+      "is_shorts_eligible": false,
+      "metadata_evidence": {
+        "url": "https://www.youtube.com/watch?v=Wo7tnwTMYNQ",
+        "retrieved_at": "2026-11-13T23:11:42.744683Z",
+        "sha256": "935ac3a656c1edc3f6e71851158c9d6cf830903ba2994a76b892620214e5e2d2",
+        "request_method": "GET"
+      },
+      "playability_status": "OK",
+      "split": "development",
+      "research_available_at": "2026-09-10T06:44:23Z",
+      "research_time_basis": "max(archive_publication,verified_live_end)+15_minutes"
+    },
+    {
+      "source_id": "nujnKp4lVbo",
+      "url": "https://www.youtube.com/watch?v=nujnKp4lVbo",
+      "listing_title": "Bitcoin Reconnected on the CPI Print. 138 CPI Days Say What Comes Next.",
+      "listing_tab": "streams",
+      "listing_page": 1,
+      "listing_labels": [
+        "11 thousand views",
+        "Streamed 2 months ago"
+      ],
+      "listing_duration": [
+        "1:51:13"
+      ],
+      "listing_evidence": {
+        "url": "https://www.youtube.com/@ECKrown/streams",
+        "retrieved_at": "2026-11-13T23:10:16.888367Z",
+        "sha256": "c580f6955086134b74aec2603c211ac6aabaa06ef7d8d0f27362fa5baece1e5d",
+        "request_method": "GET"
+      },
+      "channel_id": "UCnwxzpFzZNtLH8NgTeAROFA",
+      "channel": "Krown",
+      "title": "Bitcoin Reconnected on the CPI Print. 138 CPI Days Say What Comes Next.",
+      "duration_seconds": 6673,
+      "microformat_duration_seconds": "6673",
+      "published_at": "2026-09-11T18:24:41Z",
+      "publication_precision": "timestamp",
+      "publish_date_raw": "2026-09-11T11:24:41-07:00",
+      "upload_date_raw": "2026-09-11T11:24:41-07:00",
+      "content_type": "completed_livestream",
+      "live_start_at": "2026-09-11T16:20:48Z",
+      "live_end_at": "2026-09-11T18:12:15Z",
+      "is_shorts_eligible": false,
+      "metadata_evidence": {
+        "url": "https://www.youtube.com/watch?v=nujnKp4lVbo",
+        "retrieved_at": "2026-11-13T23:11:42.983014Z",
+        "sha256": "aad6405d68757d767b9b9ee18d9cd7dbd58bfc00ace71dde159a634131124c4d",
+        "request_method": "GET"
+      },
+      "playability_status": "OK",
+      "split": "development",
+      "research_available_at": "2026-09-11T18:39:41Z",
+      "research_time_basis": "max(archive_publication,verified_live_end)+15_minutes"
+    },
+    {
+      "source_id": "8LBiM6deRks",
+      "url": "https://www.youtube.com/watch?v=8LBiM6deRks",
+      "listing_title": "Bitcoin Touched the Line on the CPI Print. The Bounce Map: $79,700, $81,200, $82,400.",
+      "listing_tab": "videos",
+      "listing_page": 2,
+      "listing_labels": [
+        "2 months ago"
+      ],
+      "listing_duration": [
+        "14:32"
+      ],
+      "listing_evidence": {
+        "url": "https://www.youtube.com/youtubei/v1/browse",
+        "retrieved_at": "2026-11-13T23:10:11.715414Z",
+        "sha256": "2a32abb632a56d5f710cbbb699e242fa0bc586ac954c1fe777c1ab357bbeda33",
+        "request_method": "POST",
+        "request_body_sha256": "81ef2d33aea01f7805b8b8bd85e4dd9e37393387790c35e3c6a4c74a3185f01d"
+      },
+      "channel_id": "UCnwxzpFzZNtLH8NgTeAROFA",
+      "channel": "Krown",
+      "title": "Bitcoin Touched the Line on the CPI Print. The Bounce Map: $79,700, $81,200, $82,400.",
+      "duration_seconds": 872,
+      "microformat_duration_seconds": "872",
+      "published_at": "2026-09-11T23:00:06Z",
+      "publication_precision": "timestamp",
+      "publish_date_raw": "2026-09-11T16:00:06-07:00",
+      "upload_date_raw": "2026-09-11T16:00:06-07:00",
+      "content_type": "normal_video",
+      "live_start_at": null,
+      "live_end_at": null,
+      "is_shorts_eligible": false,
+      "metadata_evidence": {
+        "url": "https://www.youtube.com/watch?v=8LBiM6deRks",
+        "retrieved_at": "2026-11-13T23:11:15.081799Z",
+        "sha256": "64068cbd890e599e7a726c10062ed80b146e2b6925ad7e2e5a311bd2ce959c53",
+        "request_method": "GET"
+      },
+      "playability_status": "OK",
+      "split": "development",
+      "research_available_at": "2026-09-11T23:29:38Z",
+      "research_time_basis": "publication+full_video_duration+15_minutes"
+    },
+    {
+      "source_id": "jc2HQXgcY5s",
+      "url": "https://www.youtube.com/watch?v=jc2HQXgcY5s",
+      "listing_title": "Bitcoin's Weekly Bounce Signal Just Fired: +9.5% in 2 Weeks (Median)",
+      "listing_tab": "videos",
+      "listing_page": 2,
+      "listing_labels": [
+        "1 month ago"
+      ],
+      "listing_duration": [
+        "20:05"
+      ],
+      "listing_evidence": {
+        "url": "https://www.youtube.com/youtubei/v1/browse",
+        "retrieved_at": "2026-11-13T23:10:11.715414Z",
+        "sha256": "2a32abb632a56d5f710cbbb699e242fa0bc586ac954c1fe777c1ab357bbeda33",
+        "request_method": "POST",
+        "request_body_sha256": "81ef2d33aea01f7805b8b8bd85e4dd9e37393387790c35e3c6a4c74a3185f01d"
+      },
+      "channel_id": "UCnwxzpFzZNtLH8NgTeAROFA",
+      "channel": "Krown",
+      "title": "Bitcoin's Weekly Bounce Signal Just Fired: +9.5% in 2 Weeks (Median)",
+      "duration_seconds": 1204,
+      "microformat_duration_seconds": "1205",
+      "published_at": "2026-09-15T17:47:57Z",
+      "publication_precision": "timestamp",
+      "publish_date_raw": "2026-09-15T10:47:57-07:00",
+      "upload_date_raw": "2026-09-15T10:47:57-07:00",
+      "content_type": "normal_video",
+      "live_start_at": null,
+      "live_end_at": null,
+      "is_shorts_eligible": false,
+      "metadata_evidence": {
+        "url": "https://www.youtube.com/watch?v=jc2HQXgcY5s",
+        "retrieved_at": "2026-11-13T23:11:10.260687Z",
+        "sha256": "a11a52ba6896652077756edea0a2684092aedec9242b19e8faee84ea2fd96047",
+        "request_method": "GET"
+      },
+      "playability_status": "OK",
+      "split": "development",
+      "research_available_at": "2026-09-15T18:23:01Z",
+      "research_time_basis": "publication+full_video_duration+15_minutes"
+    },
+    {
+      "source_id": "PXWP9f2bpPU",
+      "url": "https://www.youtube.com/watch?v=PXWP9f2bpPU",
+      "listing_title": "Fed Hike Day, Live: What Bitcoin Does in the Decision Hour, and the 55 EMA Test That Follows",
+      "listing_tab": "streams",
+      "listing_page": 1,
+      "listing_labels": [
+        "17 thousand views",
+        "Streamed 1 month ago"
+      ],
+      "listing_duration": [
+        "2:48:46"
+      ],
+      "listing_evidence": {
+        "url": "https://www.youtube.com/@ECKrown/streams",
+        "retrieved_at": "2026-11-13T23:10:16.888367Z",
+        "sha256": "c580f6955086134b74aec2603c211ac6aabaa06ef7d8d0f27362fa5baece1e5d",
+        "request_method": "GET"
+      },
+      "channel_id": "UCnwxzpFzZNtLH8NgTeAROFA",
+      "channel": "Krown",
+      "title": "Fed Hike Day, Live: What Bitcoin Does in the Decision Hour, and the 55 EMA Test That Follows",
+      "duration_seconds": 10125,
+      "microformat_duration_seconds": "10126",
+      "published_at": "2026-09-16T19:28:11Z",
+      "publication_precision": "timestamp",
+      "publish_date_raw": "2026-09-16T12:28:11-07:00",
+      "upload_date_raw": "2026-09-16T12:28:11-07:00",
+      "content_type": "completed_livestream",
+      "live_start_at": "2026-09-16T16:30:42Z",
+      "live_end_at": "2026-09-16T19:19:38Z",
+      "is_shorts_eligible": false,
+      "metadata_evidence": {
+        "url": "https://www.youtube.com/watch?v=PXWP9f2bpPU",
+        "retrieved_at": "2026-11-13T23:11:37.665820Z",
+        "sha256": "796e799c625b3abdd2c61e92edaab57d7c0fafca138baaedd8adbb9a2c823a13",
+        "request_method": "GET"
+      },
+      "playability_status": "OK",
+      "split": "development",
+      "research_available_at": "2026-09-16T19:43:11Z",
+      "research_time_basis": "max(archive_publication,verified_live_end)+15_minutes"
+    },
+    {
+      "source_id": "pT7jeM9j490",
+      "url": "https://www.youtube.com/watch?v=pT7jeM9j490",
+      "listing_title": "Bitcoin Hit 81K on Quad Witching: The Turn Is Confirmed, and What a Green September Buys Into Q4",
+      "listing_tab": "streams",
+      "listing_page": 1,
+      "listing_labels": [
+        "14 thousand views",
+        "Streamed 1 month ago"
+      ],
+      "listing_duration": [
+        "1:54:03"
+      ],
+      "listing_evidence": {
+        "url": "https://www.youtube.com/@ECKrown/streams",
+        "retrieved_at": "2026-11-13T23:10:16.888367Z",
+        "sha256": "c580f6955086134b74aec2603c211ac6aabaa06ef7d8d0f27362fa5baece1e5d",
+        "request_method": "GET"
+      },
+      "channel_id": "UCnwxzpFzZNtLH8NgTeAROFA",
+      "channel": "Krown",
+      "title": "Bitcoin Hit 81K on Quad Witching: The Turn Is Confirmed, and What a Green September Buys Into Q4",
+      "duration_seconds": 6843,
+      "microformat_duration_seconds": "6843",
+      "published_at": "2026-09-18T18:09:04Z",
+      "publication_precision": "timestamp",
+      "publish_date_raw": "2026-09-18T11:09:04-07:00",
+      "upload_date_raw": "2026-09-18T11:09:04-07:00",
+      "content_type": "completed_livestream",
+      "live_start_at": "2026-09-18T16:10:09Z",
+      "live_end_at": "2026-09-18T18:04:19Z",
+      "is_shorts_eligible": false,
+      "metadata_evidence": {
+        "url": "https://www.youtube.com/watch?v=pT7jeM9j490",
+        "retrieved_at": "2026-11-13T23:11:37.781495Z",
+        "sha256": "9f4243cafe0d36aef7c090574cab4ceab3c23e85697aa78203d8fc14f25c291d",
+        "request_method": "GET"
+      },
+      "playability_status": "OK",
+      "split": "development",
+      "research_available_at": "2026-09-18T18:24:04Z",
+      "research_time_basis": "max(archive_publication,verified_live_end)+15_minutes"
+    },
+    {
+      "source_id": "UtCC3s_lo3o",
+      "url": "https://www.youtube.com/watch?v=UtCC3s_lo3o",
+      "listing_title": "September is Setting Up Bitcoin For A 54% Move",
+      "listing_tab": "videos",
+      "listing_page": 2,
+      "listing_labels": [
+        "1 month ago"
+      ],
+      "listing_duration": [
+        "14:30"
+      ],
+      "listing_evidence": {
+        "url": "https://www.youtube.com/youtubei/v1/browse",
+        "retrieved_at": "2026-11-13T23:10:11.715414Z",
+        "sha256": "2a32abb632a56d5f710cbbb699e242fa0bc586ac954c1fe777c1ab357bbeda33",
+        "request_method": "POST",
+        "request_body_sha256": "81ef2d33aea01f7805b8b8bd85e4dd9e37393387790c35e3c6a4c74a3185f01d"
+      },
+      "channel_id": "UCnwxzpFzZNtLH8NgTeAROFA",
+      "channel": "Krown",
+      "title": "September is Setting Up Bitcoin For A 54% Move",
+      "duration_seconds": 869,
+      "microformat_duration_seconds": "870",
+      "published_at": "2026-09-18T23:00:35Z",
+      "publication_precision": "timestamp",
+      "publish_date_raw": "2026-09-18T16:00:35-07:00",
+      "upload_date_raw": "2026-09-18T16:00:35-07:00",
+      "content_type": "normal_video",
+      "live_start_at": null,
+      "live_end_at": null,
+      "is_shorts_eligible": false,
+      "metadata_evidence": {
+        "url": "https://www.youtube.com/watch?v=UtCC3s_lo3o",
+        "retrieved_at": "2026-11-13T23:11:10.302498Z",
+        "sha256": "9c0325bef6212c5fa6762ae4f2906d6a40f42e1d1792c1c02ad77b8c95edee0f",
+        "request_method": "GET"
+      },
+      "playability_status": "OK",
+      "split": "development",
+      "research_available_at": "2026-09-18T23:30:04Z",
+      "research_time_basis": "publication+full_video_duration+15_minutes"
+    },
+    {
+      "source_id": "sZPfKVEoK0I",
+      "url": "https://www.youtube.com/watch?v=sZPfKVEoK0I",
+      "listing_title": "Bitcoin's Momentum Signal Fired: 12 for 12 Green Within 9 Weeks",
+      "listing_tab": "videos",
+      "listing_page": 2,
+      "listing_labels": [
+        "1 month ago"
+      ],
+      "listing_duration": [
+        "15:55"
+      ],
+      "listing_evidence": {
+        "url": "https://www.youtube.com/youtubei/v1/browse",
+        "retrieved_at": "2026-11-13T23:10:11.715414Z",
+        "sha256": "2a32abb632a56d5f710cbbb699e242fa0bc586ac954c1fe777c1ab357bbeda33",
+        "request_method": "POST",
+        "request_body_sha256": "81ef2d33aea01f7805b8b8bd85e4dd9e37393387790c35e3c6a4c74a3185f01d"
+      },
+      "channel_id": "UCnwxzpFzZNtLH8NgTeAROFA",
+      "channel": "Krown",
+      "title": "Bitcoin's Momentum Signal Fired: 12 for 12 Green Within 9 Weeks",
+      "duration_seconds": 955,
+      "microformat_duration_seconds": "955",
+      "published_at": "2026-09-22T17:49:41Z",
+      "publication_precision": "timestamp",
+      "publish_date_raw": "2026-09-22T10:49:41-07:00",
+      "upload_date_raw": "2026-09-22T10:49:41-07:00",
+      "content_type": "normal_video",
+      "live_start_at": null,
+      "live_end_at": null,
+      "is_shorts_eligible": false,
+      "metadata_evidence": {
+        "url": "https://www.youtube.com/watch?v=sZPfKVEoK0I",
+        "retrieved_at": "2026-11-13T23:11:05.313050Z",
+        "sha256": "2d885bcd8b1707aeda444f99bc3089b1651677a114a80da3335faa90f2a1b2e8",
+        "request_method": "GET"
+      },
+      "playability_status": "OK",
+      "split": "development",
+      "research_available_at": "2026-09-22T18:20:36Z",
+      "research_time_basis": "publication+full_video_duration+15_minutes"
+    },
+    {
+      "source_id": "mEHFdbVMyrQ",
+      "url": "https://www.youtube.com/watch?v=mEHFdbVMyrQ",
+      "listing_title": "Bitcoin Live: This Pullback Is a Setup. +5% in 10 Days",
+      "listing_tab": "streams",
+      "listing_page": 1,
+      "listing_labels": [
+        "15 thousand views",
+        "Streamed 1 month ago"
+      ],
+      "listing_duration": [
+        "2:00:51"
+      ],
+      "listing_evidence": {
+        "url": "https://www.youtube.com/@ECKrown/streams",
+        "retrieved_at": "2026-11-13T23:10:16.888367Z",
+        "sha256": "c580f6955086134b74aec2603c211ac6aabaa06ef7d8d0f27362fa5baece1e5d",
+        "request_method": "GET"
+      },
+      "channel_id": "UCnwxzpFzZNtLH8NgTeAROFA",
+      "channel": "Krown",
+      "title": "Bitcoin Live: This Pullback Is a Setup. +5% in 10 Days",
+      "duration_seconds": 7251,
+      "microformat_duration_seconds": "7251",
+      "published_at": "2026-09-23T18:29:46Z",
+      "publication_precision": "timestamp",
+      "publish_date_raw": "2026-09-23T11:29:46-07:00",
+      "upload_date_raw": "2026-09-23T11:29:46-07:00",
+      "content_type": "completed_livestream",
+      "live_start_at": "2026-09-23T16:21:57Z",
+      "live_end_at": "2026-09-23T18:22:58Z",
+      "is_shorts_eligible": false,
+      "metadata_evidence": {
+        "url": "https://www.youtube.com/watch?v=mEHFdbVMyrQ",
+        "retrieved_at": "2026-11-13T23:11:38.016972Z",
+        "sha256": "6d2427e7ca3918da7dd06c4a8c1ca73756150a39d6fb6d2a0aa24b1761d4ab9d",
+        "request_method": "GET"
+      },
+      "playability_status": "OK",
+      "split": "development",
+      "research_available_at": "2026-09-23T18:44:46Z",
+      "research_time_basis": "max(archive_publication,verified_live_end)+15_minutes"
+    },
+    {
+      "source_id": "tPYEYNwhKGc",
+      "url": "https://www.youtube.com/watch?v=tPYEYNwhKGc",
+      "listing_title": "Bitcoin Live: One Line Decides Sunday. 82,833",
+      "listing_tab": "streams",
+      "listing_page": 1,
+      "listing_labels": [
+        "10 thousand views",
+        "Streamed 1 month ago"
+      ],
+      "listing_duration": [
+        "1:32:25"
+      ],
+      "listing_evidence": {
+        "url": "https://www.youtube.com/@ECKrown/streams",
+        "retrieved_at": "2026-11-13T23:10:16.888367Z",
+        "sha256": "c580f6955086134b74aec2603c211ac6aabaa06ef7d8d0f27362fa5baece1e5d",
+        "request_method": "GET"
+      },
+      "channel_id": "UCnwxzpFzZNtLH8NgTeAROFA",
+      "channel": "Krown",
+      "title": "Bitcoin Live: One Line Decides Sunday. 82,833",
+      "duration_seconds": 5545,
+      "microformat_duration_seconds": "5545",
+      "published_at": "2026-09-25T18:02:50Z",
+      "publication_precision": "timestamp",
+      "publish_date_raw": "2026-09-25T11:02:50-07:00",
+      "upload_date_raw": "2026-09-25T11:02:50-07:00",
+      "content_type": "completed_livestream",
+      "live_start_at": "2026-09-25T16:21:33Z",
+      "live_end_at": "2026-09-25T17:54:09Z",
+      "is_shorts_eligible": false,
+      "metadata_evidence": {
+        "url": "https://www.youtube.com/watch?v=tPYEYNwhKGc",
+        "retrieved_at": "2026-11-13T23:11:39.982829Z",
+        "sha256": "be9e3cbdb1acf575f9766735ad760bbe0d61f2fb034813644ec3a27313190ee4",
+        "request_method": "GET"
+      },
+      "playability_status": "OK",
+      "split": "development",
+      "research_available_at": "2026-09-25T18:17:50Z",
+      "research_time_basis": "max(archive_publication,verified_live_end)+15_minutes"
+    },
+    {
+      "source_id": "uOWagLcNLKM",
+      "url": "https://www.youtube.com/watch?v=uOWagLcNLKM",
+      "listing_title": "Bitcoin's Pullback Signal Just Fired: 91% Green Within 24 Hours",
+      "listing_tab": "videos",
+      "listing_page": 2,
+      "listing_labels": [
+        "1 month ago"
+      ],
+      "listing_duration": [
+        "12:04"
+      ],
+      "listing_evidence": {
+        "url": "https://www.youtube.com/youtubei/v1/browse",
+        "retrieved_at": "2026-11-13T23:10:11.715414Z",
+        "sha256": "2a32abb632a56d5f710cbbb699e242fa0bc586ac954c1fe777c1ab357bbeda33",
+        "request_method": "POST",
+        "request_body_sha256": "81ef2d33aea01f7805b8b8bd85e4dd9e37393387790c35e3c6a4c74a3185f01d"
+      },
+      "channel_id": "UCnwxzpFzZNtLH8NgTeAROFA",
+      "channel": "Krown",
+      "title": "Bitcoin's Pullback Signal Just Fired: 91% Green Within 24 Hours",
+      "duration_seconds": 723,
+      "microformat_duration_seconds": "724",
+      "published_at": "2026-09-28T17:29:29Z",
+      "publication_precision": "timestamp",
+      "publish_date_raw": "2026-09-28T10:29:29-07:00",
+      "upload_date_raw": "2026-09-28T10:29:29-07:00",
+      "content_type": "normal_video",
+      "live_start_at": null,
+      "live_end_at": null,
+      "is_shorts_eligible": false,
+      "metadata_evidence": {
+        "url": "https://www.youtube.com/watch?v=uOWagLcNLKM",
+        "retrieved_at": "2026-11-13T23:10:59.884165Z",
+        "sha256": "02beafbceca0cd1cb093982690642cf96e26d9b277bb7916b42e21c6d7a7bbae",
+        "request_method": "GET"
+      },
+      "playability_status": "OK",
+      "split": "development",
+      "research_available_at": "2026-09-28T17:56:32Z",
+      "research_time_basis": "publication+full_video_duration+15_minutes"
+    },
+    {
+      "source_id": "rNtVHO9JZm8",
+      "url": "https://www.youtube.com/watch?v=rNtVHO9JZm8",
+      "listing_title": "Bitcoin's Monthly Signal Just Fired: +146% Within 12 Months",
+      "listing_tab": "videos",
+      "listing_page": 2,
+      "listing_labels": [
+        "1 month ago"
+      ],
+      "listing_duration": [
+        "16:21"
+      ],
+      "listing_evidence": {
+        "url": "https://www.youtube.com/youtubei/v1/browse",
+        "retrieved_at": "2026-11-13T23:10:11.715414Z",
+        "sha256": "2a32abb632a56d5f710cbbb699e242fa0bc586ac954c1fe777c1ab357bbeda33",
+        "request_method": "POST",
+        "request_body_sha256": "81ef2d33aea01f7805b8b8bd85e4dd9e37393387790c35e3c6a4c74a3185f01d"
+      },
+      "channel_id": "UCnwxzpFzZNtLH8NgTeAROFA",
+      "channel": "Krown",
+      "title": "Bitcoin's Monthly Signal Just Fired: +146% Within 12 Months",
+      "duration_seconds": 981,
+      "microformat_duration_seconds": "981",
+      "published_at": "2026-10-01T19:24:03Z",
+      "publication_precision": "timestamp",
+      "publish_date_raw": "2026-10-01T12:24:03-07:00",
+      "upload_date_raw": "2026-10-01T12:24:03-07:00",
+      "content_type": "normal_video",
+      "live_start_at": null,
+      "live_end_at": null,
+      "is_shorts_eligible": false,
+      "metadata_evidence": {
+        "url": "https://www.youtube.com/watch?v=rNtVHO9JZm8",
+        "retrieved_at": "2026-11-13T23:10:54.999420Z",
+        "sha256": "26c4b4372ef401b06e9819b9b4201bb05e328086988cd3448752d02b5130d37c",
+        "request_method": "GET"
+      },
+      "playability_status": "OK",
+      "split": "holdout",
+      "research_available_at": "2026-10-01T19:55:24Z",
+      "research_time_basis": "publication+full_video_duration+15_minutes"
+    },
+    {
+      "source_id": "AwgwAItUyoQ",
+      "url": "https://www.youtube.com/watch?v=AwgwAItUyoQ",
+      "listing_title": "Bitcoin Live: The Crowd Has October Wrong. Here's the Map",
+      "listing_tab": "streams",
+      "listing_page": 1,
+      "listing_labels": [
+        "13 thousand views",
+        "Streamed 1 month ago"
+      ],
+      "listing_duration": [
+        "1:29:47"
+      ],
+      "listing_evidence": {
+        "url": "https://www.youtube.com/@ECKrown/streams",
+        "retrieved_at": "2026-11-13T23:10:16.888367Z",
+        "sha256": "c580f6955086134b74aec2603c211ac6aabaa06ef7d8d0f27362fa5baece1e5d",
+        "request_method": "GET"
+      },
+      "channel_id": "UCnwxzpFzZNtLH8NgTeAROFA",
+      "channel": "Krown",
+      "title": "Bitcoin Live: The Crowd Has October Wrong. Here's the Map",
+      "duration_seconds": 5387,
+      "microformat_duration_seconds": "5387",
+      "published_at": "2026-10-03T06:02:06Z",
+      "publication_precision": "timestamp",
+      "publish_date_raw": "2026-10-02T23:02:06-07:00",
+      "upload_date_raw": "2026-10-02T23:02:06-07:00",
+      "content_type": "completed_livestream",
+      "live_start_at": "2026-10-02T16:21:44Z",
+      "live_end_at": "2026-10-02T17:51:53Z",
+      "is_shorts_eligible": false,
+      "metadata_evidence": {
+        "url": "https://www.youtube.com/watch?v=AwgwAItUyoQ",
+        "retrieved_at": "2026-11-13T23:11:32.713336Z",
+        "sha256": "614d1019de628263c206f54649e5bdb6a13d02b55bd9ad8a628bc68c20a4c52d",
+        "request_method": "GET"
+      },
+      "playability_status": "OK",
+      "split": "holdout",
+      "research_available_at": "2026-10-03T06:17:06Z",
+      "research_time_basis": "max(archive_publication,verified_live_end)+15_minutes"
+    },
+    {
+      "source_id": "AUP1UMotI5w",
+      "url": "https://www.youtube.com/watch?v=AUP1UMotI5w",
+      "listing_title": "Bitcoin's Weekly Signal Just Fired: +18% Within 13 Weeks",
+      "listing_tab": "videos",
+      "listing_page": 2,
+      "listing_labels": [
+        "1 month ago"
+      ],
+      "listing_duration": [
+        "17:36"
+      ],
+      "listing_evidence": {
+        "url": "https://www.youtube.com/youtubei/v1/browse",
+        "retrieved_at": "2026-11-13T23:10:11.715414Z",
+        "sha256": "2a32abb632a56d5f710cbbb699e242fa0bc586ac954c1fe777c1ab357bbeda33",
+        "request_method": "POST",
+        "request_body_sha256": "81ef2d33aea01f7805b8b8bd85e4dd9e37393387790c35e3c6a4c74a3185f01d"
+      },
+      "channel_id": "UCnwxzpFzZNtLH8NgTeAROFA",
+      "channel": "Krown",
+      "title": "Bitcoin's Weekly Signal Just Fired: +18% Within 13 Weeks",
+      "duration_seconds": 1056,
+      "microformat_duration_seconds": "1056",
+      "published_at": "2026-10-05T18:24:37Z",
+      "publication_precision": "timestamp",
+      "publish_date_raw": "2026-10-05T11:24:37-07:00",
+      "upload_date_raw": "2026-10-05T11:24:37-07:00",
+      "content_type": "normal_video",
+      "live_start_at": null,
+      "live_end_at": null,
+      "is_shorts_eligible": false,
+      "metadata_evidence": {
+        "url": "https://www.youtube.com/watch?v=AUP1UMotI5w",
+        "retrieved_at": "2026-11-13T23:10:55.029600Z",
+        "sha256": "e84c9dac9626961c3b74c94c4257daef39d840ad89fc9931db2563864c083eb7",
+        "request_method": "GET"
+      },
+      "playability_status": "OK",
+      "split": "holdout",
+      "research_available_at": "2026-10-05T18:57:13Z",
+      "research_time_basis": "publication+full_video_duration+15_minutes"
+    },
+    {
+      "source_id": "V0gjxlaW2Qk",
+      "url": "https://www.youtube.com/watch?v=V0gjxlaW2Qk",
+      "listing_title": "Bitcoin's Overbought Signal: 12 of 13 Times, +26% Within 4 Weeks",
+      "listing_tab": "videos",
+      "listing_page": 2,
+      "listing_labels": [
+        "1 month ago"
+      ],
+      "listing_duration": [
+        "14:27"
+      ],
+      "listing_evidence": {
+        "url": "https://www.youtube.com/youtubei/v1/browse",
+        "retrieved_at": "2026-11-13T23:10:11.715414Z",
+        "sha256": "2a32abb632a56d5f710cbbb699e242fa0bc586ac954c1fe777c1ab357bbeda33",
+        "request_method": "POST",
+        "request_body_sha256": "81ef2d33aea01f7805b8b8bd85e4dd9e37393387790c35e3c6a4c74a3185f01d"
+      },
+      "channel_id": "UCnwxzpFzZNtLH8NgTeAROFA",
+      "channel": "Krown",
+      "title": "Bitcoin's Overbought Signal: 12 of 13 Times, +26% Within 4 Weeks",
+      "duration_seconds": 867,
+      "microformat_duration_seconds": "867",
+      "published_at": "2026-10-06T18:02:22Z",
+      "publication_precision": "timestamp",
+      "publish_date_raw": "2026-10-06T11:02:22-07:00",
+      "upload_date_raw": "2026-10-06T11:02:22-07:00",
+      "content_type": "normal_video",
+      "live_start_at": null,
+      "live_end_at": null,
+      "is_shorts_eligible": false,
+      "metadata_evidence": {
+        "url": "https://www.youtube.com/watch?v=V0gjxlaW2Qk",
+        "retrieved_at": "2026-11-13T23:10:55.095307Z",
+        "sha256": "bd48db06ab7ea29ce34b722b6c14d09ebd319bf615cf4aca6632e53089d897cc",
+        "request_method": "GET"
+      },
+      "playability_status": "OK",
+      "split": "holdout",
+      "research_available_at": "2026-10-06T18:31:49Z",
+      "research_time_basis": "publication+full_video_duration+15_minutes"
+    },
+    {
+      "source_id": "4-LZ1_9n4vc",
+      "url": "https://www.youtube.com/watch?v=4-LZ1_9n4vc",
+      "listing_title": "Bitcoin Live: The Dip Is Here. Hold $83,367 Tonight",
+      "listing_tab": "streams",
+      "listing_page": 1,
+      "listing_labels": [
+        "14 thousand views",
+        "Streamed 1 month ago"
+      ],
+      "listing_duration": [
+        "1:36:44"
+      ],
+      "listing_evidence": {
+        "url": "https://www.youtube.com/@ECKrown/streams",
+        "retrieved_at": "2026-11-13T23:10:16.888367Z",
+        "sha256": "c580f6955086134b74aec2603c211ac6aabaa06ef7d8d0f27362fa5baece1e5d",
+        "request_method": "GET"
+      },
+      "channel_id": "UCnwxzpFzZNtLH8NgTeAROFA",
+      "channel": "Krown",
+      "title": "Bitcoin Live: The Dip Is Here. Hold $83,367 Tonight",
+      "duration_seconds": 5804,
+      "microformat_duration_seconds": "5804",
+      "published_at": "2026-10-08T06:28:24Z",
+      "publication_precision": "timestamp",
+      "publish_date_raw": "2026-10-07T23:28:24-07:00",
+      "upload_date_raw": "2026-10-07T23:28:24-07:00",
+      "content_type": "completed_livestream",
+      "live_start_at": "2026-10-07T16:20:06Z",
+      "live_end_at": "2026-10-07T18:06:57Z",
+      "is_shorts_eligible": false,
+      "metadata_evidence": {
+        "url": "https://www.youtube.com/watch?v=4-LZ1_9n4vc",
+        "retrieved_at": "2026-11-13T23:11:32.714265Z",
+        "sha256": "20cb5006c41a4b01aab854621f5d1d768bee7b3bb831280cc51a79b570e29801",
+        "request_method": "GET"
+      },
+      "playability_status": "OK",
+      "split": "holdout",
+      "research_available_at": "2026-10-08T06:43:24Z",
+      "research_time_basis": "max(archive_publication,verified_live_end)+15_minutes"
+    },
+    {
+      "source_id": "IJN6hlhJ8ZY",
+      "url": "https://www.youtube.com/watch?v=IJN6hlhJ8ZY",
+      "listing_title": "Bitcoin's Golden Cross, Day 30: The +20% Step Comes at Day 40",
+      "listing_tab": "videos",
+      "listing_page": 1,
+      "listing_labels": [
+        "13 thousand views",
+        "1 month ago"
+      ],
+      "listing_duration": [
+        "15:25"
+      ],
+      "listing_evidence": {
+        "url": "https://www.youtube.com/@ECKrown/videos",
+        "retrieved_at": "2026-11-13T23:10:07.611249Z",
+        "sha256": "0ad4af0441c787797a8c8c551d2066343554dc66c91f2e9a6c8b53ac657f7c0d",
+        "request_method": "GET"
+      },
+      "channel_id": "UCnwxzpFzZNtLH8NgTeAROFA",
+      "channel": "Krown",
+      "title": "Bitcoin's Golden Cross, Day 30: The +20% Step Comes at Day 40",
+      "duration_seconds": 925,
+      "microformat_duration_seconds": "925",
+      "published_at": "2026-10-08T18:41:33Z",
+      "publication_precision": "timestamp",
+      "publish_date_raw": "2026-10-08T11:41:33-07:00",
+      "upload_date_raw": "2026-10-08T11:41:33-07:00",
+      "content_type": "normal_video",
+      "live_start_at": null,
+      "live_end_at": null,
+      "is_shorts_eligible": false,
+      "metadata_evidence": {
+        "url": "https://www.youtube.com/watch?v=IJN6hlhJ8ZY",
+        "retrieved_at": "2026-11-13T23:10:50.380941Z",
+        "sha256": "e31efa5612b837278e124d08a5cf7cdca9cb57b29bec06f4bd993aace47b9a77",
+        "request_method": "GET"
+      },
+      "playability_status": "OK",
+      "split": "holdout",
+      "research_available_at": "2026-10-08T19:11:58Z",
+      "research_time_basis": "publication+full_video_duration+15_minutes"
+    },
+    {
+      "source_id": "3BIzcbfWzuU",
+      "url": "https://www.youtube.com/watch?v=3BIzcbfWzuU",
+      "listing_title": "Bitcoin Live: The Correction Has a Target",
+      "listing_tab": "streams",
+      "listing_page": 1,
+      "listing_labels": [
+        "14 thousand views",
+        "Streamed 1 month ago"
+      ],
+      "listing_duration": [
+        "1:55:26"
+      ],
+      "listing_evidence": {
+        "url": "https://www.youtube.com/@ECKrown/streams",
+        "retrieved_at": "2026-11-13T23:10:16.888367Z",
+        "sha256": "c580f6955086134b74aec2603c211ac6aabaa06ef7d8d0f27362fa5baece1e5d",
+        "request_method": "GET"
+      },
+      "channel_id": "UCnwxzpFzZNtLH8NgTeAROFA",
+      "channel": "Krown",
+      "title": "Bitcoin Live: The Correction Has a Target",
+      "duration_seconds": 6925,
+      "microformat_duration_seconds": "6926",
+      "published_at": "2026-10-12T20:14:57Z",
+      "publication_precision": "timestamp",
+      "publish_date_raw": "2026-10-12T13:14:57-07:00",
+      "upload_date_raw": "2026-10-12T13:14:57-07:00",
+      "content_type": "completed_livestream",
+      "live_start_at": "2026-10-12T16:20:27Z",
+      "live_end_at": "2026-10-12T18:26:08Z",
+      "is_shorts_eligible": false,
+      "metadata_evidence": {
+        "url": "https://www.youtube.com/watch?v=3BIzcbfWzuU",
+        "retrieved_at": "2026-11-13T23:11:32.939623Z",
+        "sha256": "d8746996d8cbbc8ba5e5dc9f947462978c6a447f542dcc349558b5a0e43a32f4",
+        "request_method": "GET"
+      },
+      "playability_status": "OK",
+      "split": "holdout",
+      "research_available_at": "2026-10-12T20:29:57Z",
+      "research_time_basis": "max(archive_publication,verified_live_end)+15_minutes"
+    },
+    {
+      "source_id": "uFjS2qFEZmE",
+      "url": "https://www.youtube.com/watch?v=uFjS2qFEZmE",
+      "listing_title": "Bitcoin Just Did Something Only Done 39 Times. $79,500 Within 10 Days",
+      "listing_tab": "videos",
+      "listing_page": 1,
+      "listing_labels": [
+        "11 thousand views",
+        "1 month ago"
+      ],
+      "listing_duration": [
+        "23:23"
+      ],
+      "listing_evidence": {
+        "url": "https://www.youtube.com/@ECKrown/videos",
+        "retrieved_at": "2026-11-13T23:10:07.611249Z",
+        "sha256": "0ad4af0441c787797a8c8c551d2066343554dc66c91f2e9a6c8b53ac657f7c0d",
+        "request_method": "GET"
+      },
+      "channel_id": "UCnwxzpFzZNtLH8NgTeAROFA",
+      "channel": "Krown",
+      "title": "Bitcoin Just Did Something Only Done 39 Times. $79,500 Within 10 Days",
+      "duration_seconds": 1402,
+      "microformat_duration_seconds": "1403",
+      "published_at": "2026-10-13T00:23:11Z",
+      "publication_precision": "timestamp",
+      "publish_date_raw": "2026-10-12T17:23:11-07:00",
+      "upload_date_raw": "2026-10-12T17:23:11-07:00",
+      "content_type": "normal_video",
+      "live_start_at": null,
+      "live_end_at": null,
+      "is_shorts_eligible": false,
+      "metadata_evidence": {
+        "url": "https://www.youtube.com/watch?v=uFjS2qFEZmE",
+        "retrieved_at": "2026-11-13T23:10:50.630026Z",
+        "sha256": "efcfd66b69460fee347b42033bc7b172af63f4fefeb125a70a10659a1679afa9",
+        "request_method": "GET"
+      },
+      "playability_status": "OK",
+      "split": "holdout",
+      "research_available_at": "2026-10-13T01:01:33Z",
+      "research_time_basis": "publication+full_video_duration+15_minutes"
+    },
+    {
+      "source_id": "Vn391v0U1lI",
+      "url": "https://www.youtube.com/watch?v=Vn391v0U1lI",
+      "listing_title": "Bitcoin Live: The Correction Target Is On The Way",
+      "listing_tab": "streams",
+      "listing_page": 1,
+      "listing_labels": [
+        "11 thousand views",
+        "Streamed 4 weeks ago"
+      ],
+      "listing_duration": [
+        "1:54:56"
+      ],
+      "listing_evidence": {
+        "url": "https://www.youtube.com/@ECKrown/streams",
+        "retrieved_at": "2026-11-13T23:10:16.888367Z",
+        "sha256": "c580f6955086134b74aec2603c211ac6aabaa06ef7d8d0f27362fa5baece1e5d",
+        "request_method": "GET"
+      },
+      "channel_id": "UCnwxzpFzZNtLH8NgTeAROFA",
+      "channel": "Krown",
+      "title": "Bitcoin Live: The Correction Target Is On The Way",
+      "duration_seconds": 6896,
+      "microformat_duration_seconds": "6896",
+      "published_at": "2026-10-14T20:12:26Z",
+      "publication_precision": "timestamp",
+      "publish_date_raw": "2026-10-14T13:12:26-07:00",
+      "upload_date_raw": "2026-10-14T13:12:26-07:00",
+      "content_type": "completed_livestream",
+      "live_start_at": "2026-10-14T16:20:48Z",
+      "live_end_at": "2026-10-14T18:25:54Z",
+      "is_shorts_eligible": false,
+      "metadata_evidence": {
+        "url": "https://www.youtube.com/watch?v=Vn391v0U1lI",
+        "retrieved_at": "2026-11-13T23:11:32.714347Z",
+        "sha256": "773f9ba6b2dac9d0b33d070544a6c464176b18e0d1684e10eb73d7767436d7f9",
+        "request_method": "GET"
+      },
+      "playability_status": "OK",
+      "split": "holdout",
+      "research_available_at": "2026-10-14T20:27:26Z",
+      "research_time_basis": "max(archive_publication,verified_live_end)+15_minutes"
+    },
+    {
+      "source_id": "TDQwVve6G3Y",
+      "url": "https://www.youtube.com/watch?v=TDQwVve6G3Y",
+      "listing_title": "Bitcoin Just Hit Its Correction Target. Here's the Next 10 Days",
+      "listing_tab": "videos",
+      "listing_page": 1,
+      "listing_labels": [
+        "15 thousand views",
+        "4 weeks ago"
+      ],
+      "listing_duration": [
+        "22:06"
+      ],
+      "listing_evidence": {
+        "url": "https://www.youtube.com/@ECKrown/videos",
+        "retrieved_at": "2026-11-13T23:10:07.611249Z",
+        "sha256": "0ad4af0441c787797a8c8c551d2066343554dc66c91f2e9a6c8b53ac657f7c0d",
+        "request_method": "GET"
+      },
+      "channel_id": "UCnwxzpFzZNtLH8NgTeAROFA",
+      "channel": "Krown",
+      "title": "Bitcoin Just Hit Its Correction Target. Here's the Next 10 Days",
+      "duration_seconds": 1326,
+      "microformat_duration_seconds": "1326",
+      "published_at": "2026-10-15T18:17:28Z",
+      "publication_precision": "timestamp",
+      "publish_date_raw": "2026-10-15T11:17:28-07:00",
+      "upload_date_raw": "2026-10-15T11:17:28-07:00",
+      "content_type": "normal_video",
+      "live_start_at": null,
+      "live_end_at": null,
+      "is_shorts_eligible": false,
+      "metadata_evidence": {
+        "url": "https://www.youtube.com/watch?v=TDQwVve6G3Y",
+        "retrieved_at": "2026-11-13T23:10:45.975901Z",
+        "sha256": "d6bfedc1d97f2046d1036dbc2e43e2a7f7fefcf5bf306fe26d3956e0abfe2e87",
+        "request_method": "GET"
+      },
+      "playability_status": "OK",
+      "split": "holdout",
+      "research_available_at": "2026-10-15T18:54:34Z",
+      "research_time_basis": "publication+full_video_duration+15_minutes"
+    },
+    {
+      "source_id": "4xbNMfb_QUs",
+      "url": "https://www.youtube.com/watch?v=4xbNMfb_QUs",
+      "listing_title": "Bitcoin Live: The Week Into the Fed.",
+      "listing_tab": "streams",
+      "listing_page": 1,
+      "listing_labels": [
+        "11 thousand views",
+        "Streamed 3 weeks ago"
+      ],
+      "listing_duration": [
+        "1:54:33"
+      ],
+      "listing_evidence": {
+        "url": "https://www.youtube.com/@ECKrown/streams",
+        "retrieved_at": "2026-11-13T23:10:16.888367Z",
+        "sha256": "c580f6955086134b74aec2603c211ac6aabaa06ef7d8d0f27362fa5baece1e5d",
+        "request_method": "GET"
+      },
+      "channel_id": "UCnwxzpFzZNtLH8NgTeAROFA",
+      "channel": "Krown",
+      "title": "Bitcoin Live: The Week Into the Fed.",
+      "duration_seconds": 6872,
+      "microformat_duration_seconds": "6873",
+      "published_at": "2026-10-19T19:43:12Z",
+      "publication_precision": "timestamp",
+      "publish_date_raw": "2026-10-19T12:43:12-07:00",
+      "upload_date_raw": "2026-10-19T12:43:12-07:00",
+      "content_type": "completed_livestream",
+      "live_start_at": "2026-10-19T16:52:42Z",
+      "live_end_at": "2026-10-19T18:57:27Z",
+      "is_shorts_eligible": false,
+      "metadata_evidence": {
+        "url": "https://www.youtube.com/watch?v=4xbNMfb_QUs",
+        "retrieved_at": "2026-11-13T23:11:24.801805Z",
+        "sha256": "1084bd57cfeac725a0c9455593480c6619d35723bc295163a577f711882874c2",
+        "request_method": "GET"
+      },
+      "playability_status": "OK",
+      "split": "holdout",
+      "research_available_at": "2026-10-19T19:58:12Z",
+      "research_time_basis": "max(archive_publication,verified_live_end)+15_minutes"
+    },
+    {
+      "source_id": "ro6tMlqbbBI",
+      "url": "https://www.youtube.com/watch?v=ro6tMlqbbBI",
+      "listing_title": "Bitcoin: 83% Chance of Upside (Here Is Why)",
+      "listing_tab": "videos",
+      "listing_page": 1,
+      "listing_labels": [
+        "9.5 thousand views",
+        "3 weeks ago"
+      ],
+      "listing_duration": [
+        "19:38"
+      ],
+      "listing_evidence": {
+        "url": "https://www.youtube.com/@ECKrown/videos",
+        "retrieved_at": "2026-11-13T23:10:07.611249Z",
+        "sha256": "0ad4af0441c787797a8c8c551d2066343554dc66c91f2e9a6c8b53ac657f7c0d",
+        "request_method": "GET"
+      },
+      "channel_id": "UCnwxzpFzZNtLH8NgTeAROFA",
+      "channel": "Krown",
+      "title": "Bitcoin: 83% Chance of Upside (Here Is Why)",
+      "duration_seconds": 1177,
+      "microformat_duration_seconds": "1178",
+      "published_at": "2026-10-20T00:00:38Z",
+      "publication_precision": "timestamp",
+      "publish_date_raw": "2026-10-19T17:00:38-07:00",
+      "upload_date_raw": "2026-10-19T17:00:38-07:00",
+      "content_type": "normal_video",
+      "live_start_at": null,
+      "live_end_at": null,
+      "is_shorts_eligible": false,
+      "metadata_evidence": {
+        "url": "https://www.youtube.com/watch?v=ro6tMlqbbBI",
+        "retrieved_at": "2026-11-13T23:10:45.760821Z",
+        "sha256": "dd94e925979e704fc0589571a2befab217863e1e37be8687090317e060088eea",
+        "request_method": "GET"
+      },
+      "playability_status": "OK",
+      "split": "holdout",
+      "research_available_at": "2026-10-20T00:35:15Z",
+      "research_time_basis": "publication+full_video_duration+15_minutes"
+    },
+    {
+      "source_id": "LMRNBdMiQ2g",
+      "url": "https://www.youtube.com/watch?v=LMRNBdMiQ2g",
+      "listing_title": "Bitcoin Is Setting Up Another Higher Low. Here's My Line in the Sand",
+      "listing_tab": "videos",
+      "listing_page": 1,
+      "listing_labels": [
+        "8.4 thousand views",
+        "3 weeks ago"
+      ],
+      "listing_duration": [
+        "15:30"
+      ],
+      "listing_evidence": {
+        "url": "https://www.youtube.com/@ECKrown/videos",
+        "retrieved_at": "2026-11-13T23:10:07.611249Z",
+        "sha256": "0ad4af0441c787797a8c8c551d2066343554dc66c91f2e9a6c8b53ac657f7c0d",
+        "request_method": "GET"
+      },
+      "channel_id": "UCnwxzpFzZNtLH8NgTeAROFA",
+      "channel": "Krown",
+      "title": "Bitcoin Is Setting Up Another Higher Low. Here's My Line in the Sand",
+      "duration_seconds": 930,
+      "microformat_duration_seconds": "930",
+      "published_at": "2026-10-22T01:00:17Z",
+      "publication_precision": "timestamp",
+      "publish_date_raw": "2026-10-21T18:00:17-07:00",
+      "upload_date_raw": "2026-10-21T18:00:17-07:00",
+      "content_type": "normal_video",
+      "live_start_at": null,
+      "live_end_at": null,
+      "is_shorts_eligible": false,
+      "metadata_evidence": {
+        "url": "https://www.youtube.com/watch?v=LMRNBdMiQ2g",
+        "retrieved_at": "2026-11-13T23:10:40.872986Z",
+        "sha256": "7fe0044294b56ea5c9a901fa75f3e7b66f37246055b3ba827170cb8ebd53e179",
+        "request_method": "GET"
+      },
+      "playability_status": "OK",
+      "split": "holdout",
+      "research_available_at": "2026-10-22T01:30:47Z",
+      "research_time_basis": "publication+full_video_duration+15_minutes"
+    },
+    {
+      "source_id": "R0MW3Lhjmis",
+      "url": "https://www.youtube.com/watch?v=R0MW3Lhjmis",
+      "listing_title": "Bitcoin Live: Is the Correction Over? Here's What Prints Tonight",
+      "listing_tab": "streams",
+      "listing_page": 1,
+      "listing_labels": [
+        "12 thousand views",
+        "Streamed 3 weeks ago"
+      ],
+      "listing_duration": [
+        "1:32:58"
+      ],
+      "listing_evidence": {
+        "url": "https://www.youtube.com/@ECKrown/streams",
+        "retrieved_at": "2026-11-13T23:10:16.888367Z",
+        "sha256": "c580f6955086134b74aec2603c211ac6aabaa06ef7d8d0f27362fa5baece1e5d",
+        "request_method": "GET"
+      },
+      "channel_id": "UCnwxzpFzZNtLH8NgTeAROFA",
+      "channel": "Krown",
+      "title": "Bitcoin Live: Is the Correction Over? Here's What Prints Tonight",
+      "duration_seconds": 5577,
+      "microformat_duration_seconds": "5578",
+      "published_at": "2026-10-22T07:49:51Z",
+      "publication_precision": "timestamp",
+      "publish_date_raw": "2026-10-22T00:49:51-07:00",
+      "upload_date_raw": "2026-10-22T00:49:51-07:00",
+      "content_type": "completed_livestream",
+      "live_start_at": "2026-10-21T16:21:09Z",
+      "live_end_at": "2026-10-21T18:04:28Z",
+      "is_shorts_eligible": false,
+      "metadata_evidence": {
+        "url": "https://www.youtube.com/watch?v=R0MW3Lhjmis",
+        "retrieved_at": "2026-11-13T23:11:24.901725Z",
+        "sha256": "36faeb7597e1106b8370162c9133464a130ab7a55806ff23e4d0e7cdb352a653",
+        "request_method": "GET"
+      },
+      "playability_status": "OK",
+      "split": "holdout",
+      "research_available_at": "2026-10-22T08:04:51Z",
+      "research_time_basis": "max(archive_publication,verified_live_end)+15_minutes"
+    },
+    {
+      "source_id": "CicUYUaeF5E",
+      "url": "https://www.youtube.com/watch?v=CicUYUaeF5E",
+      "listing_title": "Bitcoin Live: It's Over... (Again) Here's What i'm Watching",
+      "listing_tab": "streams",
+      "listing_page": 1,
+      "listing_labels": [
+        "12 thousand views",
+        "Streamed 2 weeks ago"
+      ],
+      "listing_duration": [
+        "1:32:02"
+      ],
+      "listing_evidence": {
+        "url": "https://www.youtube.com/@ECKrown/streams",
+        "retrieved_at": "2026-11-13T23:10:16.888367Z",
+        "sha256": "c580f6955086134b74aec2603c211ac6aabaa06ef7d8d0f27362fa5baece1e5d",
+        "request_method": "GET"
+      },
+      "channel_id": "UCnwxzpFzZNtLH8NgTeAROFA",
+      "channel": "Krown",
+      "title": "Bitcoin Live: It's Over... (Again) Here's What i'm Watching",
+      "duration_seconds": 5521,
+      "microformat_duration_seconds": "5522",
+      "published_at": "2026-10-26T18:08:20Z",
+      "publication_precision": "timestamp",
+      "publish_date_raw": "2026-10-26T11:08:20-07:00",
+      "upload_date_raw": "2026-10-26T11:08:20-07:00",
+      "content_type": "completed_livestream",
+      "live_start_at": "2026-10-26T16:20:37Z",
+      "live_end_at": "2026-10-26T18:02:54Z",
+      "is_shorts_eligible": false,
+      "metadata_evidence": {
+        "url": "https://www.youtube.com/watch?v=CicUYUaeF5E",
+        "retrieved_at": "2026-11-13T23:11:25.072759Z",
+        "sha256": "76cc90b43c76e38dcb261f742e5bdc2fc4937860809b8ea1d53d663f72a39274",
+        "request_method": "GET"
+      },
+      "playability_status": "OK",
+      "split": "holdout",
+      "research_available_at": "2026-10-26T18:23:20Z",
+      "research_time_basis": "max(archive_publication,verified_live_end)+15_minutes"
+    },
+    {
+      "source_id": "zay_owGmjo0",
+      "url": "https://www.youtube.com/watch?v=zay_owGmjo0",
+      "listing_title": "Bitcoin: A Viewer Sent Me a Cross That Hasn't Failed Since 2022",
+      "listing_tab": "videos",
+      "listing_page": 1,
+      "listing_labels": [
+        "10 thousand views",
+        "2 weeks ago"
+      ],
+      "listing_duration": [
+        "23:52"
+      ],
+      "listing_evidence": {
+        "url": "https://www.youtube.com/@ECKrown/videos",
+        "retrieved_at": "2026-11-13T23:10:07.611249Z",
+        "sha256": "0ad4af0441c787797a8c8c551d2066343554dc66c91f2e9a6c8b53ac657f7c0d",
+        "request_method": "GET"
+      },
+      "channel_id": "UCnwxzpFzZNtLH8NgTeAROFA",
+      "channel": "Krown",
+      "title": "Bitcoin: A Viewer Sent Me a Cross That Hasn't Failed Since 2022",
+      "duration_seconds": 1432,
+      "microformat_duration_seconds": "1432",
+      "published_at": "2026-10-27T00:30:30Z",
+      "publication_precision": "timestamp",
+      "publish_date_raw": "2026-10-26T17:30:30-07:00",
+      "upload_date_raw": "2026-10-26T17:30:30-07:00",
+      "content_type": "normal_video",
+      "live_start_at": null,
+      "live_end_at": null,
+      "is_shorts_eligible": false,
+      "metadata_evidence": {
+        "url": "https://www.youtube.com/watch?v=zay_owGmjo0",
+        "retrieved_at": "2026-11-13T23:10:35.687235Z",
+        "sha256": "7bb8a24cfd63896e8794b0ff4a70eed37a5eb5f47616dc2110ea221e795d50d4",
+        "request_method": "GET"
+      },
+      "playability_status": "OK",
+      "split": "holdout",
+      "research_available_at": "2026-10-27T01:09:22Z",
+      "research_time_basis": "publication+full_video_duration+15_minutes"
+    },
+    {
+      "source_id": "mTIm-ykXBGY",
+      "url": "https://www.youtube.com/watch?v=mTIm-ykXBGY",
+      "listing_title": "Bitcoin Live: The Most IMPORTANT FOMC Stream on YouTube [uncensored]",
+      "listing_tab": "streams",
+      "listing_page": 1,
+      "listing_labels": [
+        "11 thousand views",
+        "Streamed 2 weeks ago"
+      ],
+      "listing_duration": [
+        "2:07:38"
+      ],
+      "listing_evidence": {
+        "url": "https://www.youtube.com/@ECKrown/streams",
+        "retrieved_at": "2026-11-13T23:10:16.888367Z",
+        "sha256": "c580f6955086134b74aec2603c211ac6aabaa06ef7d8d0f27362fa5baece1e5d",
+        "request_method": "GET"
+      },
+      "channel_id": "UCnwxzpFzZNtLH8NgTeAROFA",
+      "channel": "Krown",
+      "title": "Bitcoin Live: The Most IMPORTANT FOMC Stream on YouTube [uncensored]",
+      "duration_seconds": 7657,
+      "microformat_duration_seconds": "7658",
+      "published_at": "2026-10-28T19:13:36Z",
+      "publication_precision": "timestamp",
+      "publish_date_raw": "2026-10-28T12:13:36-07:00",
+      "upload_date_raw": "2026-10-28T12:13:36-07:00",
+      "content_type": "completed_livestream",
+      "live_start_at": "2026-10-28T17:00:23Z",
+      "live_end_at": "2026-10-28T19:08:11Z",
+      "is_shorts_eligible": false,
+      "metadata_evidence": {
+        "url": "https://www.youtube.com/watch?v=mTIm-ykXBGY",
+        "retrieved_at": "2026-11-13T23:11:24.800005Z",
+        "sha256": "265578c12bc68e043be613a9cd7d4ac79d0a9d5e6cd328dd6e07e8507b945059",
+        "request_method": "GET"
+      },
+      "playability_status": "OK",
+      "split": "holdout",
+      "research_available_at": "2026-10-28T19:28:36Z",
+      "research_time_basis": "max(archive_publication,verified_live_end)+15_minutes"
+    },
+    {
+      "source_id": "_mBMq8jYOY8",
+      "url": "https://www.youtube.com/watch?v=_mBMq8jYOY8",
+      "listing_title": "Bitcoin's Hack-Day Low: The One Number That Matters This Weekend",
+      "listing_tab": "streams",
+      "listing_page": 1,
+      "listing_labels": [
+        "16 thousand views",
+        "Streamed 2 weeks ago"
+      ],
+      "listing_duration": [
+        "1:45:05"
+      ],
+      "listing_evidence": {
+        "url": "https://www.youtube.com/@ECKrown/streams",
+        "retrieved_at": "2026-11-13T23:10:16.888367Z",
+        "sha256": "c580f6955086134b74aec2603c211ac6aabaa06ef7d8d0f27362fa5baece1e5d",
+        "request_method": "GET"
+      },
+      "channel_id": "UCnwxzpFzZNtLH8NgTeAROFA",
+      "channel": "Krown",
+      "title": "Bitcoin's Hack-Day Low: The One Number That Matters This Weekend",
+      "duration_seconds": 6304,
+      "microformat_duration_seconds": "6305",
+      "published_at": "2026-10-30T20:21:03Z",
+      "publication_precision": "timestamp",
+      "publish_date_raw": "2026-10-30T13:21:03-07:00",
+      "upload_date_raw": "2026-10-30T13:21:03-07:00",
+      "content_type": "completed_livestream",
+      "live_start_at": "2026-10-30T18:20:18Z",
+      "live_end_at": "2026-10-30T20:15:40Z",
+      "is_shorts_eligible": false,
+      "metadata_evidence": {
+        "url": "https://www.youtube.com/watch?v=_mBMq8jYOY8",
+        "retrieved_at": "2026-11-13T23:11:20.011794Z",
+        "sha256": "9e779a2e705cb25058480090a9b2791e96cbf4fb8044ba7ef8645f991d2cfbd2",
+        "request_method": "GET"
+      },
+      "playability_status": "OK",
+      "split": "holdout",
+      "research_available_at": "2026-10-30T20:36:03Z",
+      "research_time_basis": "max(archive_publication,verified_live_end)+15_minutes"
+    },
+    {
+      "source_id": "37k61H-vRT4",
+      "url": "https://www.youtube.com/watch?v=37k61H-vRT4",
+      "listing_title": "Bitcoin: Does November Hold the October Low?",
+      "listing_tab": "streams",
+      "listing_page": 1,
+      "listing_labels": [
+        "14 thousand views",
+        "Streamed 11 days ago"
+      ],
+      "listing_duration": [
+        "1:54:25"
+      ],
+      "listing_evidence": {
+        "url": "https://www.youtube.com/@ECKrown/streams",
+        "retrieved_at": "2026-11-13T23:10:16.888367Z",
+        "sha256": "c580f6955086134b74aec2603c211ac6aabaa06ef7d8d0f27362fa5baece1e5d",
+        "request_method": "GET"
+      },
+      "channel_id": "UCnwxzpFzZNtLH8NgTeAROFA",
+      "channel": "Krown",
+      "title": "Bitcoin: Does November Hold the October Low?",
+      "duration_seconds": 6865,
+      "microformat_duration_seconds": "6865",
+      "published_at": "2026-11-02T18:31:32Z",
+      "publication_precision": "timestamp",
+      "publish_date_raw": "2026-11-02T10:31:32-08:00",
+      "upload_date_raw": "2026-11-02T10:31:32-08:00",
+      "content_type": "completed_livestream",
+      "live_start_at": "2026-11-02T16:19:47Z",
+      "live_end_at": "2026-11-02T18:24:32Z",
+      "is_shorts_eligible": false,
+      "metadata_evidence": {
+        "url": "https://www.youtube.com/watch?v=37k61H-vRT4",
+        "retrieved_at": "2026-11-13T23:11:19.753929Z",
+        "sha256": "8aff0a327e536d3c91aa4a02075fd4561e1d957c7f745db6e91e773419c088d5",
+        "request_method": "GET"
+      },
+      "playability_status": "OK",
+      "split": "holdout",
+      "research_available_at": "2026-11-02T18:46:32Z",
+      "research_time_basis": "max(archive_publication,verified_live_end)+15_minutes"
+    },
+    {
+      "source_id": "H9KOaDvzP4Y",
+      "url": "https://www.youtube.com/watch?v=H9KOaDvzP4Y",
+      "listing_title": "Bitcoin: Does Election Day Matter? 71% Green Within 30 Days",
+      "listing_tab": "videos",
+      "listing_page": 1,
+      "listing_labels": [
+        "11 thousand views",
+        "10 days ago"
+      ],
+      "listing_duration": [
+        "18:54"
+      ],
+      "listing_evidence": {
+        "url": "https://www.youtube.com/@ECKrown/videos",
+        "retrieved_at": "2026-11-13T23:10:07.611249Z",
+        "sha256": "0ad4af0441c787797a8c8c551d2066343554dc66c91f2e9a6c8b53ac657f7c0d",
+        "request_method": "GET"
+      },
+      "channel_id": "UCnwxzpFzZNtLH8NgTeAROFA",
+      "channel": "Krown",
+      "title": "Bitcoin: Does Election Day Matter? 71% Green Within 30 Days",
+      "duration_seconds": 1134,
+      "microformat_duration_seconds": "1134",
+      "published_at": "2026-11-03T18:15:40Z",
+      "publication_precision": "timestamp",
+      "publish_date_raw": "2026-11-03T10:15:40-08:00",
+      "upload_date_raw": "2026-11-03T10:15:40-08:00",
+      "content_type": "normal_video",
+      "live_start_at": null,
+      "live_end_at": null,
+      "is_shorts_eligible": false,
+      "metadata_evidence": {
+        "url": "https://www.youtube.com/watch?v=H9KOaDvzP4Y",
+        "retrieved_at": "2026-11-13T23:10:37.150010Z",
+        "sha256": "17b5dfb0f5f27528bea6ae8fbf87857485d4257dca5707999ef1c2a2eb23109f",
+        "request_method": "GET"
+      },
+      "playability_status": "OK",
+      "split": "holdout",
+      "research_available_at": "2026-11-03T18:49:34Z",
+      "research_time_basis": "publication+full_video_duration+15_minutes"
+    },
+    {
+      "source_id": "FVakIyoNcqc",
+      "url": "https://www.youtube.com/watch?v=FVakIyoNcqc",
+      "listing_title": "Bitcoin: Did the Election Mark the Low? $81,900 Decides Next Week",
+      "listing_tab": "videos",
+      "listing_page": 1,
+      "listing_labels": [
+        "8.3 thousand views",
+        "8 days ago"
+      ],
+      "listing_duration": [
+        "21:35"
+      ],
+      "listing_evidence": {
+        "url": "https://www.youtube.com/@ECKrown/videos",
+        "retrieved_at": "2026-11-13T23:10:07.611249Z",
+        "sha256": "0ad4af0441c787797a8c8c551d2066343554dc66c91f2e9a6c8b53ac657f7c0d",
+        "request_method": "GET"
+      },
+      "channel_id": "UCnwxzpFzZNtLH8NgTeAROFA",
+      "channel": "Krown",
+      "title": "Bitcoin: Did the Election Mark the Low? $81,900 Decides Next Week",
+      "duration_seconds": 1295,
+      "microformat_duration_seconds": "1295",
+      "published_at": "2026-11-05T00:00:12Z",
+      "publication_precision": "timestamp",
+      "publish_date_raw": "2026-11-04T16:00:12-08:00",
+      "upload_date_raw": "2026-11-04T16:00:12-08:00",
+      "content_type": "normal_video",
+      "live_start_at": null,
+      "live_end_at": null,
+      "is_shorts_eligible": false,
+      "metadata_evidence": {
+        "url": "https://www.youtube.com/watch?v=FVakIyoNcqc",
+        "retrieved_at": "2026-11-13T23:10:35.851909Z",
+        "sha256": "91bcee8198e5b9bdab3f754359aca941cdbd28e1b2a4633153a16bf88b02536d",
+        "request_method": "GET"
+      },
+      "playability_status": "OK",
+      "split": "holdout",
+      "research_available_at": "2026-11-05T00:36:47Z",
+      "research_time_basis": "publication+full_video_duration+15_minutes"
+    },
+    {
+      "source_id": "8wF7kb6nRug",
+      "url": "https://www.youtube.com/watch?v=8wF7kb6nRug",
+      "listing_title": "Bitcoin and the Stock Market Crash: Does $75,000 Hold Today?",
+      "listing_tab": "streams",
+      "listing_page": 1,
+      "listing_labels": [
+        "12 thousand views",
+        "Streamed 7 days ago"
+      ],
+      "listing_duration": [
+        "2:00:42"
+      ],
+      "listing_evidence": {
+        "url": "https://www.youtube.com/@ECKrown/streams",
+        "retrieved_at": "2026-11-13T23:10:16.888367Z",
+        "sha256": "c580f6955086134b74aec2603c211ac6aabaa06ef7d8d0f27362fa5baece1e5d",
+        "request_method": "GET"
+      },
+      "channel_id": "UCnwxzpFzZNtLH8NgTeAROFA",
+      "channel": "Krown",
+      "title": "Bitcoin and the Stock Market Crash: Does $75,000 Hold Today?",
+      "duration_seconds": 7242,
+      "microformat_duration_seconds": "7242",
+      "published_at": "2026-11-06T20:39:59Z",
+      "publication_precision": "timestamp",
+      "publish_date_raw": "2026-11-06T12:39:59-08:00",
+      "upload_date_raw": "2026-11-06T12:39:59-08:00",
+      "content_type": "completed_livestream",
+      "live_start_at": "2026-11-06T16:20:33Z",
+      "live_end_at": "2026-11-06T18:21:29Z",
+      "is_shorts_eligible": false,
+      "metadata_evidence": {
+        "url": "https://www.youtube.com/watch?v=8wF7kb6nRug",
+        "retrieved_at": "2026-11-13T23:11:19.852591Z",
+        "sha256": "54b7f5a3cf33c32790049e4ed4a21e2d364ed06a0c5aa738b184e21dc2a05942",
+        "request_method": "GET"
+      },
+      "playability_status": "OK",
+      "split": "holdout",
+      "research_available_at": "2026-11-06T20:54:59Z",
+      "research_time_basis": "max(archive_publication,verified_live_end)+15_minutes"
+    },
+    {
+      "source_id": "_vVNNnKqdDw",
+      "url": "https://www.youtube.com/watch?v=_vVNNnKqdDw",
+      "listing_title": "Bitcoin and Stocks: The Last Time This Happened Was 1989",
+      "listing_tab": "streams",
+      "listing_page": 1,
+      "listing_labels": [
+        "14 thousand views",
+        "Streamed 4 days ago"
+      ],
+      "listing_duration": [
+        "1:33:53"
+      ],
+      "listing_evidence": {
+        "url": "https://www.youtube.com/@ECKrown/streams",
+        "retrieved_at": "2026-11-13T23:10:16.888367Z",
+        "sha256": "c580f6955086134b74aec2603c211ac6aabaa06ef7d8d0f27362fa5baece1e5d",
+        "request_method": "GET"
+      },
+      "channel_id": "UCnwxzpFzZNtLH8NgTeAROFA",
+      "channel": "Krown",
+      "title": "Bitcoin and Stocks: The Last Time This Happened Was 1989",
+      "duration_seconds": 5632,
+      "microformat_duration_seconds": "5633",
+      "published_at": "2026-11-09T18:31:16Z",
+      "publication_precision": "timestamp",
+      "publish_date_raw": "2026-11-09T10:31:16-08:00",
+      "upload_date_raw": "2026-11-09T10:31:16-08:00",
+      "content_type": "completed_livestream",
+      "live_start_at": "2026-11-09T16:20:42Z",
+      "live_end_at": "2026-11-09T18:25:02Z",
+      "is_shorts_eligible": false,
+      "metadata_evidence": {
+        "url": "https://www.youtube.com/watch?v=_vVNNnKqdDw",
+        "retrieved_at": "2026-11-13T23:11:19.907091Z",
+        "sha256": "4069e15086a48a2080d1db40a9620aafcda37856b7f547e96f1f7ae429356dc8",
+        "request_method": "GET"
+      },
+      "playability_status": "OK",
+      "split": "holdout",
+      "research_available_at": "2026-11-09T18:46:16Z",
+      "research_time_basis": "max(archive_publication,verified_live_end)+15_minutes"
+    },
+    {
+      "source_id": "78k4GmOT2KE",
+      "url": "https://www.youtube.com/watch?v=78k4GmOT2KE",
+      "listing_title": "Bitcoin: Why I Bought Puts Into December. My Line Is $68,000",
+      "listing_tab": "videos",
+      "listing_page": 1,
+      "listing_labels": [
+        "15 thousand views",
+        "3 days ago"
+      ],
+      "listing_duration": [
+        "15:53"
+      ],
+      "listing_evidence": {
+        "url": "https://www.youtube.com/@ECKrown/videos",
+        "retrieved_at": "2026-11-13T23:10:07.611249Z",
+        "sha256": "0ad4af0441c787797a8c8c551d2066343554dc66c91f2e9a6c8b53ac657f7c0d",
+        "request_method": "GET"
+      },
+      "channel_id": "UCnwxzpFzZNtLH8NgTeAROFA",
+      "channel": "Krown",
+      "title": "Bitcoin's 200-Day Is Breaking: Is $68,000 Next by December?",
+      "duration_seconds": 952,
+      "microformat_duration_seconds": "953",
+      "published_at": "2026-11-10T17:56:42Z",
+      "publication_precision": "timestamp",
+      "publish_date_raw": "2026-11-10T09:56:42-08:00",
+      "upload_date_raw": "2026-11-10T09:56:42-08:00",
+      "content_type": "normal_video",
+      "live_start_at": null,
+      "live_end_at": null,
+      "is_shorts_eligible": false,
+      "metadata_evidence": {
+        "url": "https://www.youtube.com/watch?v=78k4GmOT2KE",
+        "retrieved_at": "2026-11-13T23:10:30.130306Z",
+        "sha256": "fa2314d15ee93506807da85f5991d956d53a60088bc70471b1db9bf58073fac3",
+        "request_method": "GET"
+      },
+      "playability_status": "OK",
+      "split": "holdout",
+      "research_available_at": "2026-11-10T18:27:34Z",
+      "research_time_basis": "publication+full_video_duration+15_minutes"
+    }
+  ]
+}

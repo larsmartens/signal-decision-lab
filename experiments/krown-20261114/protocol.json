@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "study_id": "krown-20261114",
+  "frozen_at": "2026-11-13T23:19:54.038041Z",
+  "freeze_scope": "Selection and numeric policy fixed before empirical returns. Semantic bug fixes use development text or synthetic examples only; extractor code hash will be recorded before holdout extraction.",
+  "channel_id": "UCnwxzpFzZNtLH8NgTeAROFA",
+  "input_sha256": {
+    "sources": "bcf100cae62d27c5b1958453968113f540b9ff9190b2e9c91627ad80613003b3",
+    "acquisition": "9564de3c01051482c7b29bce10b75d2dfb860ac7f653f8f18a33de8216608245",
+    "market_bars": "c764e5ddbef8bcca557964d924ce2b369d1f1d24c6e9bd21587cf17109f36e27"
+  },
+  "splits": {
+    "development": {
+      "sample_start": "2026-09-08T18:00:00Z",
+      "sample_end": "2026-10-01T19:00:00Z",
+      "expected_sources": 12
+    },
+    "holdout": {
+      "sample_start": "2026-10-01T19:00:00Z",
+      "sample_end": "2026-11-13T23:00:00Z",
+      "expected_sources": 24
+    }
+  },
+  "variants": [
+    {
+      "id": "lexical_24h",
+      "label": "Word count · 24h",
+      "extractor": "lexical",
+      "holding_hours": 24,
+      "confirmation": "none"
+    },
+    {
+      "id": "context_strict_24h",
+      "label": "Strict context · 24h",
+      "extractor": "context_strict",
+      "holding_hours": 24,
+      "confirmation": "none"
+    },
+    {
+      "id": "context_standard_24h",
+      "label": "Standard context · 24h",
+      "extractor": "context_standard",
+      "holding_hours": 24,
+      "confirmation": "none"
+    },
+    {
+      "id": "context_broad_24h",
+      "label": "Broad context · 24h",
+      "extractor": "context_broad",
+      "holding_hours": 24,
+      "confirmation": "none"
+    },
+    {
+      "id": "context_standard_48h",
+      "label": "Standard context · 48h",
+      "extractor": "context_standard",
+      "holding_hours": 48,
+      "confirmation": "none"
+    },
+    {
+      "id": "context_standard_breakout_24h",
+      "label": "Standard + breakout · 24h",
+      "extractor": "context_standard",
+      "holding_hours": 24,
+      "confirmation": "breakout"
+    }
+  ],
+  "extractors": {
+    "lexical": {
+      "name": "lexical",
+      "context_words": 32,
+      "asset_window_words": 70,
+      "minimum_support": 1,
+      "minimum_dominance": 0.0,
+      "allowed_rules": [
+        "word_mention"
+      ],
+      "lexical": true
+    },
+    "context_strict": {
+      "name": "context_strict",
+      "context_words": 24,
+      "asset_window_words": 40,
+      "minimum_support": 2,
+      "minimum_dominance": 0.5,
+      "allowed_rules": [
+        "explicit_stance",
+        "explicit_expectation",
+        "probability_bias"
+      ],
+      "lexical": false
+    },
+    "context_standard": {
+      "name": "context_standard",
+      "context_words": 48,
+      "asset_window_words": 70,
+      "minimum_support": 1,
+      "minimum_dominance": 0.25,
+      "allowed_rules": [
+        "explicit_stance",
+        "explicit_expectation",
+        "probability_bias",
+        "present_market_description"
+      ],
+      "lexical": false
+    },
+    "context_broad": {
+      "name": "context_broad",
+      "context_words": 80,
+      "asset_window_words": 100,
+      "minimum_support": 1,
+      "minimum_dominance": 0.1,
+      "allowed_rules": [
+        "explicit_stance",
+        "explicit_expectation",
+        "probability_bias",
+        "present_market_description",
+        "bounded_directional_expectation",
+        "tentative_expectation"
+      ],
+      "lexical": false
+    }
+  },
+  "rule_weights": {
+    "word_mention": 1.0,
+    "explicit_stance": 1.0,
+    "explicit_expectation": 1.0,
+    "probability_bias": 0.8,
+    "present_market_description": 0.6,
+    "bounded_directional_expectation": 0.5,
+    "tentative_expectation": 0.4
+  },
+  "costs": {
+    "base": {
+      "fee_bps": 10.0,
+      "slippage_bps": 5.0
+    },
+    "stress": {
+      "fee_bps": 20.0,
+      "slippage_bps": 10.0
+    }
+  },
+  "engine": {
+    "asset": "BTCUSDT",
+    "initial_equity": 10000.0,
+    "max_signal_age_hours": 24.0,
+    "direction_mode": "long_short",
+    "breakout_lookback_hours": 24,
+    "confirmation_window_hours": 24.0,
+    "exposure_fraction": 1.0,
+    "min_strength": 0.0
+  },
+  "comparisons": [
+    "all six variants in both partitions and both cost settings",
+    "buy and hold over the same partition",
+    "24h price momentum at the same source clocks, with matching 24h/48h hold and no breakout gate",
+    "coverage of literal complete source setups, without automatic review"
+  ],
+  "selection_after_results": "No winner selection, threshold search, or source replacement. Every declared run is published.",
+  "model_runs": {
+    "jev": {
+      "status": "not_run",
+      "reason": "No TypeSafe API credential configured."
+    },
+    "llm_extraction": {
+      "status": "not_run",
+      "reason": "No configured inference endpoint or credential."
+    }
+  },
+  "public_source_text": "No caption quotes or full transcripts are published; timestamps, span offsets, source hashes and source links remain available."
+}

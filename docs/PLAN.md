@@ -4,6 +4,14 @@ Build a record of what Krown said, measure how faithfully the system extracts it
 
 ## Starting point
 
+The [36-source channel experiment](experiments/krown-20261114/README.md) is complete:
+fixed source cohorts, four directional extractors, six execution variants, two cost levels,
+market-only controls and reproducible charts. Its positive strict-rule result failed the
+subsequent context audit. The current blocker is interpretation accuracy, especially
+subject attribution, conditions and horizons. The experiment does not satisfy the source
+labeling or production-entry acceptance criteria below. Keep its frozen results as a
+baseline and use new sources to evaluate any replacement extractor.
+
 The prototype imports timestamped transcripts, extracts claims with source evidence, requires review, and replays supported setups against price bars. The default decision rule and all position sizing run in ordinary Python. An optional LLM proposes claims; [TypeSafe's Jev](https://docs.typesafe.ai/introduction) is the intended model for comparing narrowly defined decisions. Jev accepts state and typed questions. Its integration and verification status belong in [JEV_SETUP.md](JEV_SETUP.md).
 
 The code separates [extraction](../signal_lab/extract.py), [LLM proposals](../signal_lab/llm.py), [Jev](../signal_lab/jev.py), [risk](../signal_lab/engine.py), and [replay](../signal_lab/replay.py). Executable setups currently require a limited English grammar. LLM output cannot bypass `unsupported_language`; unsupported corrections, price ranges, and additional conditions remain blocked. Publication times are supplied as metadata and need external verification.

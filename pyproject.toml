@@ -12,6 +12,7 @@ dependencies = []
 [project.optional-dependencies]
 youtube = ["youtube-transcript-api>=1.2.5,<2"]
 asr = ["faster-whisper>=1.2,<2"]
+research = ["matplotlib==3.10.8"]
 dev = ["ruff==0.17.5", "mypy==2.4.1"]
 
 [project.scripts]

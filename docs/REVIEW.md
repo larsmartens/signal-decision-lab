@@ -61,3 +61,41 @@ the Jev demo with no key made none and recorded `missing_api_key`.
 
 No unresolved behavioral findings remain in the reviewed scope. These checks used controlled
 local responses; they did not call hosted Jev or measure its decision quality or calibration.
+## Krown channel experiment, November 2026
+
+This addition was reviewed as a reproducible research artifact against main commit
+`3bd0400145cc7452b64297e2e4d2410a7c5d464f`. It does not claim that the heuristic labels
+meet a production signal contract. The [study report](experiments/krown-20261114/README.md)
+and [validation receipt](../experiments/krown-20261114/validation.json) retain the evidence.
+
+A non-author reviewed the runner with synthetic captions and prices. The review found
+missing saved-feature provenance enforcement and a path for nested caption text to reach
+public features. Both were fixed and covered by the fifteen new runner tests. Separate
+non-author checks exercised engine timing and hand-calculated long/short costs, open P&L,
+drawdowns and exposure.
+
+The numeric audit reconstructed all 36 strategy/control blocks, 284 completed trades and
+28,638 hourly equity observations. It also rebuilt all twelve controls from market bars
+and source clocks. The offline command reproduces the published outcome rows exactly.
+
+The source interpretation review reached a different conclusion: both profitable strict
+holdout outputs are unsupported. It examined all six accepted units with surrounding
+captions and confirmed wrong-subject, missed-condition and repeated-proposition errors.
+The report and charts disclose this failure. Rules and outcomes were not changed after
+the audit. This selected post-outcome check is not a blind accuracy benchmark.
+
+The appropriate release scope is the experiment, its code, data references and negative
+findings. Promoting the extracted directions into reviewed live decisions remains blocked
+by the source-interpretation failures. Actual GitHub head checks and merge state must be
+read from the associated pull request; this document does not certify a future commit.
+
+### Python-version reproduction check
+
+The first GitHub run exposed seven last-bit differences in `profit_factor` on Python
+3.11. Its built-in float summation predates the change documented in
+[Python 3.12](https://docs.python.org/3.12/whatsnew/3.12.html#other-language-changes).
+Using `math.fsum` for the two reporting totals restores the original output hashes.
+A synthetic regression failed before the patch on actual CPython 3.11.18 and passes
+after it. The 41 frozen result files reproduce on CPython 3.11, 3.12 and 3.13, with
+the same source features, decisions, trades, returns and equity. The checker retains
+exact comparisons. The full suite now contains 233 passing tests.

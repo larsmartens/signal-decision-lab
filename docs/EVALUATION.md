@@ -1,5 +1,15 @@
 # Evaluation protocol
 
+## Completed channel study
+
+The [November 2026 experiment](experiments/krown-20261114/README.md) applies a fixed
+12-source development / 24-source holdout split to Krown's own regular videos and
+completed streams. It publishes all 24 strategy runs, matched controls, source references
+and charts. The [protocol](../experiments/krown-20261114/PROTOCOL.md) records its actual
+execution assumptions. A post-outcome source audit rejected both profitable strict-rule
+interpretations. This is a reproducible negative research result; a blind labeled
+extraction benchmark and a prospective performance trial remain outstanding.
+
 Use this protocol for the experiments in [PLAN.md](PLAN.md). Record metrics and acceptance thresholds before opening the test data. Changing a threshold after reading the results creates a new hypothesis.
 
 ## What has been demonstrated

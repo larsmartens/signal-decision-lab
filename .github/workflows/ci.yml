@@ -25,6 +25,10 @@ jobs:
           python -m mypy signal_lab
       - name: Reproduce the synthetic demonstration
         run: python -m signal_lab demo --out artifacts/demo --format json
+      - name: Reproduce the published Krown study offline
+        run: |
+          python -m signal_lab krown-study --out artifacts/krown-replay --format json
+          python scripts/check_study_reproduction.py
       - uses: actions/upload-artifact@v4
         with:
           name: synthetic-demo-python-${{ matrix.python }}

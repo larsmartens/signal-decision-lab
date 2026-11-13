@@ -1,30 +1,47 @@
 # Signal Decision Lab
 
-Extract trading claims from transcripts, keep the source evidence, and test reviewed setups
-in a chronological paper simulation. The optional **Jev adapter uses TypeSafe's System One
-API** to judge a narrowly defined action: buy, sell or hold.
+Process Krown's regular Bitcoin videos and completed livestreams, retain source timestamps,
+and test what the extracted views do under fixed trading rules. A separate workflow handles
+complete, reviewed trade setups. The optional **Jev adapter uses TypeSafe's System One API**
+to judge a narrowly defined buy, sell or hold decision.
 
-The project starts with a practical question: can commentary from channels such as Eric
-Krown's be turned into useful, testable trading inputs? The code covers ingestion,
-extraction, review and replay. The [research](docs/research/video-signals.md) and
-[evaluation plan](docs/EVALUATION.md) describe how to test whether those inputs add value.
-A trading advantage has not been established.
+The [first channel study](docs/experiments/krown-20261114/README.md) covers **36 videos,
+six strategies and two cost levels**, with separate September development and
+October–November holdout sets. Five strategies lost money in holdout. The strict rule's
+two profitable trades failed a subsequent source-context review. The project has a
+reproducible experiment, not an established trading advantage.
+
+![Holdout returns and drawdowns](docs/experiments/krown-20261114/charts/holdout-results.png)
 
 ## Run it
 
-Python 3.11 or later is enough for the offline demo and tests. Neither needs API keys or
-third-party packages.
+Python 3.11 or later is enough to reproduce the published study, run the synthetic demo
+and execute the tests. These paths need no API keys or third-party packages.
 
 ```bash
 git clone https://github.com/larsmartens/signal-decision-lab.git
 cd signal-decision-lab
-python -m signal_lab demo
+python -m signal_lab krown-study --out artifacts/krown-replay --format json
+python scripts/check_study_reproduction.py
 python -m unittest discover -s tests -v
 ```
 
-Open `artifacts/demo/report.html` to inspect six synthetic claims, their evidence, review
-results and one completed paper trade. The price series was written to exercise the
-simulator. Its return is a fixture result, not a strategy performance estimate.
+The replay writes all strategy and control results, trades, hourly equity and source
+references. Its input is the committed feature snapshot and actual BTCUSDT candles.
+Read the [report](docs/experiments/krown-20261114/README.md) for the assumptions and the
+known extraction failures. No full third-party captions are redistributed.
+
+To regenerate the charts:
+
+```bash
+python -m pip install -e '.[research]'
+python -m signal_lab krown-study --out artifacts/krown-replay \
+  --charts artifacts/krown-replay/charts
+```
+
+`python -m signal_lab demo` also creates `artifacts/demo/report.html`: six synthetic
+claims, one reviewed setup and one completed trade. That fixture checks the stricter
+setup workflow; its return is not a strategy performance estimate.
 
 `python -m pip install -e '.[dev]'` also installs the `signal-lab` command, Ruff and Mypy.
 Commands print compact TOON by default; append `--format json` for JSON. Saved run files
@@ -35,7 +52,9 @@ always contain the full JSON record.
 | Component | Current behavior | Validation limit |
 |---|---|---|
 | Transcript import | Reads JSON, WebVTT and SRT with source metadata | Publication and availability times must be supplied accurately. |
-| YouTube captions | Optional importer; one real download recorded | Caption access varies by video and environment. |
+| YouTube captions | Channel discovery, verified metadata and 36 acquired caption tracks | Current captions do not prove unchanged historical availability. |
+| Krown study | Four extractors, six trading rules, two cost settings, separate cohorts and matched controls | Heuristic source attribution has known failures; no source-accuracy or trading-edge claim. |
+| Study charts | Matplotlib PNG/SVG figures for source dates, coverage, returns and hourly equity | Shows the declared retrospective experiments, including failed interpretations and losses. |
 | Audio and video transcription | Optional `faster-whisper` adapter for local files | No actual ASR model run was completed here. |
 | Rule extraction | Recognizes a small set of English BTC/ETH setup patterns | Other wording and unsupported conditions remain unreviewed. |
 | LLM extraction | Accepts structured output from a chat-completions endpoint | HTTP and schema tests passed; external model inference is untested. |
@@ -64,6 +83,10 @@ flowchart TD
 
 The rule engine controls eligibility and risk. Jev can veto an eligible entry; it cannot
 supply a missing stop, approve an unreviewed claim or override a failed risk check.
+
+The channel study is a separate research path. It combines a coarse video-level direction
+with a researcher-chosen holding period. It does not approve those views as executable
+source claims or feed them to Jev. [Study protocol](experiments/krown-20261114/PROTOCOL.md).
 
 ## Use your own transcript
 
@@ -107,23 +130,24 @@ that assumption is recorded and does not establish that the information was avai
 ```bash
 python -m pip install -e '.[youtube]'
 python -m signal_lab import-youtube \
-  --url 'https://www.youtube.com/watch?v=EdXslFg3u38' \
-  --channel 'Cointelegraph: Krown interview' \
-  --published-at '2026-09-02T15:01:27Z' --out data/interview.json
+  --url 'https://www.youtube.com/watch?v=78k4GmOT2KE' \
+  --channel 'Krown / @ECKrown' \
+  --published-at '2026-11-10T17:56:42Z' --out data/krown-video.json
 ```
 
-A real import of this interview returned 646 automatically generated English caption
-segments. The rule baseline found 46 asset mentions and no complete supported setups.
-This checks acquisition, not extraction accuracy: the captions were not manually labeled
-or independently checked against the audio. The [record](docs/validation/youtube-smoke.json)
-contains the fetch time and payload hash. Full third-party transcripts are excluded from git.
+The [channel acquisition record](docs/research/krown-corpus.md) contains the exact
+36-source inventory, publication evidence, actual retrieval times, generated-caption
+flags and download hashes. `scripts/collect_krown.py` discovers normal videos and
+completed streams and acquires a selected cohort. Publication and actual retrieval
+remain separate. An earlier [interview smoke test](docs/validation/youtube-smoke.json)
+is retained as a separate source record.
 
 ### Generative extraction
 
 ```bash
 export SIGNAL_LLM_BASE_URL='http://127.0.0.1:11434/v1'
 export SIGNAL_LLM_MODEL='<installed model>'
-python -m signal_lab extract data/interview.json --provider llm \
+python -m signal_lab extract data/krown-video.json --provider llm \
   --out artifacts/llm-claims.json
 ```
 
@@ -156,6 +180,7 @@ request was made during this implementation because no TypeSafe API key was conf
 
 ## Research and next steps
 
+- [Krown channel experiment](docs/experiments/krown-20261114/README.md): measured results, charts, source failures and reproduction commands.
 - [Implementation plan](docs/PLAN.md): staged work and acceptance criteria.
 - [Evaluation plan](docs/EVALUATION.md): source labeling, chronological splits and comparisons.
 - [Jev and decision models](docs/research/decision-models.md): official API, implementations and papers.
@@ -163,7 +188,8 @@ request was made during this implementation because no TypeSafe API key was conf
 - [Validation](docs/VALIDATION.md): observed results and limits.
 - [Specification](docs/SPEC.md) and [coding standards](docs/CODING_STANDARDS.md).
 
-The next useful experiment is a small, manually labeled Krown corpus with enough context
-to resolve conditional statements. Compare price-only rules, transcript-derived rules and
-the same rules with Jev on later, untouched periods. That comparison will show whether the
-video input or model filter adds anything beyond the baseline.
+The next step is to measure source interpretation against independent labels: which asset
+is being discussed, whether a view is conditional, and which time horizon it concerns.
+The current study exposed failures in all three areas. A revised extractor needs fresh
+unseen sources before another performance claim; the existing holdout has been examined.
+Jev can then be tested as a separate decision filter over reviewed facts.

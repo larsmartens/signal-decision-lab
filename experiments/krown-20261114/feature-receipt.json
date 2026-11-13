@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "study_id": "krown-20261114",
+  "frozen_at": "2026-11-13T23:27:13.406082Z",
+  "features_sha256": "26540f035737d56079a6fdf99e6760657cbe7932174da69be7923c087458ce33",
+  "protocol_sha256": "e7034d5102f903647c461d0f660301791db66f0fd6769fe6637ca9364616338e",
+  "extractor_code_sha256": "d14bdd6e2cbf1e09541cdbc28d25582a5a5427995548cbf78678099621ae8d62",
+  "frozen_before_backtest": true
+}
