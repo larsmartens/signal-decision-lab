@@ -1,0 +1,35 @@
+{
+  "retrieved_at": "2026-11-13T18:00:14.582240Z",
+  "video_id": "EdXslFg3u38",
+  "publisher": "Cointelegraph: Krown interview",
+  "url": "https://www.youtube.com/watch?v=EdXslFg3u38",
+  "published_at": "2026-09-02T15:01:27Z",
+  "publication_provenance": "YouTube watch page microformat publishDate and uploadDate both 2026-09-02T08:01:27-07:00; publisher transcript pages disagree on calendar date",
+  "caption_provider": "youtube-transcript-api 1.2.5",
+  "language": "English",
+  "auto_generated": true,
+  "segments": 646,
+  "raw_caption_sha256": "271b173b1efcc3d94639f13ed2c4b8769dd0de23b4feea5a824a188db62fb1aa",
+  "baseline_asset_claims": 46,
+  "reviewed_claims": 0,
+  "complete_supported_setups": 0,
+  "claim_types": {
+    "commentary": 46
+  },
+  "blockers": {
+    "missing_horizon_minutes": 46,
+    "missing_level": 46,
+    "missing_stop": 46,
+    "missing_target": 46,
+    "missing_timeframe_minutes": 46,
+    "missing_trigger": 46,
+    "unsupported_condition": 3
+  },
+  "limits": [
+    "Downloaded captions, not independently audio-verified.",
+    "Genuine source smoke, not an extraction-accuracy gold set.",
+    "Full captions deliberately not redistributed in this repository.",
+    "Acquired today; cannot be used as if the system had captured them in September.",
+    "Sentence context spans several short captions; baseline segment-local extraction is intentionally incomplete."
+  ]
+}

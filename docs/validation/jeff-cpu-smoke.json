@@ -1,0 +1,69 @@
+{
+  "source_commit": "59898ae9e12621bd8e0199b86c951d366f5026b7",
+  "python": "3.13.5",
+  "torch": "2.14.0+cpu",
+  "cuda_available": false,
+  "threads": 8,
+  "load_seconds": 15.490182577999803,
+  "results": [
+    {
+      "case": "trigger_met",
+      "expected": "buy",
+      "elapsed_ms": 3152.0812659982766,
+      "decision": {
+        "value": "hold",
+        "confidence": 0.8884097793111893,
+        "abstained": true,
+        "calibrated": true,
+        "interface": "classify",
+        "function": "jeff.finance.trading-desk.direction",
+        "version": "1.4.0",
+        "probabilities": {
+          "buy": 0.1063311083171248,
+          "sell": 0.005259112371685999,
+          "hold": 0.8884097793111893
+        },
+        "score": null,
+        "route": [],
+        "decided_by": "jeff.finance.trading-desk.direction@1.4.0",
+        "escalations": [],
+        "timing": {
+          "path": "standard",
+          "model_ms": 3151.602,
+          "format": "bf16"
+        },
+        "evidence_refs": []
+      }
+    },
+    {
+      "case": "trigger_not_met",
+      "expected": "hold",
+      "elapsed_ms": 3101.2660749984207,
+      "decision": {
+        "value": "hold",
+        "confidence": 0.9888062654384604,
+        "abstained": false,
+        "calibrated": true,
+        "interface": "classify",
+        "function": "jeff.finance.trading-desk.direction",
+        "version": "1.4.0",
+        "probabilities": {
+          "buy": 0.007629674064806873,
+          "sell": 0.003564060496732746,
+          "hold": 0.9888062654384604
+        },
+        "score": null,
+        "route": [],
+        "decided_by": "jeff.finance.trading-desk.direction@1.4.0",
+        "escalations": [],
+        "timing": {
+          "path": "standard",
+          "model_ms": 3100.885,
+          "format": "bf16"
+        },
+        "evidence_refs": []
+      }
+    }
+  ],
+  "scope": "Actual model weights through official in-process SDK; not the HTTP adapter"
+}

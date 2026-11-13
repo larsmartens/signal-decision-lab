@@ -1,0 +1,11 @@
+{
+  "risk_fraction": 0.0025,
+  "max_exposure_fraction": 1.0,
+  "initial_equity": 10000,
+  "fee_bps": 5,
+  "slippage_bps": 2,
+  "max_drawdown_fraction": 0.1,
+  "allow_short": false,
+  "min_reward_risk": 1.5,
+  "min_model_confidence": 0.8
+}

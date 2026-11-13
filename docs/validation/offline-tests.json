@@ -1,0 +1,20 @@
+{
+  "python": "3.12.14",
+  "tests": 146,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "elapsed_seconds": 1.428,
+  "checks": {
+    "ruff": {
+      "exit_code": 0,
+      "output": "All checks passed!"
+    },
+    "mypy": {
+      "exit_code": 0,
+      "output": "Success: no issues found in 12 source files"
+    }
+  },
+  "scope": "Offline behavioral tests; local HTTP stubs do not imply live model integration",
+  "test_output": "..................................................................................................................................................\n----------------------------------------------------------------------\nRan 146 tests in 1.094s\n\nOK"
+}

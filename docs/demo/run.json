@@ -1,0 +1,412 @@
+{
+  "schema_version": 1,
+  "transcript": {
+    "source_id": "synthetic-scenario-001",
+    "channel": "Synthetic test author - not Eric Crown",
+    "url": "",
+    "published_at": "2026-01-01T00:00:00Z",
+    "available_at": "2026-01-01T00:05:00Z",
+    "segments": [
+      {
+        "id": "s1",
+        "start": 0,
+        "end": 20,
+        "text": "For BTC, if the 1-hour close above 100,000 is confirmed, go long. Stop at 97,000. Target at 108,000. Valid for 6 hours."
+      },
+      {
+        "id": "s2",
+        "start": 20,
+        "end": 35,
+        "text": "Bitcoin looks interesting over the next few weeks, but this is general market commentary."
+      },
+      {
+        "id": "s3",
+        "start": 35,
+        "end": 55,
+        "text": "Do not buy BTC. If the 1-hour close above 101,000 occurs, go long. Stop at 98,000. Target at 110,000. Valid for 6 hours."
+      },
+      {
+        "id": "s4",
+        "start": 55,
+        "end": 75,
+        "text": "Yesterday we had a BTC long: if the 1-hour close above 98,000 occurred, buy. Stop at 95,000. Target at 105,000. Valid for 6 hours."
+      },
+      {
+        "id": "s5",
+        "start": 75,
+        "end": 95,
+        "text": "For ETH, if the 1-hour close below 3,000 is confirmed, go short. Stop at 3,100. Target at 2,700. Valid for 6 hours."
+      },
+      {
+        "id": "s6",
+        "start": 95,
+        "end": 115,
+        "text": "For BTC, if the 1-hour close above 100,000 is confirmed and the RSI turns up, go long. Stop at 97,000. Target at 108,000. Valid for 6 hours."
+      }
+    ],
+    "kind": "synthetic"
+  },
+  "signals": [
+    {
+      "id": "f61145e626d17d9d",
+      "source_id": "synthetic-scenario-001",
+      "asset": "BTCUSDT",
+      "side": "long",
+      "statement_type": "conditional",
+      "trigger": "close_above",
+      "level": 100000.0,
+      "stop": 97000.0,
+      "target": 108000.0,
+      "timeframe_minutes": 60,
+      "horizon_minutes": 360,
+      "available_at": "2026-01-01T00:05:00Z",
+      "expires_at": "2026-01-01T06:00:00Z",
+      "evidence": [
+        {
+          "segment_id": "s1",
+          "quote": "For BTC, if the 1-hour close above 100,000 is confirmed, go long. Stop at 97,000. Target at 108,000. Valid for 6 hours."
+        }
+      ],
+      "issues": [],
+      "reviewed": true,
+      "extractor": "rules-v1",
+      "extracted_at": "2026-01-01T00:05:00Z",
+      "reviewed_at": "2026-01-01T00:05:00Z"
+    },
+    {
+      "id": "575f8f791fe60973",
+      "source_id": "synthetic-scenario-001",
+      "asset": "BTCUSDT",
+      "side": "none",
+      "statement_type": "commentary",
+      "trigger": "none",
+      "level": null,
+      "stop": null,
+      "target": null,
+      "timeframe_minutes": null,
+      "horizon_minutes": null,
+      "available_at": "2026-01-01T00:05:00Z",
+      "expires_at": null,
+      "evidence": [
+        {
+          "segment_id": "s2",
+          "quote": "Bitcoin looks interesting over the next few weeks, but this is general market commentary."
+        }
+      ],
+      "issues": [
+        "missing_horizon_minutes",
+        "missing_level",
+        "missing_stop",
+        "missing_target",
+        "missing_timeframe_minutes",
+        "missing_trigger"
+      ],
+      "reviewed": false,
+      "extractor": "rules-v1",
+      "extracted_at": "2026-01-01T00:05:00Z",
+      "reviewed_at": null
+    },
+    {
+      "id": "4ea9d2163daca091",
+      "source_id": "synthetic-scenario-001",
+      "asset": "BTCUSDT",
+      "side": "none",
+      "statement_type": "negated",
+      "trigger": "close_above",
+      "level": 101000.0,
+      "stop": 98000.0,
+      "target": 110000.0,
+      "timeframe_minutes": 60,
+      "horizon_minutes": 360,
+      "available_at": "2026-01-01T00:05:00Z",
+      "expires_at": "2026-01-01T06:00:00Z",
+      "evidence": [
+        {
+          "segment_id": "s3",
+          "quote": "Do not buy BTC. If the 1-hour close above 101,000 occurs, go long. Stop at 98,000. Target at 110,000. Valid for 6 hours."
+        }
+      ],
+      "issues": [],
+      "reviewed": false,
+      "extractor": "rules-v1",
+      "extracted_at": "2026-01-01T00:05:00Z",
+      "reviewed_at": null
+    },
+    {
+      "id": "1c7fc7709b224ec5",
+      "source_id": "synthetic-scenario-001",
+      "asset": "BTCUSDT",
+      "side": "none",
+      "statement_type": "retrospective",
+      "trigger": "close_above",
+      "level": 98000.0,
+      "stop": 95000.0,
+      "target": 105000.0,
+      "timeframe_minutes": 60,
+      "horizon_minutes": 360,
+      "available_at": "2026-01-01T00:05:00Z",
+      "expires_at": "2026-01-01T06:00:00Z",
+      "evidence": [
+        {
+          "segment_id": "s4",
+          "quote": "Yesterday we had a BTC long: if the 1-hour close above 98,000 occurred, buy. Stop at 95,000. Target at 105,000. Valid for 6 hours."
+        }
+      ],
+      "issues": [],
+      "reviewed": false,
+      "extractor": "rules-v1",
+      "extracted_at": "2026-01-01T00:05:00Z",
+      "reviewed_at": null
+    },
+    {
+      "id": "ef4dfecac331542e",
+      "source_id": "synthetic-scenario-001",
+      "asset": "ETHUSDT",
+      "side": "short",
+      "statement_type": "conditional",
+      "trigger": "close_below",
+      "level": 3000.0,
+      "stop": 3100.0,
+      "target": 2700.0,
+      "timeframe_minutes": 60,
+      "horizon_minutes": 360,
+      "available_at": "2026-01-01T00:05:00Z",
+      "expires_at": "2026-01-01T06:00:00Z",
+      "evidence": [
+        {
+          "segment_id": "s5",
+          "quote": "For ETH, if the 1-hour close below 3,000 is confirmed, go short. Stop at 3,100. Target at 2,700. Valid for 6 hours."
+        }
+      ],
+      "issues": [],
+      "reviewed": false,
+      "extractor": "rules-v1",
+      "extracted_at": "2026-01-01T00:05:00Z",
+      "reviewed_at": null
+    },
+    {
+      "id": "757e09f9ad9049d6",
+      "source_id": "synthetic-scenario-001",
+      "asset": "BTCUSDT",
+      "side": "long",
+      "statement_type": "conditional",
+      "trigger": "close_above",
+      "level": 100000.0,
+      "stop": 97000.0,
+      "target": 108000.0,
+      "timeframe_minutes": 60,
+      "horizon_minutes": 360,
+      "available_at": "2026-01-01T00:05:00Z",
+      "expires_at": "2026-01-01T06:00:00Z",
+      "evidence": [
+        {
+          "segment_id": "s6",
+          "quote": "For BTC, if the 1-hour close above 100,000 is confirmed and the RSI turns up, go long. Stop at 97,000. Target at 108,000. Valid for 6 hours."
+        }
+      ],
+      "issues": [
+        "unsupported_condition",
+        "unsupported_language"
+      ],
+      "reviewed": false,
+      "extractor": "rules-v1",
+      "extracted_at": "2026-01-01T00:05:00Z",
+      "reviewed_at": null
+    }
+  ],
+  "replay": {
+    "mode": "paper-replay",
+    "policy": {
+      "risk_fraction": 0.0025,
+      "max_exposure_fraction": 1.0,
+      "initial_equity": 10000.0,
+      "fee_bps": 5.0,
+      "slippage_bps": 2.0,
+      "max_drawdown_fraction": 0.1,
+      "allow_short": false,
+      "min_reward_risk": 1.5,
+      "min_model_confidence": 0.8
+    },
+    "assumptions": [
+      "Synthetic scenarios establish behavior, never profitability.",
+      "One asset and one position; no exchange connection, leverage, funding or borrow costs.",
+      "Signals are eligible at availability; completed-bar decisions fill only at the next contiguous open.",
+      "Both legs pay fees and adverse proportional slippage; size includes modeled stop costs.",
+      "A stop/target collision assumes the stop first; stop gaps fill at the adverse open.",
+      "Intrabar exit_time is the bar-close upper bound, not an observed execution timestamp.",
+      "Expiry exits at the first observed bar open at/after deadline; gaps can delay exits.",
+      "End-of-data positions remain open and marked at last close; no fictitious liquidation.",
+      "Drawdown is measured at completed closes; a halt queues liquidation at the next observed open, including gaps.",
+      "Jeff confidence concerns rule selection, never the probability of a profitable trade."
+    ],
+    "summary": {
+      "initial_equity": 10000.0,
+      "final_equity": 10058.578796617609,
+      "net_pnl": 58.57879661760853,
+      "return_pct": 0.5857879661760768,
+      "max_drawdown_pct": 0.0,
+      "completed_trades": 1,
+      "entries": 1,
+      "total_fees": 0.7913172655561859,
+      "model_calls": 0,
+      "rejected_signals": 5,
+      "halted": false
+    },
+    "events": [
+      {
+        "time": "2026-01-01T01:00:00Z",
+        "type": "signal_rejected",
+        "signal_id": "1c7fc7709b224ec5",
+        "reasons": [
+          "review_required",
+          "not_actionable",
+          "direction_missing"
+        ]
+      },
+      {
+        "time": "2026-01-01T01:00:00Z",
+        "type": "signal_rejected",
+        "signal_id": "4ea9d2163daca091",
+        "reasons": [
+          "review_required",
+          "not_actionable",
+          "direction_missing"
+        ]
+      },
+      {
+        "time": "2026-01-01T01:00:00Z",
+        "type": "signal_rejected",
+        "signal_id": "575f8f791fe60973",
+        "reasons": [
+          "review_required",
+          "extraction_issues",
+          "not_actionable",
+          "direction_missing",
+          "trigger_missing",
+          "level_missing",
+          "stop_missing",
+          "target_missing",
+          "timeframe_minutes_missing",
+          "horizon_minutes_missing",
+          "expires_at_missing"
+        ]
+      },
+      {
+        "time": "2026-01-01T01:00:00Z",
+        "type": "signal_rejected",
+        "signal_id": "757e09f9ad9049d6",
+        "reasons": [
+          "review_required",
+          "extraction_issues"
+        ]
+      },
+      {
+        "time": "2026-01-01T01:00:00Z",
+        "type": "signal_rejected",
+        "signal_id": "ef4dfecac331542e",
+        "reasons": [
+          "asset_mismatch",
+          "review_required",
+          "short_disabled"
+        ]
+      },
+      {
+        "time": "2026-01-01T01:00:00Z",
+        "type": "order_queued",
+        "signal_id": "f61145e626d17d9d",
+        "reasons": [
+          "eligible"
+        ],
+        "action": "enter_long"
+      },
+      {
+        "time": "2026-01-01T01:00:00Z",
+        "type": "entry",
+        "signal_id": "f61145e626d17d9d",
+        "reasons": [
+          "next_open"
+        ],
+        "price": 100170.03,
+        "quantity": 0.00760339403526787,
+        "planned_stop_loss": 25.0,
+        "notional": 761.6322086146035,
+        "fee": 0.3808161043073018
+      },
+      {
+        "time": "2026-01-01T03:00:00Z",
+        "type": "exit",
+        "signal_id": "f61145e626d17d9d",
+        "reasons": [
+          "target"
+        ],
+        "price": 107978.40000000001,
+        "quantity": 0.00760339403526787,
+        "net_pnl": 58.57879661760847
+      }
+    ],
+    "trades": [
+      {
+        "signal_id": "f61145e626d17d9d",
+        "asset": "BTCUSDT",
+        "side": "long",
+        "entry_time": "2026-01-01T01:00:00Z",
+        "exit_time": "2026-01-01T03:00:00Z",
+        "exit_time_basis": "bar_close_bound",
+        "entry_price": 100170.03,
+        "exit_price": 107978.40000000001,
+        "quantity": 0.00760339403526787,
+        "entry_fee": 0.3808161043073018,
+        "exit_fee": 0.4105011612488841,
+        "fees": 0.7913172655561859,
+        "gross_pnl": 59.37011388316465,
+        "net_pnl": 58.57879661760847,
+        "exit_reason": "target"
+      }
+    ],
+    "equity": [
+      {
+        "time": "2026-01-01T00:00:00Z",
+        "equity": 10000.0,
+        "unrealized_pnl": 0.0
+      },
+      {
+        "time": "2026-01-01T01:00:00Z",
+        "equity": 10000.0,
+        "unrealized_pnl": 0.0
+      },
+      {
+        "time": "2026-01-01T02:00:00Z",
+        "equity": 10013.533166878413,
+        "unrealized_pnl": 13.913982982719153
+      },
+      {
+        "time": "2026-01-01T03:00:00Z",
+        "equity": 10058.578796617609,
+        "unrealized_pnl": 0.0
+      },
+      {
+        "time": "2026-01-01T04:00:00Z",
+        "equity": 10058.578796617609,
+        "unrealized_pnl": 0.0
+      },
+      {
+        "time": "2026-01-01T05:00:00Z",
+        "equity": 10058.578796617609,
+        "unrealized_pnl": 0.0
+      },
+      {
+        "time": "2026-01-01T06:00:00Z",
+        "equity": 10058.578796617609,
+        "unrealized_pnl": 0.0
+      }
+    ],
+    "open_position": null
+  },
+  "review_log": [
+    {
+      "reviewer": "synthetic_demo_fixture",
+      "scope": "synthetic scenarios only"
+    }
+  ],
+  "evaluation_scope": "Synthetic mechanics; not a historical Krown strategy or profit validation"
+}

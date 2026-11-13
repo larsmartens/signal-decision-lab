@@ -1,0 +1,31 @@
+name: Offline behavior and type checks
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ['3.11', '3.13']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install development tools
+        run: python -m pip install -e '.[dev]'
+      - name: Behavioral tests (no network or model)
+        run: python -W error::ResourceWarning -m unittest discover -s tests -v
+      - name: Lint and type checks
+        run: |
+          python -m ruff check signal_lab tests
+          python -m mypy signal_lab
+      - name: Reproduce the synthetic demonstration
+        run: python -m signal_lab demo --out artifacts/demo --format json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: synthetic-demo-python-${{ matrix.python }}
+          path: artifacts/demo/
