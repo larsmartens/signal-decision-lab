@@ -1,0 +1,16 @@
+{
+  "source_id": "synthetic-scenario-001",
+  "channel": "Synthetic test author - not Eric Crown",
+  "url": "",
+  "kind": "synthetic",
+  "published_at": "2026-01-01T00:00:00Z",
+  "available_at": "2026-01-01T00:05:00Z",
+  "segments": [
+    {"id": "s1", "start": 0, "end": 20, "text": "For BTC, if the 1-hour close above 100,000 is confirmed, go long. Stop at 97,000. Target at 108,000. Valid for 6 hours."},
+    {"id": "s2", "start": 20, "end": 35, "text": "Bitcoin looks interesting over the next few weeks, but this is general market commentary."},
+    {"id": "s3", "start": 35, "end": 55, "text": "Do not buy BTC. If the 1-hour close above 101,000 occurs, go long. Stop at 98,000. Target at 110,000. Valid for 6 hours."},
+    {"id": "s4", "start": 55, "end": 75, "text": "Yesterday we had a BTC long: if the 1-hour close above 98,000 occurred, buy. Stop at 95,000. Target at 105,000. Valid for 6 hours."},
+    {"id": "s5", "start": 75, "end": 95, "text": "For ETH, if the 1-hour close below 3,000 is confirmed, go short. Stop at 3,100. Target at 2,700. Valid for 6 hours."},
+    {"id": "s6", "start": 95, "end": 115, "text": "For BTC, if the 1-hour close above 100,000 is confirmed and the RSI turns up, go long. Stop at 97,000. Target at 108,000. Valid for 6 hours."}
+  ]
+}

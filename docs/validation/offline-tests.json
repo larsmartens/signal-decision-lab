@@ -1,0 +1,54 @@
+{
+  "recorded_at": "2026-11-13T19:42:06.350438Z",
+  "python": "3.12.14",
+  "command": "python -W error::ResourceWarning -m unittest discover -s tests -q",
+  "tests": 160,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "elapsed_seconds": 1.448,
+  "checks": {
+    "ruff": {
+      "exit_code": 0,
+      "output": "All checks passed!"
+    },
+    "mypy": {
+      "exit_code": 0,
+      "output": "Success: no issues found in 12 source files"
+    },
+    "demo": {
+      "exit_code": 0,
+      "claims": 6,
+      "reviewed": 1,
+      "completed_paper_trades": 1
+    }
+  },
+  "scope": "Offline behavior and real loopback HTTP tests with controlled responses; no live Jev inference",
+  "jev_live_inference": {
+    "run": false,
+    "reason": "No TypeSafe API credential configured"
+  },
+  "source_sha256": {
+    "signal_lab/__init__.py": "1afb8a7482714f9184b54c7c5a80dfde774e5f4587d1c875da9714c16f6115fb",
+    "signal_lab/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "signal_lab/cli.py": "1f64156f344c9cb7705433f3bc8640ff701798e300b5394d89e9a9dfce892d57",
+    "signal_lab/engine.py": "a06c4087fa6d221ada6045af84b0da79a296c660debbeb36cc6d3f04c02e4fc6",
+    "signal_lab/evaluate.py": "a35929aa1c6a5584376ea28640c50b1b6538843dcc4478941ffa0377eb2b4613",
+    "signal_lab/extract.py": "5c5e5a53a91459098e4921deacd8bcc662908dd637d7b38944bac45a9a16d206",
+    "signal_lab/ingest.py": "68652b96fb07154bbb49a338bf471f19ab540e13d6ceb3a5cdd47febd80e65b3",
+    "signal_lab/jev.py": "a78c6714e6e8976900ca08e7f8f06e74c313c867a6dcd54c20d40aac9c956b24",
+    "signal_lab/llm.py": "b6bd6b79a29be4e1591106c76522f4a9d9f27d79c8958d9451a5d31c731cd5c0",
+    "signal_lab/models.py": "a8b4ecb0680c9c20b52ab2cbb0f41560ad834e8641cda296aaa045c61502c5e5",
+    "signal_lab/replay.py": "c88d7e684eebd9e16c38325cb93061a6362e3ebec9456ca9ca5871226661c995",
+    "signal_lab/report.py": "06fc87dfad1f9b3b77f51971a575cdfc8e93c645cc9c74224ea24498a2a36f63",
+    "tests/test_cli.py": "941b57ee9eab0a8cea85cef2c8cd018dc753075e68a49710e38579aec0576725",
+    "tests/test_engine.py": "a5033b8ed8777f62a646f549b41300cd2bdf2082d3425c9fc1a838f51a3c037b",
+    "tests/test_evaluate.py": "49be417527799e30193802831da46eacee0492ab754698932bc0f981a2ab4df2",
+    "tests/test_extract.py": "79eb05c988b430d91b5190c3f9be2129ae869ec8f0f0f65d5b45709b710727d7",
+    "tests/test_ingest.py": "55a4f509e1bc79db849a3d83daa1bbbe2b615dafb32c6500aaa40717184cea76",
+    "tests/test_jev.py": "fe4e7a5ed6987ded099b5aeac1db89ee314e6a9875587a9ad7a4611e67f9b0b8",
+    "tests/test_llm.py": "071026500b9aebbd4cbce5ac8aea7a3491b0a23e78716ce6f5120dd9ab1cd194",
+    "tests/test_replay.py": "57f6b02ee391c9549a99222064f60d35aa3d23576e949b66f3782b4f80ba9a23"
+  },
+  "test_output": "Ran 160 tests in 1.448s\n\nOK"
+}
