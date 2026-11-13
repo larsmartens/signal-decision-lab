@@ -9,6 +9,7 @@ from __future__ import annotations
 from bisect import bisect_right
 from dataclasses import dataclass, replace
 from datetime import datetime, timedelta
+import math
 from typing import Any
 
 from .models import Bar, jsonable, positive, utc
@@ -355,8 +356,10 @@ def _simulate(events: list[_Event], bars: list[Bar], config: ResearchConfig,
     final_equity = equity[-1]["equity"]
     wins = sum(trade["net_pnl"] > 0 for trade in trades)
     losses = sum(trade["net_pnl"] < 0 for trade in trades)
-    gross_wins = sum(max(0, trade["net_pnl"]) for trade in trades)
-    gross_losses = -sum(min(0, trade["net_pnl"]) for trade in trades)
+    # Built-in float sum changed in Python 3.12. Use one explicit algorithm
+    # across supported runtimes so the serialized reporting ratio is stable.
+    gross_wins = math.fsum(max(0, trade["net_pnl"]) for trade in trades)
+    gross_losses = -math.fsum(min(0, trade["net_pnl"]) for trade in trades)
     duration_hours = (end - start) / HOUR
     audit.sort(key=lambda item: item["time"])  # Stable ordering retains entry/exit causality at shared boundaries.
     return {"mode": "directional-event-research", "config": config, "window": window,

@@ -6,7 +6,7 @@
   "scope": "Research artifact and execution mechanics; the source interpretation contract failed in the two specifically audited profitable strict-rule cases.",
   "local_checks": {
     "python": "3.12.14",
-    "behavioral_tests": 232,
+    "behavioral_tests": 233,
     "failures": 0,
     "errors": 0,
     "skipped": 0,
@@ -56,7 +56,12 @@
     "checked_files": 41,
     "outcome_rows_sha256": "be7bb0114bff71ae568ffce246485eec8968b9719a634dbe298a8dafe70aa09e",
     "command": "python -m signal_lab krown-study --out artifacts/krown-replay --format json",
-    "check_command": "python scripts/check_study_reproduction.py"
+    "check_command": "python scripts/check_study_reproduction.py",
+    "python_versions": [
+      "3.11.18",
+      "3.12.14",
+      "3.13.5"
+    ]
   },
   "charts": {
     "library": "Matplotlib",
@@ -88,7 +93,7 @@
     "signal_lab/models.py": "a8b4ecb0680c9c20b52ab2cbb0f41560ad834e8641cda296aaa045c61502c5e5",
     "signal_lab/replay.py": "c88d7e684eebd9e16c38325cb93061a6362e3ebec9456ca9ca5871226661c995",
     "signal_lab/report.py": "06fc87dfad1f9b3b77f51971a575cdfc8e93c645cc9c74224ea24498a2a36f63",
-    "signal_lab/research_backtest.py": "dccb5a69d72804d49c1296ee5d8c9c5c58e5dd3a07117a6fd4d2e7ebe244c35c",
+    "signal_lab/research_backtest.py": "fc4fecb2c0f4170f65fe012e7f8b2a64c54795f276ca0c9e57e1b131d7c03c25",
     "tests/test_cli.py": "941b57ee9eab0a8cea85cef2c8cd018dc753075e68a49710e38579aec0576725",
     "tests/test_engine.py": "a5033b8ed8777f62a646f549b41300cd2bdf2082d3425c9fc1a838f51a3c037b",
     "tests/test_evaluate.py": "49be417527799e30193802831da46eacee0492ab754698932bc0f981a2ab4df2",
@@ -99,7 +104,7 @@
     "tests/test_krown_study.py": "b18f7c03fd35d9262cf0eb7a7da44aaeaab312697f124daded8800c7c4bfeae3",
     "tests/test_llm.py": "071026500b9aebbd4cbce5ac8aea7a3491b0a23e78716ce6f5120dd9ab1cd194",
     "tests/test_replay.py": "57f6b02ee391c9549a99222064f60d35aa3d23576e949b66f3782b4f80ba9a23",
-    "tests/test_research_backtest.py": "6b7b2bc37e4c39914d36fe774c6775b838033415ba6ff1e7958d789e17dfb001"
+    "tests/test_research_backtest.py": "f20d26df4bac589b4aede360abc97071d90217f44e462f4f39b076c26d1851c1"
   },
   "remaining_limits": [
     "Known asset/condition/semantic-subject extraction errors remain in the frozen research baseline.",
@@ -107,5 +112,18 @@
     "Historical availability reconstructed from current captions and verified source metadata.",
     "Synthetic shorts omit funding, borrow and liquidation.",
     "No live Jev, LLM, ASR, OCR, broker execution or prospective run."
-  ]
+  ],
+  "updated_at": "2026-11-13T23:54:51.477669Z",
+  "cross_version_reporting_fix": {
+    "initial_ci_head": "20eb340b72fb5000570e6d2dc65ad9bcff459c21",
+    "observed_failure": "CPython 3.11 reproduced seven profit_factor fields with last-bit differences because built-in float summation changed in 3.12.",
+    "failed_results_sha256": "f727e9aea76c6c0af4a7db2e8322e3ec611c1e4c008d887a034034ee55fe2c3e",
+    "change": "Use math.fsum for the winning and losing P&L reporting totals.",
+    "new_regression": "Seven small compounding wins and one loss; failed on CPython 3.11 before the patch and passed after.",
+    "engine_sha256": "fc4fecb2c0f4170f65fe012e7f8b2a64c54795f276ca0c9e57e1b131d7c03c25",
+    "verification": "Original published outcome hash and all 41 artifact hashes match on actual CPython 3.11.18, 3.12.14 and 3.13.5. No checker tolerance or golden outcome changes.",
+    "frozen_extractor_changed": false,
+    "trades_or_returns_changed": false,
+    "documentation": "https://docs.python.org/3.12/whatsnew/3.12.html#other-language-changes"
+  }
 }

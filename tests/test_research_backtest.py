@@ -72,6 +72,19 @@ class ResearchBacktestTests(unittest.TestCase):
         self.assertEqual(result["summary"]["max_drawdown_pct"], 20)
         self.assertEqual(sum(row["contribution_net_pnl"] for row in result["per_video"]), -2000)
 
+    def test_profit_factor_is_reproducible_across_python_float_sum_versions(self):
+        # Seven small compounding gains and one loss expose the changed float
+        # summation in Python 3.12. Sequential addition yields ...3583 instead.
+        prices, signals = [], []
+        for index in range(8):
+            hour = index * 3
+            prices.extend((bar(hour), bar(hour + 1), bar(hour + 2, 100.1 if index < 7 else 99.7)))
+            signals.append(event(f"video-{index}", available_hours=hour))
+        result = run_research_backtest(signals, prices, replace(FREE, holding_hours=1))
+        self.assertEqual(result["summary"]["completed_trades"], 8)
+        self.assertEqual((result["summary"]["wins"], result["summary"]["losses"]), (7, 1))
+        self.assertEqual(result["summary"]["profit_factor"], 2.3240279301535827)
+
     def test_short_sign_and_long_only_cash_semantics(self):
         prices = [bar(0), bar(1), bar(2), bar(3, 90)]
         short = run_research_backtest([event(direction="short")], prices, FREE)

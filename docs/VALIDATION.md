@@ -12,7 +12,7 @@ It runs with resource warnings treated as errors.
 
 | Check | Result | What it establishes |
 |---|---|---|
-| Behavioral tests | 232 passed, no failures, errors or skips on Python 3.12.14 | Behavior on specified cases; no estimate of extraction accuracy on a Krown corpus. |
+| Behavioral tests | 233 passed, no failures, errors or skips on Python 3.12.14 | Behavior on specified cases; no estimate of extraction accuracy on a Krown corpus. |
 | Ruff and Mypy | Passed; 16 source modules checked | Lint and type checks on the maintained implementation. |
 | Offline demo | Six synthetic claims, one reviewed setup, one completed paper trade | The pipeline runs and records its evidence and execution assumptions. |
 | Jev HTTP contract | Local server tests exercise real HTTP requests and controlled responses | Client behavior against the published contract, including distinct probability and confidence fields. |

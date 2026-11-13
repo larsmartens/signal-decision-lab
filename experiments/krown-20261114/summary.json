@@ -16,7 +16,7 @@
       "market_bars": "c764e5ddbef8bcca557964d924ce2b369d1f1d24c6e9bd21587cf17109f36e27"
     },
     "extractor_code_sha256": "d14bdd6e2cbf1e09541cdbc28d25582a5a5427995548cbf78678099621ae8d62",
-    "engine_code_sha256": "dccb5a69d72804d49c1296ee5d8c9c5c58e5dd3a07117a6fd4d2e7ebe244c35c",
+    "engine_code_sha256": "fc4fecb2c0f4170f65fe012e7f8b2a64c54795f276ca0c9e57e1b131d7c03c25",
     "runner_code_sha256": "0603f4d656d5c5028b7aec92697c7bbef5528ba862c6b4c913712d9e3d42c360",
     "model_runs": {
       "jev": {

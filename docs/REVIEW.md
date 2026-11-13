@@ -88,3 +88,14 @@ The appropriate release scope is the experiment, its code, data references and n
 findings. Promoting the extracted directions into reviewed live decisions remains blocked
 by the source-interpretation failures. Actual GitHub head checks and merge state must be
 read from the associated pull request; this document does not certify a future commit.
+
+### Python-version reproduction check
+
+The first GitHub run exposed seven last-bit differences in `profit_factor` on Python
+3.11. Its built-in float summation predates the change documented in
+[Python 3.12](https://docs.python.org/3.12/whatsnew/3.12.html#other-language-changes).
+Using `math.fsum` for the two reporting totals restores the original output hashes.
+A synthetic regression failed before the patch on actual CPython 3.11.18 and passes
+after it. The 41 frozen result files reproduce on CPython 3.11, 3.12 and 3.13, with
+the same source features, decisions, trades, returns and equity. The checker retains
+exact comparisons. The full suite now contains 233 passing tests.
