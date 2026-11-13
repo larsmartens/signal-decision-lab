@@ -13,7 +13,7 @@ from .engine import Policy
 from .evaluate import calibration_report
 from .extract import extract_rules, review_signal, validate_grounding
 from .ingest import fetch_youtube, load_bars, load_transcript, read_json, transcribe_media, write_json
-from .jeff import JeffClient
+from .jev import MODEL, JevClient
 from .llm import LLMExtractor
 from .models import Signal, Transcript, jsonable, strict_keys, utc
 from .replay import run_replay
@@ -39,7 +39,7 @@ def parser() -> Parser:
     commands = root.add_subparsers(dest="command")
     demo = commands.add_parser("demo", help="Run the complete offline synthetic scenario")
     demo.add_argument("--out", default="artifacts/demo", help="Output directory")
-    demo.add_argument("--judge", choices=("rules", "jeff"), default="rules")
+    demo.add_argument("--judge", choices=("rules", "jev"), default="rules", help="Optional Jev paper experiment; default: rules")
     extract = commands.add_parser("extract", help="Extract unreviewed claims from JSON/VTT/SRT")
     extract.add_argument("input")
     extract.add_argument("--metadata", help="Required sidecar JSON for VTT/SRT")
@@ -56,7 +56,7 @@ def parser() -> Parser:
     replay.add_argument("--signals", required=True)
     replay.add_argument("--bars", required=True)
     replay.add_argument("--policy", help="Optional policy JSON; unknown keys rejected")
-    replay.add_argument("--judge", choices=("rules", "jeff"), default="rules")
+    replay.add_argument("--judge", choices=("rules", "jev"), default="rules", help="Optional Jev paper experiment; default: rules")
     replay.add_argument("--out", required=True)
     replay.add_argument("--report", help="Optional self-contained HTML report path")
     youtube = commands.add_parser("import-youtube", help="Fetch available captions without inventing a historical ingestion time")
@@ -112,7 +112,9 @@ def _bundle(path) -> tuple[dict, Transcript, list[Signal]]:
 
 
 def _judge(name):
-    return JeffClient(base_url=os.environ.get("JEFF_BASE_URL", "http://127.0.0.1:8765"), api_key=os.environ.get("JEFF_API_KEY") or None).judge if name == "jeff" else None
+    if name == "jev":
+        return JevClient(model=os.environ.get("TYPESAFE_MODEL", MODEL)).judge
+    return None
 
 
 def _manifest(bundle: dict) -> dict:

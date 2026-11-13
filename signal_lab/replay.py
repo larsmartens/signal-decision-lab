@@ -4,6 +4,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from datetime import datetime
 import math
+import re
 from typing import Callable
 
 from .engine import Policy, deadline, decide
@@ -11,6 +12,26 @@ from .models import Bar, Signal, jsonable
 
 
 Judge = Callable[[Signal, Bar], dict]
+_DECISION_FIELDS = ("value", "confidence", "probabilities", "abstained", "calibrated")
+_JEV_FIELDS = ("provider", "model", "provider_confidence", "probability_source", "calibration_source")
+
+
+def _jev_experiment(answer: dict) -> bool:
+    """Recognize an explicitly selected Jev experiment without claiming calibration."""
+    score = answer.get("provider_confidence")
+    model = answer.get("model")
+    return (
+        answer.get("provider") == "typesafe"
+        and answer.get("probability_source") == "jev_model"
+        and answer.get("calibration_source") == "provider_claim_not_locally_validated"
+        and answer.get("calibrated") is False
+        and isinstance(model, str)
+        and re.fullmatch(r"jev-[0-9]+\.[0-9]+\.[0-9]+", model) is not None
+        and not isinstance(score, bool)
+        and isinstance(score, (int, float))
+        and 0 <= score <= 1
+        and math.isfinite(score)
+    )
 
 
 @dataclass
@@ -55,12 +76,25 @@ def _model_check(answer: object, signal: Signal, policy: Policy) -> tuple[bool, 
         return False, "model_invalid_response"
     if answer["abstained"]:
         return False, "model_abstained"
-    if not answer["calibrated"]:
+    if not answer["calibrated"] and not _jev_experiment(answer):
         return False, "model_uncalibrated"
     if confidence < policy.min_model_confidence:
         return False, "model_low_confidence"
     expected = "buy" if signal.side == "long" else "sell"
     return (True, "model_agreed") if value == expected else (False, "model_disagreement")
+
+
+def _rejected_jev_evidence(answer: object, signal: Signal, policy: Policy) -> dict | None:
+    """Keep a valid rejected prediction separate from the effective policy hold."""
+    if not isinstance(answer, dict) or not _jev_experiment(answer):
+        return None
+    try:
+        _, reason = _model_check(answer, signal, policy)
+    except (ValueError, TypeError, OverflowError):
+        return None
+    if reason not in {"model_agreed", "model_disagreement", "model_low_confidence"}:
+        return None
+    return {key: answer[key] for key in (*_DECISION_FIELDS, *_JEV_FIELDS)}
 
 
 def _validate_inputs(signals: list[Signal], bars: list[Bar]) -> None:
@@ -69,7 +103,7 @@ def _validate_inputs(signals: list[Signal], bars: list[Bar]) -> None:
     if len({signal.id for signal in signals}) != len(signals):
         raise ValueError("Duplicate signal IDs would allow duplicate trades")
     if len({bar.asset for bar in bars}) != 1:
-        raise ValueError("This draft supports one price series/asset per replay")
+        raise ValueError("Replay supports one price series/asset per run")
     for previous, current in zip(bars, bars[1:]):
         if current.open_time < previous.close_time:
             raise ValueError("Bars must be strictly chronological and non-overlapping")
@@ -98,7 +132,7 @@ def _exit_price(position: _Position, bar: Bar) -> tuple[float, str, datetime, st
 
 def run_replay(signals: list[Signal], bars: list[Bar], policy: Policy = Policy(),
                judge: Judge | None = None) -> dict:
-    """Replay known-at-time signals; an optional Jeff judge may only veto entries.
+    """Replay known-at-time signals; an optional model judge may only veto entries.
 
     The callback receives one frozen completed bar and one frozen signal. It receives
     neither the historical container nor future prices. External callback behavior is
@@ -246,13 +280,19 @@ def run_replay(signals: list[Signal], bars: list[Bar], policy: Policy = Policy()
                 answer, accepted, reason = None, False, "model_error"
             detail = {}
             if isinstance(answer, dict) and reason not in {"model_invalid_probabilities", "model_invalid_response"}:
-                detail = {key: answer[key] for key in ("value", "confidence", "probabilities", "abstained", "calibrated")}
+                detail = {key: answer[key] for key in _DECISION_FIELDS}
+                if _jev_experiment(answer):
+                    for key in _JEV_FIELDS:
+                        detail[key] = answer[key]
                 if reason == "model_policy_abstention":
                     detail["probability_source"] = "fail_closed_policy"
                     # Preserve a bounded cause code, never raw provider errors.
                     code = answer.get("error_code")
                     if isinstance(code, str) and len(code) <= 64 and all(c.islower() or c == "_" for c in code):
                         detail["error_code"] = code
+                    original = _rejected_jev_evidence(answer.get("model_decision"), signal, policy)
+                    if original is not None:
+                        detail["model_decision"] = original
             event(bar.close_time, "model_judgment", signal, reason, **detail)
             if not accepted:
                 rejected.add(signal.id)
@@ -284,7 +324,7 @@ def run_replay(signals: list[Signal], bars: list[Bar], policy: Policy = Policy()
             "Expiry exits at the first observed bar open at/after deadline; gaps can delay exits.",
             "End-of-data positions remain open and marked at last close; no fictitious liquidation.",
             "Drawdown is measured at completed closes; a halt queues liquidation at the next observed open, including gaps.",
-            "Jeff confidence concerns rule selection, never the probability of a profitable trade."],
+            "The model gate uses the selected action's probability. Calibration on these inputs has not been measured."],
         "summary": {"initial_equity": policy.initial_equity, "final_equity": final_equity,
                     "net_pnl": final_equity - policy.initial_equity,
                     "return_pct": (final_equity / policy.initial_equity - 1) * 100,

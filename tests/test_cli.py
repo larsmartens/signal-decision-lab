@@ -79,7 +79,7 @@ class CommandTests(unittest.TestCase):
         self.assertFalse((self.output / "bad.json").exists())
 
     def test_unknown_flags_are_usage_errors_and_create_no_outputs(self):
-        code, stdout = self.run_cli("demo", "--judeg", "jeff")
+        code, stdout = self.run_cli("demo", "--judeg", "jev")
         self.assertEqual(code, 2)
         self.assertIn("unrecognized", stdout)
         self.assertIn("--help", stdout)

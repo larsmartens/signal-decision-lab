@@ -31,6 +31,15 @@ def judgment(value="buy", **changes):
             "calibrated": True, "probabilities": probabilities, **changes}
 
 
+def jev_judgment(**changes):
+    return judgment(
+        **{"confidence": .8, "probabilities": {"buy": .8, "sell": .1, "hold": .1},
+           "calibrated": False, "provider": "typesafe", "model": "jev-1.14.0",
+           "provider_confidence": .7, "probability_source": "jev_model",
+           "calibration_source": "provider_claim_not_locally_validated", **changes}
+    )
+
+
 FREE = Policy(fee_bps=0, slippage_bps=0)
 
 
@@ -179,10 +188,12 @@ class PaperReplayTests(unittest.TestCase):
         self.assertEqual(result["trades"], [])
         self.assertTrue(any(e["type"] == "risk_exit_unfilled" for e in result["events"]))
 
-    def test_jeff_policy_abstention_keeps_sanitized_cause_and_provenance(self):
-        from signal_lab.jeff import _fallback
+    def test_policy_abstention_keeps_sanitized_cause_and_provenance(self):
+        answer = judgment("hold", confidence=0.0, calibrated=False, abstained=True,
+                          probabilities={"buy": 0.0, "sell": 0.0, "hold": 1.0},
+                          probability_source="fail_closed_policy", error_code="model_abstained")
         result = run_replay([signal()], [bar(), bar(1)], FREE,
-                            judge=lambda *_: _fallback("model_abstained", "calibration abstention"))
+                            judge=lambda *_: answer)
         event = next(e for e in result["events"] if e["type"] == "model_judgment")
         self.assertEqual(event["reasons"], ["model_policy_abstention"])
         self.assertEqual(event["error_code"], "model_abstained")
@@ -219,6 +230,86 @@ class PaperReplayTests(unittest.TestCase):
             with self.subTest(answer=answer):
                 result = run_replay([signal()], [bar(), bar(1)], judge=lambda *_: answer)
                 self.assertEqual(result["summary"]["entries"], 0)
+
+    def test_jev_paper_experiment_preserves_both_scores_and_calibration_limit(self):
+        result = run_replay([signal()], [bar(), bar(1)], judge=lambda *_: jev_judgment())
+        self.assertEqual(result["summary"]["entries"], 1)
+        event = next(e for e in result["events"] if e["type"] == "model_judgment")
+        self.assertEqual(event["reasons"], ["model_agreed"])
+        self.assertEqual(event["confidence"], .8)
+        self.assertEqual(event["provider_confidence"], .7)
+        self.assertEqual(event["model"], "jev-1.14.0")
+        self.assertEqual(event["provider"], "typesafe")
+        self.assertEqual(event["probability_source"], "jev_model")
+        self.assertEqual(event["calibration_source"], "provider_claim_not_locally_validated")
+        self.assertFalse(event["calibrated"])
+
+    def test_jev_gate_uses_selected_probability_not_provider_confidence(self):
+        answer = jev_judgment(confidence=.75, provider_confidence=.99,
+                              probabilities={"buy": .75, "sell": .125, "hold": .125})
+        result = run_replay([signal()], [bar(), bar(1)], judge=lambda *_: answer)
+        self.assertEqual(result["summary"]["entries"], 0)
+        self.assertEqual(result["events"][0]["reasons"], ["model_low_confidence"])
+
+    def test_unknown_or_malformed_jev_provenance_does_not_relax_calibration_gate(self):
+        for change in ({"provider": "unknown"}, {"model": "jev-latest"},
+                       {"calibration_source": "assumed"}, {"probability_source": "heuristic"},
+                       {"provider_confidence": float("nan")}, {"provider_confidence": True},
+                       {"provider_confidence": 2}, {"provider_confidence": None}):
+            with self.subTest(change=change):
+                result = run_replay([signal()], [bar(), bar(1)], judge=lambda *_: jev_judgment(**change))
+                self.assertEqual(result["summary"]["entries"], 0)
+                self.assertEqual(result["events"][0]["reasons"], ["model_uncalibrated"])
+                json.dumps(result, allow_nan=False)
+
+    def test_jev_agreement_cannot_override_risk_check_at_fill(self):
+        result = run_replay([signal()], [bar(), bar(1, 150, 155, 145, 151)], FREE,
+                            judge=lambda *_: jev_judgment())
+        self.assertEqual(result["summary"]["entries"], 0)
+        self.assertIn("entry_gap_outside_bracket", result["events"][-1]["reasons"])
+
+    def test_abstaining_callback_with_oversized_provider_score_does_not_break_audit(self):
+        result = run_replay([signal()], [bar(), bar(1)],
+                            judge=lambda *_: jev_judgment(abstained=True, provider_confidence=10**400))
+        self.assertEqual(result["summary"]["entries"], 0)
+        event = next(e for e in result["events"] if e["type"] == "model_judgment")
+        self.assertEqual(event["reasons"], ["model_abstained"])
+        self.assertNotIn("provider_confidence", event)
+        json.dumps(result, allow_nan=False)
+
+    def test_policy_hold_retains_valid_rejected_model_evidence_without_raw_diagnostics(self):
+        original = jev_judgment(value="sell", confidence=.9, provider_confidence=.85,
+                                 probabilities={"buy": .05, "sell": .9, "hold": .05},
+                                 debug="secret-provider-diagnostics")
+        answer = judgment("hold", confidence=0.0, calibrated=False, abstained=True,
+                          probabilities={"buy": 0.0, "sell": 0.0, "hold": 1.0},
+                          probability_source="fail_closed_policy", error_code="opposite_direction",
+                          model_decision=original)
+        result = run_replay([signal()], [bar(), bar(1)], judge=lambda *_: answer)
+        event = next(e for e in result["events"] if e["type"] == "model_judgment")
+        self.assertEqual(result["summary"]["entries"], 0)
+        self.assertEqual(event["value"], "hold")
+        self.assertEqual(event["probability_source"], "fail_closed_policy")
+        self.assertEqual(event["model_decision"]["value"], "sell")
+        self.assertEqual(event["model_decision"]["probabilities"], original["probabilities"])
+        self.assertEqual(event["model_decision"]["provider_confidence"], .85)
+        self.assertFalse(event["model_decision"]["calibrated"])
+        self.assertNotIn("secret-provider-diagnostics", json.dumps(result))
+
+    def test_policy_hold_drops_invalid_nested_model_evidence(self):
+        for original in (None, {"error": "secret-provider-diagnostics"},
+                         jev_judgment(probabilities={"buy": 10**400, "sell": 0, "hold": 0}),
+                         jev_judgment(probability_source="invented"),
+                         jev_judgment(provider_confidence=float("nan"))):
+            with self.subTest(original=original):
+                answer = judgment("hold", confidence=0.0, calibrated=False, abstained=True,
+                                  probabilities={"buy": 0.0, "sell": 0.0, "hold": 1.0},
+                                  probability_source="fail_closed_policy", error_code="opposite_direction",
+                                  model_decision=original)
+                result = run_replay([signal()], [bar(), bar(1)], judge=lambda *_: answer)
+                self.assertEqual(result["summary"]["entries"], 0)
+                self.assertNotIn("model_decision", result["events"][0])
+                self.assertNotIn("secret-provider-diagnostics", json.dumps(result, allow_nan=False))
 
     def test_malformed_model_probabilities_fail_closed(self):
         answers = [None, {}, judgment(probabilities={"buy": 1}),

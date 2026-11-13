@@ -1,6 +1,6 @@
-# Extracting trading information from YouTube: evidence and implementation audit
+# Extracting trading information from YouTube
 
-Researched **13 November 2026**. Scope: creator identity, a real source example, public implementations, extraction quality, and what would be required to evaluate a trading edge. This is a source and code inspection; the repositories were **not installed or run**, and no live or paper trades were placed. Performance figures below are the authors’ reported research or demo results, not independently reproduced results.
+Research updated 13 November 2026. This review covers creator identity, a real transcript, public implementations, extraction quality, and the work needed to evaluate a trading edge. The four repositories below were inspected without installing or running them. Their performance figures are the authors’ reported results and were not reproduced here.
 
 ## Main finding
 
@@ -8,7 +8,7 @@ Extracting useful, reviewable trading information from videos is feasible. Sever
 
 ## Creator identity and a real transcript
 
-The verified YouTube channel is currently **Krown**, handle **[@ECKrown](https://www.youtube.com/@ECKrown)**, channel ID **UCnwxzpFzZNtLH8NgTeAROFA**. Its description links the Krown teaching site. That site identifies its founder as **Eric Crown** and explicitly associates its audience with ECKrown, so the user’s spelling “Eric Crown” need not be corrected. The teaching site describes an educational process and explicitly excludes copy-trading signals. Verification here establishes the intended creator/channel, not the truth of biographical or performance claims. Sources: [YouTube channel](https://www.youtube.com/channel/UCnwxzpFzZNtLH8NgTeAROFA), [Krown site](https://krown-trading.teachable.com/), [first-party course page](https://krown-trading.teachable.com/p/kulti).
+The verified YouTube channel is currently **Krown**, handle **[@ECKrown](https://www.youtube.com/@ECKrown)**, channel ID **UCnwxzpFzZNtLH8NgTeAROFA**. Its description links the Krown teaching site, which identifies its founder as **Eric Crown** and associates its audience with ECKrown. The teaching site describes an educational process and explicitly excludes copy-trading signals. These links establish the creator’s identity; they do not verify performance claims. Sources: [YouTube channel](https://www.youtube.com/channel/UCnwxzpFzZNtLH8NgTeAROFA), [Krown site](https://krown-trading.teachable.com/), [first-party course page](https://krown-trading.teachable.com/p/kulti).
 
 ### Historical extraction example, not a current recommendation
 
@@ -20,7 +20,7 @@ Cointelegraph’s own [episode page](https://cointelegraph.com/podcasts/proof-of
 | 4:38–8:43 | Separate conditional September/October/Q4 scenarios; positive September close conditions the October projection. | Do not activate a conditional projection immediately. Targets have different horizons. |
 | Same 4:38–8:43 block | Speaker corrects a prior weekly high from 82,000 to 82,800; distinguishes touching six figures from ending the year there. | Retain the correction and distinguish barrier-touch from terminal-price outcomes. |
 
-The transcript contains obvious transcription imperfections. I read the publisher’s text, not the underlying audio/video, so numeric values should be checked against the recording before use. This example demonstrates why topic sentiment alone is an inadequate extraction contract.
+The transcript contains transcription errors. This review used the publisher’s text; numeric values still need checking against the recording before use. The passages above also show why a single bullish/bearish label would lose conditions that matter to a trade.
 
 ## Closest public implementations
 
@@ -32,22 +32,22 @@ The transcript contains obvious transcription imperfections. I read the publishe
 
 - [`ingest.py`](https://github.com/mostlyerror/yt-trade-distill/blob/a374bc2615aed85c05e0d1050547fa74aedeb431/yt_trade_distill/ingest.py) records video ID, title and upload date, caches captions, and skips missing captions. [`transcript.py`](https://github.com/mostlyerror/yt-trade-distill/blob/a374bc2615aed85c05e0d1050547fa74aedeb431/yt_trade_distill/transcript.py) removes cue timestamps. The source video survives; precise evidence times do not survive into cleaned text.
 - [`prompts.py`](https://github.com/mostlyerror/yt-trade-distill/blob/a374bc2615aed85c05e0d1050547fa74aedeb431/yt_trade_distill/prompts.py) asks for short evidence excerpts, confidence, mechanical predicates, content classification, contradictions and source video IDs. Missing order-flow thresholds can remain null. However, the same prompt defaults an unspecified swing lookback to five bars. That is an implementation assumption, despite the broader instruction against invented numbers.
-- [`distill.py`](https://github.com/mostlyerror/yt-trade-distill/blob/a374bc2615aed85c05e0d1050547fa74aedeb431/yt_trade_distill/distill.py) actually implements parallel extraction and hierarchical reduction. Video provenance metadata is joined deterministically, which is better than asking the model to reproduce metadata. Extraction evidence is still model output; the inspected path does not prove quote entailment or validate that every claimed number follows from the cited text.
+- [`distill.py`](https://github.com/mostlyerror/yt-trade-distill/blob/a374bc2615aed85c05e0d1050547fa74aedeb431/yt_trade_distill/distill.py) implements parallel extraction and hierarchical reduction. Code joins the video provenance metadata. The evidence excerpts are model output; the inspected path does not check that every extracted claim and number follows from its cited text.
 - Reduction favors more recent rules. **Inference:** backtesting a specification built from an entire channel against earlier dates introduces hindsight unless the input videos are restricted to the information available at each historical decision date.
 
 **Backtest limitations visible in code:** [`generate_backtest.py`](https://github.com/mostlyerror/yt-trade-distill/blob/a374bc2615aed85c05e0d1050547fa74aedeb431/yt_trade_distill/generate_backtest.py) substitutes a 2% stop when no mechanical stop exists, hardcodes 1% equity risk and a five-basis-point commission per side, and enters at the same closing price used to compute the signal. Its equity curve updates on realized P&L and omits open-position mark-to-market losses. An open final position is not force-closed for the reported realized return. These choices can change both strategy meaning and reported drawdown; they require replacement or explicit modeling before meaningful evaluation.
 
-**Assessment:** useful extraction/code-generation prototype, not a validated trading engine. No independently audited profitability result was found in the inspected material. Do not copy the backtest as a trusted evaluation layer.
+The extraction and code-generation pipeline is worth studying. The inspected material contains no independently audited profitability result, and the backtest needs the corrections above before its results can support an evaluation.
 
 ### 2. jackson-video-resources/yt-strategy-agent
 
-[Repository](https://github.com/jackson-video-resources/yt-strategy-agent). Inspected head: `b88f977ae7904268c4c3eda0fd93351f7492ad7d`, April 29, 2026. This is closer to ongoing creator monitoring: recent videos become rules, risk/timing notes, self-reported executed trades and a strategy-change log. The repository includes real Python modules, not just an onboarding prompt. [README](https://github.com/jackson-video-resources/yt-strategy-agent/blob/b88f977ae7904268c4c3eda0fd93351f7492ad7d/README.md)
+[Repository](https://github.com/jackson-video-resources/yt-strategy-agent). Inspected head: `b88f977ae7904268c4c3eda0fd93351f7492ad7d`, April 29, 2026. Its Python pipeline monitors a creator over time: recent videos become rules, risk/timing notes, self-reported executed trades and a strategy-change log. [README](https://github.com/jackson-video-resources/yt-strategy-agent/blob/b88f977ae7904268c4c3eda0fd93351f7492ad7d/README.md)
 
 [`extract.py`](https://github.com/jackson-video-resources/yt-strategy-agent/blob/b88f977ae7904268c4c3eda0fd93351f7492ad7d/extract.py) calls an LLM and parses JSON containing buy/sell rules, evidence snippets, risk notes, timing notes and purported executed trades. Its confidence definition measures how emphatically the host states a rule. That is neither the probability the extraction is correct nor the probability a trade wins. The source schema has no timestamp span or typed conditional/negation fields. [`transcript.py`](https://github.com/jackson-video-resources/yt-strategy-agent/blob/b88f977ae7904268c4c3eda0fd93351f7492ad7d/transcript.py) requests Apify transcripts as a single text string, losing cue-level timing in its interface.
 
 [`weighting.py`](https://github.com/jackson-video-resources/yt-strategy-agent/blob/b88f977ae7904268c4c3eda0fd93351f7492ad7d/weighting.py) groups semantically similar rules with sentence embeddings and a 0.82 cosine threshold. Actual effective confidence is a weighted mean divided by total weight. Thus a rule appearing only in the oldest video can retain its original confidence; its confidence does not decay simply because it is old. This differs from the README’s simpler description. Semantic similarity also cannot, on its own, establish that two conditions or negations have the same trading meaning.
 
-**Assessment:** useful monitoring scaffold. It does not establish extraction accuracy or a tradable edge. Replace confidence semantics, retain timestamps, and preserve separate conditional scenarios before adapting it.
+Adapting this monitoring pipeline would require a different confidence definition, retained timestamps and separate records for conditional scenarios. Its extraction accuracy and trading value remain unestablished.
 
 ### 3. CO0Oper/quant-intern
 
@@ -57,7 +57,7 @@ Actual [`src/transcript_fetch.js`](https://github.com/CO0Oper/quant-intern/blob/
 
 The [`resolver` prompt](https://github.com/CO0Oper/quant-intern/blob/2e55261740239ebd086e9a5a00a9d3c229e516f4/prompts/resolver.md) explicitly converts vague language into conventional numeric defaults and logs assumptions. The [`extractor` prompt](https://github.com/CO0Oper/quant-intern/blob/2e55261740239ebd086e9a5a00a9d3c229e516f4/prompts/extractor.md) defaults unspecified symbol/timeframe to gold/one hour absent a supplied hint. [`spec_schema.js`](https://github.com/CO0Oper/quant-intern/blob/2e55261740239ebd086e9a5a00a9d3c229e516f4/src/spec_schema.js) checks shape/types; it does not verify source fidelity.
 
-**Assessment:** a useful demonstration of turning a proposed strategy into an inspectable experiment. Its performance is the performance of the interpreted/default-filled strategy. It must not be attributed automatically to the video creator. A fallback strategy’s performance must never be represented as the original strategy’s result.
+This demonstrates how a proposed strategy can become an inspectable experiment. Any performance result belongs to the strategy after interpretation and added defaults. Attributing it to the video creator would require showing that those choices preserve the original instructions; a fallback strategy needs its own result label.
 
 ### 4. tonbistudio/model-trader
 
@@ -67,7 +67,7 @@ The [`resolver` prompt](https://github.com/CO0Oper/quant-intern/blob/2e552617402
 
 **Concrete backtest defect:** [`docs/backtest.md`](https://github.com/tonbistudio/model-trader/blob/a069235251f0e640362e08ecc2fd647f4fbf75f5/docs/backtest.md) says historical data has already been truncated to the simulated timestamp. In the inspected [`runner.py`](https://github.com/tonbistudio/model-trader/blob/a069235251f0e640362e08ecc2fd647f4fbf75f5/model_trader/backtest/runner.py), the full `hist` and `corr_hist` dictionaries are passed unchanged to the scanner. No truncation occurs in that runner. A scanner written to trust the documentation can see future candles. The runner also calculates outcomes in gross risk units without fee, slippage, funding or borrow-cost deductions.
 
-**Assessment:** an interesting architecture reference that requires substantial review. The observed backtest mismatch is sufficient reason not to trust its results without correction and tests of information availability.
+The backtest mismatch needs correction and tests of information availability before the results can be used.
 
 ## Research evidence and adjacent frameworks
 
@@ -102,7 +102,7 @@ Aaron J. Black’s March 2026 working paper, [YouTube Finfluencers and Retail In
 
 ## Recommended extraction contract
 
-The following is a proposed design based on the observed failure modes, not a claim that an inspected repository already provides it.
+The following design addresses the observed failure modes. It can serve either a conventional extractor or the [proposed Jev integration](decision-models.md#proposed-integration); the inspected repositories do not already provide the complete contract.
 
 | Field group | Required semantics |
 |---|---|

@@ -1,102 +1,95 @@
-# Validierung des Drafts
+# Validation record
 
-Stand: 13. November 2026. Die nachfolgenden Prüfungen unterscheiden Softwareverhalten,
-echte Quellen und echte Modellinferenz. **Keine Prüfung belegt eine profitable Strategie.**
+Updated 13 November 2026. This record separates software tests, real source acquisition
+and model inference. The project has not established a profitable trading strategy.
 
-## Ausgeführt
+## Current checks
 
-| Prüfung | Beobachtetes Ergebnis | Aussagegrenze |
+The latest local counts and tool output are saved in
+[offline-tests.json](validation/offline-tests.json). The suite covers the default offline
+pipeline, local HTTP provider fixtures, source grounding, time ordering and paper accounting.
+It runs with resource warnings treated as errors.
+
+| Check | Result | What it establishes |
 |---|---|---|
-| Verhaltenstests | **146 bestanden, 0 Fehler, 0 übersprungen** auf Python 3.12.14 | Konstruierte Fälle und lokale HTTP-Testserver; keine Genauigkeitsmessung auf einem repräsentativen Krown-Korpus. |
-| Ruff | Bestanden | Statische Konsistenz, kein fachlicher Nachweis. |
-| Mypy | Bestanden, 12 Quelldateien | Typprüfung, kein Gewinn- oder Sicherheitsbeweis. |
-| Offline-Demo | 6 synthetische Aussagen, 1 freigegebenes Setup, 1 abgeschlossener Paper-Trade | Künstliche Preisfolge; Ergebnis ausschließlich als Mechaniktest ausgewiesen. |
-| Paket-Build | Wheel gebaut, in separater Umgebung installiert, Demo außerhalb des Source-Verzeichnisses gestartet | Belegt die Auslieferung der notwendigen Beispieldaten. |
-| Echter YouTube-Abruf | 646 automatisch erzeugte englische Segmente für `EdXslFg3u38` | Audio nicht unabhängig geprüft; kein manuell gelabelter Extraktionsbenchmark. |
-| Quelle auf Baseline angewendet | 46 Asset-Erwähnungen als Kommentare; 0 vollständige unterstützte Setups | Segmentweise Verarbeitung verliert Kontext über Cue-Grenzen; diese Zahl misst keine Recall-Qualität. |
-| Jeff mit echten Gewichten | Acht echte CPU-Aufrufe über die offizielle In-Process-Schnittstelle | Zwei Darstellungen und sehr wenige konstruierte Fälle; keine Accuracy-Schätzung. |
-| Jeff-HTTP-Vertrag | 12 Tests gegen einen echten lokalen HTTP-Testserver | Der Testserver liefert kontrollierte Antworten, keine Modellinferenz. |
-| Unabhängige Code-Reviews | Drei Standards-Befunde und drei Spec-Befunde bearbeitet | Gezielte Nachprüfung; siehe [REVIEW.md](REVIEW.md). |
+| Behavioral tests | 160 passed, no failures, errors or skips on Python 3.12.14 | Behavior on specified cases; no estimate of extraction accuracy on a Krown corpus. |
+| Ruff and Mypy | Passed; 12 source modules checked | Lint and type checks on the maintained implementation. |
+| Offline demo | Six synthetic claims, one reviewed setup, one completed paper trade | The pipeline runs and records its evidence and execution assumptions. |
+| Jev HTTP contract | Local server tests exercise real HTTP requests and controlled responses | Client behavior against the published contract, including distinct probability and confidence fields. |
+| Jev live inference | Not run; no TypeSafe API key was configured | No claims about live responses, latency, calibration or trading value. |
+| Real YouTube retrieval | 646 automatically generated English caption segments | One source could be acquired with timestamps and provenance. |
+| Rule extraction on that source | 46 asset mentions, all commentary; no complete supported setups | A processing check, not a labeled accuracy benchmark. |
+| Independent review | Findings and verification are recorded in [REVIEW.md](REVIEW.md) | Targeted checks by a reviewer who did not write the revised implementation. |
 
-Die rohe lokale Testzusammenfassung steht in [offline-tests.json](validation/offline-tests.json).
-Die GitHub-Workflow-Datei prüft zusätzlich Python 3.11 und 3.13; deren tatsächlicher Laufstatus
-ist im jeweiligen PR unter Checks einsehbar. Ein vorhandener Workflow ist allein noch kein
-bestandener CI-Lauf.
+[GitHub Actions](https://github.com/larsmartens/signal-decision-lab/actions) runs the suite,
+Ruff, Mypy and the demo on Python 3.11 and 3.13. The workflow definition is not evidence of a
+successful run; use the check attached to the commit being assessed.
 
-## Besonders relevante Regressionen
+## Behaviors covered
 
-- Negierte, historische und als Beispiel oder fremde Aussage markierte Setups führen nicht
-  zu einer Freigabe. Nicht abgebildete Bedingungen bleiben gesperrt.
-- Stop, Ziel und Auslöser müssen ihrer jeweiligen Rolle in der Quelle entsprechen. Eine
-  vorhandene Zahl an anderer Stelle reicht nicht. Spannen und Korrekturen werden nicht
-  still auf einen Wert reduziert.
-- Die begrenzte Ausführungsgrammatik wird auch beim Review erneut geprüft. Ein Modell
-  kann eine Sperre nicht allein durch Löschen seines `issues`-Feldes umgehen.
-- Publikation, Quellenverfügbarkeit, Extraktion, Review und früheste Entscheidungsverfügbarkeit
-  bleiben getrennt. Ein später Import oder Review verlängert die ursprüngliche Gültigkeit nicht.
-- Untertitel-Kommentare sind keine Sprache; malformed Zeitstempel lösen einen Fehler aus,
-  statt eventuell wichtige Negationen aus der Quelle zu entfernen.
-- Das Modell erhält nur das aktuelle abgeschlossene Candle und das bereits verfügbare Signal.
-  Der Einstieg erfolgt zur nächsten zusammenhängenden Eröffnung. Gebühren und adverse
-  Slippage betreffen beide Seiten.
-- Drawdown-Schließungen erfolgen erst zur nächsten beobachteten Eröffnung. Der konkrete
-  Regressionstest umfasst Einstieg 100, Alarm bei Schlusskurs 90 und nächste Eröffnung 70:
-  Die Simulation realisiert −3.000 bei 100 Einheiten statt optimistisch −1.000. Endet der
-  Datensatz am Alarm, bleibt die Position offen und markiert.
-- Jeff-Ausfälle und Enthaltungen bleiben von fehlerhaften Antworten unterscheidbar. Eine
-  von der Anwendung erzeugte Hold-Verteilung ist ausdrücklich keine Modellwahrscheinlichkeit.
-- Manipulierte HTML-Statistikwerte werden verworfen; Quellentexte werden escaped.
+- Negated, retrospective, illustrative and ambiguously attributed statements remain blocked.
+  Extra conditions that the execution schema cannot represent also prevent approval.
+- Stops, targets and trigger levels must match their roles in the quoted source. A number
+  appearing elsewhere in the transcript is insufficient. Ranges and corrections are not
+  silently reduced to one value.
+- Review repeats the executable-language checks. Removing an `issues` field from a model's
+  proposal cannot make unsupported text executable.
+- Publication, retrieval, extraction, review and decision availability remain separate.
+  A late import or review cannot extend the original expiry.
+- Subtitle comments are excluded from speech. Malformed timestamps cause an error rather
+  than silently dropping potentially relevant wording.
+- Model callbacks receive one completed bar and an already available, immutable signal.
+  Entries wait for the next contiguous open. Fees and adverse slippage apply on both sides.
+- A gap can cause a loss larger than the planned stop risk. Ambiguous intrabar stop/target
+  collisions use the stop first; a target already reached at the open has known precedence.
+- Drawdown exits wait for the next observed open. A regression case enters 100 units at 100,
+  observes a drawdown at a close of 90 and exits at the next open of 70, realizing a loss of
+  3,000. If the data end at the alert, the position remains open and marked to market.
+- Jev's selected probability and provider confidence remain distinct. The paper experiment
+  records its unvalidated calibration status and cannot override source or risk checks.
+- Missing credentials and provider failures prevent entry. An application-generated hold
+  is labeled as policy output and cannot be mistaken for a model probability.
+- Source text is escaped in HTML. Report statistics containing executable markup are rejected.
 
-## Echte Quelle
+## Real source acquisition
 
-[youtube-smoke.json](validation/youtube-smoke.json) protokolliert Abrufzeit, Sprache, Hash
-des lokal gespeicherten Caption-Payloads und Resultate. Originalvideo:
-[Cointelegraph-Interview mit Eric Crown](https://www.youtube.com/watch?v=EdXslFg3u38).
-Das YouTube-Microformat nennt sowohl als `publishDate` als auch `uploadDate`
-`2026-09-02T08:01:27-07:00`, entsprechend **2. September 2026, 15:01:27 UTC**.
-Die Podcastseiten nennen teils abweichende Kalendertage; die Videoangabe wurde direkt geprüft.
+[youtube-smoke.json](validation/youtube-smoke.json) records the actual retrieval time,
+language, caption hash and processing result for the
+[Cointelegraph interview with Eric Krown](https://www.youtube.com/watch?v=EdXslFg3u38).
+The video's YouTube microformat reported `publishDate` and `uploadDate` as
+`2026-09-02T08:01:27-07:00`, equivalent to **2 September 2026, 15:01:27 UTC**.
+The acquisition happened on 13 November, so this record does not claim the source was
+observed in September.
 
-Der Abruf erfolgte am 13. November. Das System behauptet deshalb keine damalige Beobachtung
-im September. Die vollständigen fremden Untertitel liegen nur im ignorierten lokalen
-Datenverzeichnis und werden nicht mit dem Repository verteilt. Ein kurzer, attribuierter
-Originalsatz dient in den Tests lediglich als Negativbeispiel für eine uneindeutige Prognose.
+The audio was not independently checked and the captions were not manually labeled.
+The full third-party transcript remains outside git. A short attributed sentence is used
+only as a negative test for an ambiguous forecast.
 
-## Echte Jeff-Inferenz
+## Correction to the earlier model research
 
-Getestet wurden die offiziellen v1.4-Gewichte mit Python 3.13.5 und PyTorch 2.14.0+cpu.
-Details einschließlich aller Wahrscheinlichkeiten und Requests:
+An earlier version tested `firelex/jeff` after the intended model name was misidentified.
+Those CPU runs concern a different model. They do not validate Jev and are no longer part
+of the active setup or current test record. The
+[previous validation record](https://github.com/larsmartens/signal-decision-lab/blob/f883ace43922c73bffb553fc3aed7a89e7b4562f/docs/VALIDATION.md)
+and its raw measurements remain in git history.
 
-- [Ursprüngliche zwei Fälle](validation/jeff-cpu-smoke.json)
-- [Einmalige kompakte Darstellung mit sechs vorab festgelegten Fällen](validation/jeff-cpu-concise-smoke.json)
-- [Setup und Reproduktion](JEFF_SETUP.md)
+The current adapter follows TypeSafe's official API and pins `jev-1.14.0`. Its contract,
+configuration and limits are documented in [JEV_SETUP.md](JEV_SETUP.md).
 
-In der ursprünglichen Darstellung enthielt sich Jeff beim erfüllten Long-Trigger und wählte
-beim nicht erfüllten Trigger korrekt Hold. In der kompakten Darstellung enthielt es sich in
-allen sechs Fällen. Zwei zuerst gewählte Labels waren falsch: ein erfüllter Short-Trigger
-und ein Fall mit fehlendem Stop. Kein Einstiegsfall erhielt eine akzeptierte Freigabe.
-Die kompakte Darstellung wurde nicht übernommen und es wurden keine Schwellen gesenkt.
-Die beobachtete Laufzeit lag bei etwa 2,4–3,2 Sekunden pro CPU-Aufruf. Das ist kein belastbarer
-Latenzbenchmark. Vier Threads wurden angefordert; nach dem Laden meldete die Runtime acht.
+## Remaining gaps
 
-**Getrennte Integrationsgrenze:** Der offizielle HTTP-Dienst konnte hier nach dem Laden
-der Gewichte keinen Unix-Socket erstellen (`AF_UNIX`, `PermissionError: Operation not permitted`).
-Echte In-Process-Inferenz und HTTP-Vertrag sind separat belegt. Ein kompletter Lauf über
-den offiziellen HTTP-Server bis zu echten Gewichten ist hier nicht nachgewiesen.
+Generative extraction has transport and schema tests, but no external LLM call was completed.
+The optional CPU transcription adapter has not been exercised with an actual Whisper model.
+Chart reading and OCR are not implemented.
 
-## Offen oder nur vorbereitet
+HTML generation, escaping and report data have been tested. Visual desktop and mobile
+review was not completed: local Chromium could not start under the environment's socket
+restriction, and the separate cloud browser could not reach the local server. The responsive
+CSS is therefore present but not visually verified.
 
-- **Generative LLM-Extraktion:** transport- und schema-getestet, aber kein echter externer
-  generativer Modellaufruf. Es war kein solcher Dienst für diesen Test konfiguriert.
-- **ASR/Video:** optionaler CPU-Adapter implementiert; kein echter Whisper-Lauf und keine
-  Chart-/OCR-Extraktion geprüft.
-- **Berichtsansicht:** HTML-Erzeugung, Escaping und Berichtsdaten geprüft. Ein visueller
-  Desktop-/Mobile-Render konnte hier nicht abgeschlossen werden: Der lokale Chromium-Start
-  scheiterte an einer Socket-Beschränkung; der getrennte Cloud-Browser erreichte den lokalen
-  HTTP-Server nicht. Responsive CSS ist vorhanden, aber nicht als gerendert geprüft ausgewiesen.
-- **Marktevaluation:** kein historischer Krown-Backtest mit belastbarem Goldstandard, keine
-  prospektive Performancebeobachtung, keine Schätzung eines Handelsvorteils.
-- **Ausführung:** keine Brokerverbindung, keine Funding-/Leihkosten, kein Orderbuch-,
-  Liquiditäts- oder Margin-Liquidationsmodell. Shorts sind ausschließlich optionale Simulation.
+There is no labeled historical Krown strategy backtest, prospective performance sample or
+measured trading advantage. The simulator has no broker connection, funding or borrow costs,
+order-book liquidity model or margin liquidation model. Short positions are optional simulations.
 
-Nächste Prüfschritte und Abnahmekriterien stehen in [PLAN.md](PLAN.md) und
+The next measurements and acceptance criteria are in [PLAN.md](PLAN.md) and
 [EVALUATION.md](EVALUATION.md).

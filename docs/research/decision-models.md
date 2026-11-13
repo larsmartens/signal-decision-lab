@@ -1,188 +1,111 @@
-# Decision Models für transcriptbasiertes Trading
+# Using Jev in a system that extracts trading signals
 
-Recherche- und Quellenstand: **13. November 2026**. Primärquellen: Projektcode, versionierte Model Cards und Originalarbeiten. Dieser Bericht prüft verfügbare Ansätze und Schnittstellen. Die anschließend ausgeführten Tests mit echten Jeff-v1.4-Gewichten sind in [JEFF_SETUP.md](../JEFF_SETUP.md) dokumentiert: lokale CPU-Inferenz gelang; beim ursprünglichen Zweifall-Test enthielt sich das Modell einmal, bei einem einmaligen Vergleich mit kompakter Darstellung in allen sechs Fällen. Zwei der sechs zuerst gewählten Labels waren falsch. Die veröffentlichte Modellgüte wurde nicht unabhängig repliziert.
+Research updated 13 November 2026.
 
-## Empfehlung für diesen Prototyp
+Jev is a plausible component for checking and classifying claims extracted from trading videos. Its typed questions fit tasks such as identifying a conditional setup, checking whether a quotation supports an extracted field, or deciding which of several candidate price levels the speaker meant. Whether those claims help a trading strategy is a separate question that needs market data and a fixed evaluation policy.
 
-**Jeff v1.4 als optionalen, austauschbaren Vergleichsentscheider für ausdrücklich formulierte Handelsregeln anbinden.** Die aus Transkripten gewonnenen Aussagen sollten zunächst in belegte, zeitlich verfügbare Signale überführt werden. Ein deterministisches Regelwerk bleibt die Vergleichsbasis. Jeff kann prüfen, welche der vorgegebenen Aktionen zu Regeln und Zustand passt; die aktuelle Trading Model Card grenzt Preisprognose und Strategieentwicklung ausdrücklich aus. Deshalb darf die Oberfläche eine Jeff-Konfidenz nicht als Gewinnwahrscheinlichkeit darstellen. [J1] Die unten recherchierte technische Eignung wurde anschließend durch die genannten kleinen Funktionstests eingegrenzt: Für diese einfachen Regeln bleibt deterministischer Code die empfohlene Grundlage.
+This report uses TypeSafe's official documentation for the product contract, source code for implementation findings, and papers for reported experimental results. The proposed integration below has not been validated as a profitable strategy.
 
-Decision Transformer und klassisches Offline-RL sind mögliche spätere Experimente. Dafür werden zeitlich geordnete Markt-, Positions-, Aktions- und Ergebnisverläufe benötigt. Eine Sammlung von Transkripten allein liefert diese Trainingsdaten nicht. Dies ist eine Architekturfolgerung aus dem Trainingsproblem des ursprünglichen Decision Transformer. [D1]
+## The current TypeSafe interface
 
-## 1. „Jeff“ ist identifiziert
+[TypeSafe's introduction](https://docs.typesafe.ai/introduction) describes Jev as its first System One model. A request supplies a shared `state` and named, typed questions. The model evaluates the questions independently against that state. Code combines the answers.
 
-Gemeint sein kann tatsächlich das Projekt **firelex/jeff**, nicht eine fehlerhaft transkribierte JEPA-Bezeichnung. Jeff verwendet ein auf Qwen3.5-0.8B basierendes Modell mit taskbezogenen LoRA-Adaptern. Es bewertet eine begrenzte Auswahl von Antworten in einem Forward-Pass. Die v1.4-Base ist für die Verwendung mit Adaptern vorgesehen, unterstützt laut eigener Model Card englischen Text und ist kein Modell für mehrstufiges Schlussfolgern. [J2]
+The current model documented on 13 November is **`jev-1.14.0`**, released on 14 October 2026. Both `jev-latest` and `jev-preview` currently point to it. Use the versioned ID for a recorded experiment and retain the returned `model`; aliases can move. TypeSafe documents shared weights across accounts and customization through state, instructions and criteria, rather than customer fine-tuning or LoRA. [Models](https://docs.typesafe.ai/models)
 
-### Verifizierter aktueller Stand
+| Interface | What is available |
+|---|---|
+| HTTP | `POST https://api.typesafe.ai/v1/systemone`, authenticated with a bearer API key. Required fields: `model`, `state`, `questions`. Results are under `answers`, with the responding `model` and token `usage`. |
+| Model discovery | `GET /v1/models`. The documented response lists account-visible aliases; versioned model IDs are accepted even when absent from that list. |
+| Python | `typesafe-sdk`; synchronous `TypeSafeClient` and asynchronous `AsyncTypeSafeClient`, with `system_one(...)`. |
+| JavaScript / TypeScript | `@typesafe-ai/sdk`; `TypeSafeClient.systemOne(...)`. |
 
-| Komponente | Verifizierter Stand | Quelle |
+Sources: [HTTP reference](https://docs.typesafe.ai/api/system-one), [model discovery](https://docs.typesafe.ai/api/list-models), [Python SDK](https://docs.typesafe.ai/sdk/python), [JavaScript SDK](https://docs.typesafe.ai/sdk/javascript). The official Python docs link to [typesafe-ai/typesafe-sdk-python](https://github.com/typesafe-ai/typesafe-sdk-python). At inspected commit `f36e685`, its [package definition](https://github.com/typesafe-ai/typesafe-sdk-python/blob/f36e68549ceca3191e5791e5f99ea1baa1a258b5/pyproject.toml) specifies version 0.7.5 and Python 3.10 or newer; its [endpoint constant](https://github.com/typesafe-ai/typesafe-sdk-python/blob/f36e68549ceca3191e5791e5f99ea1baa1a258b5/src/typesafe_sdk/_core/constants.py) confirms `/v1/systemone`. The SDK's MIT license applies to the client library; it is not a release of model weights.
+
+| Question | Returned information | Possible use here |
 |---|---|---|
-| Öffentliches Repository | `firelex/jeff` | [J3] |
-| Für diese Recherche festgehaltener Commit | `59898ae9e12621bd8e0199b86c951d366f5026b7`, 6. November 2026 | [J3] |
-| Python-SDK und Runtime | Version 1.4.1; Python mindestens 3.13 | [J4], [J5] |
-| Modellbasis | `mstrasser/jeff-base`, Revision `v1.4`, veröffentlicht am 5. November 2026 | [J2], [J6] |
-| Trading-Adapter | `mstrasser/jeff-adapter-trading-desk`, Revision `v1.4`; Adapterversion 1.4.0 | [J1], [J7] |
-| Base-Identität | SHA-256 `22fd9a1ee317894fe8a987e362a313f36e4246129602a19ce54f617fa90e2f9b` | [J6] |
-| Code-Lizenz | MIT | [J3] |
-| Base- und Trading-Adapter-Gewichte | Apache-2.0 laut Model Cards | [J1], [J2] |
+| Choice | Selected option, probabilities for every option, and confidence. | Classify a passage as a conditional setup, outlook, historical account, or other statement. |
+| Noul | A probability from 0 to 1 that a yes/no statement is true. No separate confidence field. | Check whether the cited passage supports a proposed condition. |
+| Score | A position on an ordered rubric, probabilities over its levels, and confidence. | Rate ambiguity using a clearly defined rubric. |
+| Box | Image coordinates, with confidence when supplied. Image and Box support is experimental. | Locate a relevant chart region for further inspection. |
 
-**Versionsfalle:** Suchmaschinen liefern noch v1.3-Seiten, die `jeff-serve`, andere Installationsbefehle und 98,1 % Trading-Genauigkeit nennen. Die aktuelle versionierte Quelldatei erklärt v1.3 für zurückgezogen; nur v1.4 und zugehörige Adapter werden veröffentlicht. Für Neuinstallationen deshalb weder v1.3-Anweisungen noch deren Kennzahlen verwenden. [J6]
+These are API primitives, not built-in financial models. Sources: [Choice](https://docs.typesafe.ai/primitives/choice), [Noul](https://docs.typesafe.ai/primitives/noul), [Score](https://docs.typesafe.ai/primitives/score), [Box](https://docs.typesafe.ai/primitives/box).
 
-### Was die aktuelle Trading-Evidenz belegt
+### Probabilities and confidence
 
-Der v1.4-Adapter wurde laut Model Card am **25. Oktober 2026** trainiert. Der Anbieter meldet **97,7 % Accuracy auf 5.000 intern generierten Testfällen mit simulierten Orderbüchern**. Die Messung bewertet, ob die richtige diskrete Regelentscheidung gewählt wurde. Sie ist weder eine Renditemessung noch ein Live-Handelsnachweis. Die Model Card unterscheidet dieses Generator-Testset ausdrücklich von unabhängigen öffentlichen Benchmarks und echten gehaltenen Dokumenten. Die Ergebnisse wurden in dieser Recherche nicht repliziert. [J1]
+For a Choice with `n` options, TypeSafe defines:
 
-Die aktuellen kalibrierten Funktionsschwellen stehen separat im Manifest:
-
-| Funktion | Ergebniswerte | Konfidenzschwelle | Präzision oberhalb der Schwelle | Abdeckung | Kalibrierungsfälle |
-|---|---|---:|---:|---:|---:|
-| `direction` | `buy`, `sell`, `hold` | 0,980730 | 100,0 % | 100,0 % | 200 |
-| `risk_off` | `yes`, `no` | 0,999642 | 100,0 % | 100,0 % | 200 |
-| `size` | `increase`, `decrease`, `keep` | 0,968660 | 99,2 % | 63,0 % | 200 |
-| `order` | `cancel`, `amend`, `leave` | 0,999338 | 100,0 % | 100,0 % | 200 |
-| `route` | drei vom Aufrufer beschriebene Venues | 0,808822 | 99,4 % | 90,5 % | 200 |
-
-Quelle: aktuelles Manifest, Zielpräzision jeweils 0,99. [J7]
-
-Diese Zahlen beschreiben das Kalibrierungsset. **Eigene Schlussfolgerung:** Bei anderen Instrumenten, deutschen Transkripten, anderen Regeln und Nachrichtentypen muss die Anwendung Konfidenz und Enthaltung erneut messen. Eine kalibrierte Auswahlwahrscheinlichkeit ist keine ökonomische Wahrscheinlichkeit für Profit.
-
-### Lizenz- und Reproduzierbarkeitsgrenze
-
-Die Base Model Card beschreibt eine Mischung aus öffentlichen, synthetischen und adapterspezifischen Trainingsdaten, einschließlich Daten mit Beschränkung auf nichtkommerzielle, akademische oder Forschungsnutzung. Die vollständigen Trainingsdaten werden nicht veröffentlicht. Die Gewichte selbst werden als Apache-2.0 ausgewiesen. Das erlaubt keine pauschale Aussage, sämtliche vorgelagerten Daten seien uneingeschränkt kommerziell lizenziert; vor einer Produktverwertung sollte die Datenherkunft gesondert geklärt werden. Für die Reproduktion nennt die Trading-Model-Card veröffentlichte `test.jsonl` und `calibration.jsonl`. [J2], [J1]
-
-## 2. Konkrete Integrationsschnittstelle
-
-### Aktuelle API: POST /v1/decide
-
-Das versionierte Schema akzeptiert eine Liste von Funktionsaufrufen. Für den Trading-Adapter sind `desk` und `market_context` Pflichtkontext; das wechselnde Live-Feld heißt `market_state`. Der Aufruf übergibt den Inhalt dieses Felds als `input`. [J7], [J8]
-
-Ein bewusst vereinfachtes, selbst formuliertes Beispiel:
-
-```json
-{
-  "calls": [
-    {
-      "function": "jeff.finance.trading-desk.direction",
-      "context": {
-        "desk": "Buy one unit if the verified signal is positive and exposure is below one unit. Otherwise hold. Never short.",
-        "market_context": "Research simulation. One instrument. Current signal is derived only from sources already available."
-      },
-      "input": "Verified signal: positive. Current position: zero units. Request: choose the next action."
-    }
-  ],
-  "on_low_confidence": "return"
-}
+```text
+confidence = (highest_probability - 1/n) / (1 - 1/n)
 ```
 
-Dieses Beispiel demonstriert das Request-Schema, **nicht eine bereits validierte Strategie oder gemessene Jeff-Antwort**. Ein echtes Experiment sollte Markt- und Positionsfelder vollständig und in reproduzierbarer Form übergeben.
+For three options, a highest probability of 0.8 therefore gives confidence 0.7. These fields must not be substituted for each other. A threshold on one adds no independent evidence to a threshold on the other when the option count is fixed. Score uses a different formula that accounts for distances between ordered levels. [Confidence documentation](https://docs.typesafe.ai/confidence)
 
-Die Antwort enthält `decisions` in Aufrufreihenfolge. Zu jeder Entscheidung gehören unter anderem `value`, `confidence`, `abstained`, `calibrated`, `probabilities`, `function`, `version`, `timing` und `evidence_refs`. Diese Felder gehören ins Auditprotokoll. Bei `abstained=true` wird keine neue risikosteigernde Position eröffnet. Das ist eine empfohlene Anwendungsregel, kein aus der Konfidenz abgeleitetes Profitversprechen. [J9], [J10]
+The question determines what a probability refers to. A high probability that a passage describes a long setup does not estimate the chance that a long trade will make money. The HTTP contract also has no `calibrated` or `abstained` flags. Those are application decisions and records; they must not be inferred from a successful response. [API schema](https://api.typesafe.ai/openapi.json)
 
-### Noch unterstützte ältere API
+### Limits that affect video processing
 
-Das aktuelle Repository führt zusätzlich `POST /v1/systemone`. Dort ist die Form `{model, state, questions}`; eine Choice-Frage enthält `type: "choice"`, `criteria` und optional `instructions`. Antworten liegen unter `answers.<question>` mit `choice`, `probabilities` und `confidence`. Das ist eine dokumentierte Kompatibilitätsschnittstelle, kein Beleg dafür, dass alte v1.3-Gewichte noch verfügbar sind. [J11], [J12]
+The documented default context limits are 64k tokens per request and 32k for the state plus any individual question. An experimental header raises both to 262k, with an explicit accuracy and latency caveat. Jev accepts text and PNG/JPEG images; it does not natively accept audio or video. Image requests require the `TypeSafe-Danger-Zone-Images: true` header. Captions, speech recognition and frame selection remain separate ingestion steps. [Models](https://docs.typesafe.ai/models), [image support](https://docs.typesafe.ai/images)
 
-Für den neuen Prototyp ist `/v1/decide` sinnvoll, weil Adapterversion und Enthaltung Teil des standardisierten Ergebnisses sind. Ein kleiner HTTP-Adapter entkoppelt die Trading-Anwendung vom Python- und GPU-Stack des Modells.
+TypeSafe identifies weaknesses in arithmetic, numeric precision, date comparison, long irrelevant context, indirection, adversarial input and option ordering. It recommends extracting candidate values with code or a generative model, then asking Jev to select among them. That fits a transcript pipeline: preserve exact source spans and let code handle prices, timestamps and risk calculations. Typed output does not establish that the selected answer is correct. [Known model limitations](https://docs.typesafe.ai/model-jaggedness)
 
-### Installation und Betriebskosten
+Requests also have a 32 MiB body limit and require finite JSON numbers. Rate limits are account-specific; overload and rate-limit responses need bounded retries. A replay or live observer should record these failures and wait rather than silently manufacture a model answer. [Request rules and errors](https://docs.typesafe.ai/api/errors)
 
-Die Runtime unterstützt PyTorch auf CPU, MLX auf Apple Silicon und einen NVIDIA-Pfad. Das Repository nennt ungefähr 1,7 GB für den ersten Download der Base; die Downloadgröße ist nicht gleich dem gesamten RAM-/VRAM-Bedarf. Modell, Frameworks und Cache benötigen zusätzlichen Platz. Hier wurden keine Laufzeit- oder Speicherwerte auf eigener Hardware gemessen. [J3], [J13]
+## A concrete trading implementation: buberlo/jev-trader
 
-Der aktuelle Runtime-Paketstand pinnt unter anderem PyTorch 2.14.0, Transformers 5.17.0 und PEFT 0.21.1. Das macht eine isolierte Runtime-Umgebung zweckmäßig. Die Model Card weist auf Installation aus GitHub hin, solange die Pakete nicht auf PyPI stehen; die README enthält dazu noch widersprüchliche Installationsformulierungen. Ein reproduzierbares Setup sollte den oben genannten Commit festhalten. [J5], [J1]
+The closest inspected Jev-specific example is [buberlo/jev-trader](https://github.com/buberlo/jev-trader), at commit [`15d089e656d968fabb750bde8ebeec6d0da1ac7d`](https://github.com/buberlo/jev-trader/commit/15d089e656d968fabb750bde8ebeec6d0da1ac7d), dated 19 September 2026. This is a third-party market-making prototype. It does not ingest videos.
 
-Die folgenden Startbefehle entsprechen den ausgelesenen CLI-Optionen und sind **hier noch nicht ausgeführt**:
+Its [question battery](https://github.com/buberlo/jev-trader/blob/15d089e656d968fabb750bde8ebeec6d0da1ac7d/src/jev_trader/judgment/battery.py) asks for regime, short-horizon direction, toxic flow, liquidity stress, quoting conditions and inventory pressure. The [policy engine](https://github.com/buberlo/jev-trader/blob/15d089e656d968fabb750bde8ebeec6d0da1ac7d/src/jev_trader/policy/engine.py) converts these outputs into quoting actions. Separate [risk checks](https://github.com/buberlo/jev-trader/blob/15d089e656d968fabb750bde8ebeec6d0da1ac7d/src/jev_trader/risk/limits.py) can hold, reduce exposure or kill the loop. Pricing and execution are separate modules.
 
-```bash
-jeff runtime serve \
-  --socket /tmp/jeff-trading.sock \
-  --adapter trading-desk \
-  --backend torch \
-  --batch-window-ms 1 \
-  --max-batch-rows 1 \
-  --queue-limit-rows 64 \
-  --prepare-workers 1
-```
+Those boundaries are useful to borrow. The inspected implementation also has limits that matter when reading its results:
 
-In einem zweiten Prozess:
+- The [paper command](https://github.com/buberlo/jev-trader/blob/15d089e656d968fabb750bde8ebeec6d0da1ac7d/src/jev_trader/cli.py) always uses synthetic market data and a simulated venue. An API key enables actual Jev judgments within that simulation; it does not make the market data real.
+- Without a key, the command selects a heuristic judge. On an API exception, the [loop](https://github.com/buberlo/jev-trader/blob/15d089e656d968fabb750bde8ebeec6d0da1ac7d/src/jev_trader/loop/engine.py) also falls back to heuristics. A timeout instead produces a hold. Counts distinguish these paths.
+- The [calibration loader](https://github.com/buberlo/jev-trader/blob/15d089e656d968fabb750bde8ebeec6d0da1ac7d/src/jev_trader/calibration/metrics.py) drops neutral outcomes but retains the original three-way probability of “up.” That changes the population being evaluated without conditioning the probability on it.
+- The calibration command defaults to mixing judgment sources. It fits Platt scaling and reports the resulting Brier score on the same samples. That is a fit diagnostic, not evidence of calibration on unseen data.
 
-```bash
-JEFF_ENGINE_SOCKETS=/tmp/jeff-trading.sock \
-JEFF_MODEL_NAME=jeff-v1.4 \
-jeff-server serve --host 127.0.0.1 --port 8765 --workers 1
-```
+The source was inspected without installing or executing this repository. Its latency statements and simulated results were not reproduced. Use it as an example of module responsibilities; build and evaluate the transcript-specific questions separately.
 
-Die vier Scheduler-Optionen und die drei HTTP-Startoptionen sind im aktuellen Stand erforderlich. Der explizite Backendwert `torch` ist gültig; GPU-spezifische Flags gehören nicht in dieses CPU-Beispiel. [J14], [J15]
+## What the papers support
 
-Lokale Software und offene Gewichte erfordern keinen hier festgestellten Kauf. Reale Kosten entstehen durch Hardware, Strom, Datenversorgung und gegebenenfalls Cloud-Inferenz. Aus Hersteller-Benchmarks auf H100 oder RTX-Hardware lässt sich keine CPU-Latenz für diesen Prototyp ableiten.
+### Independent Jev evaluation
 
-## 3. Weitere Decision-Model-Ansätze
+Deußer, Sparrenberg and Sifa's September 2026 preprint, [Evaluating and Benchmarking the System One Model Jev](https://arxiv.org/html/2609.37647v1), evaluates **`jev-1.13.0`** on 37 datasets. It reports pooled Choice ECE of 0.028, but results vary substantially by task. Financial PhraseBank reaches 73.0% accuracy with ECE 0.138. Binary and multilabel Noul tasks often need task-specific thresholds; fitting those on separate training examples improves some results.
 
-| Ansatz | Primärquelle und Implementierung | Was tatsächlich gelernt wird | Einordnung für den Prototyp |
-|---|---|---|---|
-| Jeff + Trading-Adapter | [firelex/jeff](https://github.com/firelex/jeff), aktuelle Model Card [J1] | Auswahl zwischen benannten Optionen anhand beschriebener Regeln und Zustand | Unmittelbar als austauschbarer Regelentscheider integrierbar |
-| Decision Transformer | NeurIPS 2021; [kzl/decision-transformer](https://github.com/kzl/decision-transformer) [D1], [D2] | Aktionen aus Return-to-go, Zuständen und vergangenen Aktionen | Erst nach Aufbau eines zeitlich korrekten Trajektoriendatensatzes |
-| GPT-2 + LoRA als Trading-DT | Yun, 26. November 2024; [syyunn/finrl-dt](https://github.com/syyunn/finrl-dt) [D3], [D4] | Handelsverhalten aus Trajektorien bereits trainierter Experten | Forschungsreferenz, kein fertiges transcriptbasiertes Handelssystem |
-| Conservative Q-Learning | NeurIPS 2020; [aviralkumar2907/CQL](https://github.com/aviralkumar2907/CQL) [D5], [D6] | Konservative Wertschätzung bei Offline-RL | Späterer Vergleich gegen Behavior Cloning und DT |
-| CORL | [corl-team/CORL](https://github.com/corl-team/CORL) [D7] | Referenzimplementierungen mehrerer Offline-RL-Verfahren | Für kontrollierte Algorithmenexperimente; bewusst keine importierbare modulare Trading-Bibliothek |
-| Decision Foundation Models | Liu et al., Version vom 5. Januar 2024 [D8] | Vortraining und nachgelagerte Anpassung als allgemeines Forschungsprogramm | Kein Nachweis einer universellen profitablen Trading-Policy |
+The study includes [evaluation code and recorded responses](https://github.com/AppliedMachineLearning-Lab/jev-benchmarking). It measures language tasks, not trading returns. It uses one frozen template per dataset, runs each request once, and cannot rule out training exposure to benchmark questions. Its findings justify testing Jev as a classifier or evidence checker, with fresh channel-specific labels. They do not establish performance for version 1.14, crypto forecasts or Krown transcripts.
 
-### Was die Trading-DT-Arbeit belegt
+### Evidence on typed decision models
 
-Die Arbeit von Yun initialisiert einen Decision Transformer mit GPT-2 und trainiert LoRA sowie Embeddings auf Expertenverläufen. Die Experimente verwenden 29 DJIA-Aktien; Training läuft von 2009 bis Juli 2020, der Test bis Oktober 2021. Verglichen werden unter anderem CQL, IQL, Behavior Cloning und zufällig initialisierte DT-Varianten. Die Arbeit wurde als Poster eines ICAIF-2024-Workshops angenommen. Diese begrenzte Studie stützt weitere Experimente, keine Zusage über neue Märkte, Transkript-Alpha oder heutige Handelskosten. Das Repository ist Replikationscode, nicht ein bereitgestellter Produktionsdienst. [D3], [D4]
+Tang and Zheng's [Typed Decision Models: An Early Evidence Audit and Evaluation Checklist](https://arxiv.org/html/2609.32160v1) reviews 28 early papers. It finds useful efficiency results but no established accuracy advantage attributable to the typed interface itself. Calibration and deferral thresholds depend on the workload. The review covers a short September 2026 release window and largely preprint evidence.
 
-### Wesentliche methodische Grenze
+For this project, the practical comparison is Jev against a simple extractor, an ordinary model with constrained labels, and human-reviewed claims. Report the fraction of cases accepted as well as their error rate. A system can look accurate by refusing nearly everything.
 
-Die Originalarbeit „You Can't Count on Luck“ zeigt, warum bloße Konditionierung auf hohe historische Returns in stochastischen Umgebungen scheitern kann: Gute realisierte Ergebnisse können Zufall statt reproduzierbare Handlungsqualität widerspiegeln. Die Autoren untersuchen auch einen alternativen, auf durchschnittlichen Cluster-Returns beruhenden Ansatz. **Eigene Übertragung auf Trading:** Ein hoher gewünschter Return ist kein Stellrad, das verlässlich hohe künftige Rendite erzeugt. [D9]
+### Learning a trading policy from trajectories
 
-JEPA ist davon getrennt zu betrachten. Zwei gefundene finanzielle Eigenstudien berichten zwar lernbare Repräsentationen, aber keinen robusten Trading-Vorteil: Fin-JEPA beschreibt schwache bis vernachlässigbare Downstream-Signale; JEPA-Trader berichtet in seiner eigenen Machbarkeitsstudie keinen robusten Vorteil nach Kosten. Diese Autorenberichte sind hilfreiche Gegenbeispiele zu überzogenen Architekturversprechen, keine allgemeine Widerlegung von JEPA. Für die jetzt geklärte Jeff-Anforderung ist JEPA nicht erforderlich. [D10], [D11]
+[Decision Transformer](https://arxiv.org/abs/2106.01345) conditions actions on desired return, past states and actions. The [authors' implementation](https://github.com/kzl/decision-transformer) is a starting point for that form of offline reinforcement learning. Yun's [2024 trading study](https://arxiv.org/abs/2411.17900), with [replication code](https://github.com/syyunn/finrl-dt), adapts GPT-2 with LoRA and compares it with other offline RL methods.
 
-## 4. Empfohlene Verbindung von Transkripten und Entscheidungsmodell
+This would require a different training dataset: market states, available signals, actions, costs and subsequent outcomes. A transcript archive alone does not supply those trajectories. Jev's hosted question API offers a more direct first experiment for semantic interpretation; a learned policy can be evaluated later if the recorded data supports it.
 
-Die folgende Architektur ist eine eigene Implementierungsempfehlung, keine behauptete Eigenschaft einer der zitierten Implementierungen.
+## Proposed integration
 
-1. **Belegbare Aussagen extrahieren.** Pro Aussage Originaltext, Quelle, Sprecher, Instrumentbezug, Veröffentlichungszeit und früheste Verfügbarkeit speichern. Meinung, beobachtete Tatsache und konditionale Aussage unterscheiden.
-2. **Signale definieren.** Aus Aussagen messbare Regeln ableiten: Richtung, Horizont, Gültigkeitsdauer, Auslöser, Gegenevidenz und Unsicherheit. Fehlende Angaben nicht durch LLM-Vermutungen ergänzen.
-3. **Regeln und Marktzustand trennen.** Stabile Handelsregeln werden zu `desk`; Instrument und Sitzung zu `market_context`; nur zum Entscheidungszeitpunkt verfügbare Signale, Preise und Positionen kommen in `input`. Englischen Jeff-Eingaben Originalbelege in der ursprünglichen Sprache zuordnen.
-4. **Entscheider austauschbar halten.** Gleicher Zustand für deterministische Regeln und Jeff; später auch für trainierte Policies. Ein Lauf darf einen nicht erreichbaren Jeff-Dienst nicht stillschweigend durch Heuristiken ersetzen.
-5. **Grenzen in Code erzwingen.** Positionsobergrenzen, verfügbare Liquidität, Marktzeit, Kosten, Short-Erlaubnis und Stoppregeln werden nach jeder Modellantwort deterministisch geprüft. Im ersten Prototyp genügen `flat` und begrenzte Long-Positionen, falls keine andere Mandatsdefinition vorliegt.
-6. **Simulation getrennt messen.** Regelgenauigkeit, Konfidenzkalibrierung, Enthaltungsquote und Latenz gehören in einen technischen Bericht; Nettorendite, Drawdown, Exposure und Umsatz in einen getrennten Handelsbericht.
-7. **Erst den Zusatznutzen prüfen.** Vergleiche mindestens: keine Position, einfache feste Regel, Regel mit Transkriptsignal, Jeff mit denselben Inputs. So wird sichtbar, ob ein Gewinn aus Signal, Marktexposure oder Entscheider stammt.
+Keep the [timestamped extraction contract](video-signals.md#recommended-extraction-contract) as the common input. Use short passages with their exact quotes, candidate fields and source times. Ask separate questions whose errors can be labeled:
 
-### Für einen glaubwürdigen Funktionstest
+| Question | Suggested primitive | What code does afterward |
+|---|---|---|
+| What kind of statement is this? | Choice, including historical, hypothetical and unclear options. | Keep statements outside the supported setup classes out of the execution path. |
+| Does the passage support this specific condition? | Noul, one check per condition. | Flag disagreement or uncertainty for review. |
+| Which observed number is the stop or invalidation? | Choice over source candidates, including “not stated.” | Preserve the chosen span and parse the exact number. |
+| Which stated scenario does this passage describe? | Choice over explicit branches, including “none.” | Evaluate that scenario’s numeric conditions against closed market bars. |
+| Does the evidence leave a material ambiguity? | Noul or a narrow ambiguity rubric. | Keep the candidate pending when the meaning is unresolved. |
 
-Ein erfolgreicher Prototyp sollte nachweisen, dass ein tatsächliches Transkript in nachvollziehbare Signale übergeht, der Marktzeitpunkt korrekt zugeordnet wird, Positionen erst nach Signalverfügbarkeit entstehen und Gebühren bei Positionsänderungen anfallen. Für Jeff gehören reale Erreichbarkeit und eine echte Modellantwort zum Integrationstest; ein gemockter HTTP-Test prüft nur den Vertrag.
+These questions are proposed experiments. They should not be described as implemented capabilities merely because Jev can accept their schema.
 
-### Für einen späteren Alpha-Test
+After interpretation, code checks source availability, review status, expiry, instrument, timeframe, trigger and the complete entry/stop/target bracket. Position sizing, costs, exposure and drawdown limits remain deterministic. A model answer can withhold an otherwise eligible paper trade; it cannot make an expired or incomplete setup eligible.
 
-Vor dem ersten Test Handelsuniversum, Zeitraum, Gebühren, Slippage, Haltedauer und Benchmark festlegen. Training, Kalibrierung und Test chronologisch trennen; bei überlappenden Zielhorizonten eine angemessene Lücke verwenden. Auch Fälle ohne klare Signale im Datensatz behalten. Tests über mehrere Marktphasen wiederholen und Hyperparameter nicht nach dem letzten Testfenster wählen. Diese Empfehlungen sollen verhindern, dass eine technisch korrekte Pipeline mit einer ökonomisch nachgewiesenen Strategie verwechselt wird.
+Start by recording Jev's answers alongside the baseline without changing its trades. Label extraction errors and measure calibration on later examples. Then freeze the questions, thresholds and policy and compare the baseline with the model-filtered replay on a later period. Keep API failures, abstentions, latency and actual model IDs in the record. Measure the effect of adding Jev separately from the effect of adding video information.
 
-## Quellenverzeichnis
+No authenticated Jev inference was performed for this report. Live latency, channel-specific accuracy and incremental trading value remain unmeasured here. HTTP fixtures can verify request and error handling; they cannot supply that evidence.
 
-Alle URLs am 13. November 2026 geprüft. Die Jeff-Dateien sind nach Möglichkeit auf den beobachteten Commit festgehalten; volatile Webseiten können ältere Inhalte zeigen.
+## Historical correction
 
-- **[J1]** Jeff Trading-Adapter, v1.4-Model-Card: https://github.com/firelex/jeff/blob/59898ae9e12621bd8e0199b86c951d366f5026b7/release/hf/jeff-adapter-trading-desk/README.md
-- **[J2]** Jeff Base, v1.4-Model-Card: https://github.com/firelex/jeff/blob/59898ae9e12621bd8e0199b86c951d366f5026b7/release/hf/jeff-base/README.md
-- **[J3]** Repository und festgehaltener Commit: https://github.com/firelex/jeff ; https://github.com/firelex/jeff/commit/59898ae9e12621bd8e0199b86c951d366f5026b7
-- **[J4]** Python SDK Paketdefinition: https://github.com/firelex/jeff/blob/59898ae9e12621bd8e0199b86c951d366f5026b7/packages/python/pyproject.toml
-- **[J5]** Runtime Paketdefinition: https://github.com/firelex/jeff/blob/59898ae9e12621bd8e0199b86c951d366f5026b7/runtime/python/pyproject.toml
-- **[J6]** Aktuell veröffentlichte Basen und Gewichts-Hash: https://github.com/firelex/jeff/blob/59898ae9e12621bd8e0199b86c951d366f5026b7/catalogue/bases.yaml
-- **[J7]** Trading-Manifest, Funktionsnamen und Kalibrierung: https://github.com/firelex/jeff/blob/59898ae9e12621bd8e0199b86c951d366f5026b7/catalogue/jeff.finance.trading-desk/manifest.yaml
-- **[J8]** Decide-Request-Schema: https://github.com/firelex/jeff/blob/59898ae9e12621bd8e0199b86c951d366f5026b7/contract/schemas/decide_request.schema.json
-- **[J9]** Decide-Response-Schema: https://github.com/firelex/jeff/blob/59898ae9e12621bd8e0199b86c951d366f5026b7/contract/schemas/decide_response.schema.json
-- **[J10]** Decision-Schema: https://github.com/firelex/jeff/blob/59898ae9e12621bd8e0199b86c951d366f5026b7/contract/schemas/decision.schema.json
-- **[J11]** Legacy-Request-Schema: https://github.com/firelex/jeff/blob/59898ae9e12621bd8e0199b86c951d366f5026b7/contract/schemas/systemone_request.schema.json
-- **[J12]** Legacy-Response-Schema: https://github.com/firelex/jeff/blob/59898ae9e12621bd8e0199b86c951d366f5026b7/contract/schemas/systemone_response.schema.json
-- **[J13]** Runtime-Dokumentation: https://github.com/firelex/jeff/blob/59898ae9e12621bd8e0199b86c951d366f5026b7/runtime/python/README.md
-- **[J14]** CLI und gültige Backendwerte: https://github.com/firelex/jeff/blob/59898ae9e12621bd8e0199b86c951d366f5026b7/packages/python/src/jeff/cli.py
-- **[J15]** Betriebsdokumentation: https://github.com/firelex/jeff/blob/59898ae9e12621bd8e0199b86c951d366f5026b7/docs/operating.md
-- **[D1]** Chen et al., Decision Transformer, NeurIPS 2021: https://proceedings.neurips.cc/paper/2021/file/7f489f642a0ddb10272b5c31057f0663-Paper.pdf
-- **[D2]** Offizielle DT-Implementierung, MIT: https://github.com/kzl/decision-transformer
-- **[D3]** Yun, Pretrained LLM Adapted with LoRA as a Decision Transformer for Offline RL in Quantitative Trading, eingereicht 26. November 2024: https://arxiv.org/abs/2411.17900 ; Volltext https://arxiv.org/html/2411.17900v1
-- **[D4]** Zugehöriger Replikationscode: https://github.com/syyunn/finrl-dt
-- **[D5]** Kumar et al., Conservative Q-Learning, NeurIPS 2020: https://arxiv.org/abs/2006.04779
-- **[D6]** Offizieller CQL-Code: https://github.com/aviralkumar2907/CQL
-- **[D7]** CORL, vom Projekt gepflegter Fork mit DT, CQL, IQL und weiteren Verfahren: https://github.com/corl-team/CORL
-- **[D8]** Liu et al., Self-supervised Pretraining for Decision Foundation Model, zuletzt geändert 5. Januar 2024: https://arxiv.org/abs/2401.00031
-- **[D9]** Paster et al., You Can't Count on Luck, Version vom 28. November 2022: https://arxiv.org/abs/2205.15967
-- **[D10]** Wang, Fin-JEPA, Manuskript vom 30. Mai 2026, auf SSRN eingestellt am 18. Juni 2026: https://ssrn.com/abstract=6855118 ; Implementierung https://github.com/cedricwyh/fin-jepa
-- **[D11]** Vine, JEPA-Trader, eigene Machbarkeitsstudie, Juni 2026: https://bryanvine.github.io/jepa-trader/ ; Implementierung https://github.com/bryanvine/jepa-trader
+An earlier revision investigated the unrelated `firelex/jeff` project after misreading the intended model name. That research and its local inference results remain in [commit `f883ace`](https://github.com/larsmartens/signal-decision-lab/blob/f883ace43922c73bffb553fc3aed7a89e7b4562f/docs/research/decision-models.md). They are not evidence about TypeSafe's Jev.
 

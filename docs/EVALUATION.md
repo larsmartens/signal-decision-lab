@@ -1,57 +1,63 @@
-# Evaluationsprotokoll
+# Evaluation protocol
 
-Stand: 13. November 2026. Dieses Dokument definiert Messgrößen und Nachweise für die Meilensteine in [PLAN.md](PLAN.md). Grenzwerte werden vor einem Experiment festgelegt; rückblickend passende Grenzwerte gelten als neue Hypothese.
+Use this protocol for the experiments in [PLAN.md](PLAN.md). Record metrics and acceptance thresholds before opening the test data. Changing a threshold after reading the results creates a new hypothesis.
 
-## 1. Was der aktuelle Stand belegt
+## What has been demonstrated
 
-Der [echte Abruf](validation/youtube-smoke.json) des [Cointelegraph-Interviews mit Krown](https://www.youtube.com/watch?v=EdXslFg3u38) lieferte 646 automatisch erzeugte englische Caption-Segmente. Die YouTube-Seite nennt Veröffentlichung und Upload am 2. September 2026 um 15:01:27 UTC. Der tatsächliche Abruf erfolgte am 13. November. Diese spätere Verfügbarkeit darf nicht auf September zurückdatiert werden. Die Baseline erzeugte 46 ungeprüfte, als Kommentar klassifizierte Aussagen und kein vollständiges unterstütztes Setup. Das belegt einen Import und konservative Ausgabe, keine gemessene Extraktionsgenauigkeit. Eine unabhängige Audioprüfung fehlt.
+The [recorded import](validation/youtube-smoke.json) of the [Cointelegraph interview with Krown](https://www.youtube.com/watch?v=EdXslFg3u38) retrieved 646 automatically generated English caption segments. The YouTube page gives both publication and upload as 2 September 2026 at 15:01:27 UTC. Retrieval took place on 13 November, so the application cannot claim to have observed these captions in September.
 
-Jeffs echte lokale Gewichte wurden über das offizielle In-Process-SDK ausgeführt. Die [ersten zwei Fälle](validation/jeff-cpu-smoke.json) und [sechs weiteren vorab definierten Fälle](validation/jeff-cpu-concise-smoke.json) belegen Modellinferenz, aber keinen akzeptierten Einstieg. Die sechs zusätzlichen Fälle führten sämtlich zur Enthaltung; zwei höchste Klassenwahrscheinlichkeiten gehörten zum falschen Label. Die vollständige HTTP-Verbindung zu diesen Gewichten wurde nicht ausgeführt. Jeff bleibt experimentell und standardmäßig deaktiviert; Details in [JEFF_SETUP.md](JEFF_SETUP.md).
+The baseline produced 46 unreviewed claims classified as commentary and no complete supported setups. This confirms ingestion and records the baseline's output. It does not measure extraction accuracy. The captions have not been independently checked against the audio.
 
-Synthetische Tests, HTTP-Vertragstests, echte Modellinferenz, echter Quellenimport und wirtschaftliche Validierung sind getrennte Nachweisarten. Es wurde kein eigener Decision Transformer trainiert und kein Krown-Handelsvorteil nachgewiesen.
+The intended decision model is Jev from TypeSafe. Live inference through the corrected Jev integration has not yet been demonstrated. An earlier revision tested the unrelated firelex/Jeff model; those eight CPU calls are documented in [the historical validation record](https://github.com/larsmartens/signal-decision-lab/blob/f883ace43922c73bffb553fc3aed7a89e7b4562f/docs/VALIDATION.md). They provide no evidence about Jev. Use [JEV_SETUP.md](JEV_SETUP.md) and [VALIDATION.md](VALIDATION.md) for the current integration status and test results.
 
-## 2. Quellenverständnis messen
+Keep evidence categories separate: synthetic behavior tests, controlled HTTP responses, real model calls, source retrieval, and trading experiments. No custom Decision Transformer or validated Krown trading edge exists in this project.
 
-Referenzlabels entstehen vor Einsicht in spätere Kurse. Videos desselben Ereignisses und überlappende Ausschnitte gehören in dieselbe Datenpartition. Testvideos bleiben bei Prompt-, Grammatik- und Schemaänderungen geschlossen. Ein eingefrorener Datensatz enthält positive Aussagen, nicht ausführbare Prognosen und schwierige negative Beispiele.
+## Measure source understanding
 
-Für jede Variante berichten:
+Create reference labels before examining later prices. Put videos about the same event and overlapping excerpts in the same data partition. Keep test videos closed while changing prompts, grammar, or schemas. Include usable claims, incomplete forecasts, and difficult negative examples.
 
-- Präzision und Trefferquote der erkannten Aussagen, getrennt nach Aussageart und Instrument.
-- Feldgenauigkeit für Zahlenwert **und Rolle**: Einstieg, Ziel, Stop, Horizont und Kerzenintervall. Fehlende Angaben dürfen fehlen.
-- Belegtreue einschließlich Kontext: Negation, hypothetische Bedingung, Rückblick, Korrektur und Sprecherzuordnung.
-- Anteil falscher ausführbarer Freigaben sowie Abdeckung: Wie viele tatsächlich ausführbare Referenzfälle werden erkannt? Zusätzlich Zahl und Gründe der Enthaltungen.
+Report the following for each extractor:
 
-Ergebnisse pro Video aggregieren und Unsicherheitsintervalle ausweisen; viele Segmente desselben Videos sind keine unabhängigen Beobachtungen. Bekannte falsche Einstiege erhalten konkrete Regressionstests. Eine hohe Gesamtgenauigkeit durch häufige Kommentare ist kein ausreichendes Annahmekriterium.
+- Claim precision and recall, broken down by statement type and instrument.
+- Field accuracy for both a number and its role: entry, target, stop, horizon, or candle interval. Unstated values should remain absent.
+- Evidence accuracy, including negation, hypothetical conditions, retrospective statements, corrections, and speaker attribution.
+- False executable setups and coverage of genuinely executable reference cases, alongside the number and reasons for abstentions.
 
-## 3. Regelgenauigkeit und Kalibrierung messen
+Aggregate results by video and report uncertainty. Many segments from one video are not independent observations. Give each known false-entry failure a behavioral regression test. Overall accuracy can conceal poor extraction when most statements are commentary.
 
-Das Ziel hier lautet `buy/sell/hold` gemäß einer ausdrücklich formulierten Regel. Es lautet nicht „Trade endet im Gewinn“. Den Zeitpunkt der Vorhersage und der Labelerfassung speichern. Das [vorhandene Auswertungsmodul](../signal_lab/evaluate.py) berechnet Genauigkeit, Abdeckung, ECE und den mehrklassigen Brier-Score.
+## Measure decision accuracy and calibration
 
-Der Brier-Wert ist der Mittelwert der **Summe über alle drei Klassen** von `(p − y)²`, wobei das richtige Label den Wert eins erhält. Die Implementierung teilt nicht zusätzlich durch drei; der Wertebereich ist null bis zwei. Er bewertet die gesamte Wahrscheinlichkeitsverteilung und ist kein reines Kalibrierungsmaß.
+The current evaluation target is the action `buy`, `sell`, or `hold` under a specified rule. A correct rule decision is distinct from a profitable trade. Record prediction and label-observation times. The [evaluation module](../signal_lab/evaluate.py) computes accuracy, coverage, expected calibration error (ECE), and a multiclass Brier score.
 
-ECE gruppiert die höchste Klassenwahrscheinlichkeit in gleich breite Intervalle und mittelt gewichtet den absoluten Abstand zwischen Konfidenz und beobachteter Trefferquote. Das entspricht dem üblichen Ansatz bei [Guo et al.](https://proceedings.mlr.press/v70/guo17a/guo17a.pdf). ECE hängt von Gruppierung und Stichprobe ab; zehn Intervalle sind kein Qualitätsstandard. Daher zusätzlich Zuverlässigkeitsdiagramm, Intervallbelegung, Klassenzahlen, Konfusionsmatrix und Ergebnisse verschiedener vorab gewählter Gruppierungen liefern.
+The Brier score averages the sum of `(p − y)²` across all three classes, with `y = 1` for the correct class and zero otherwise. This implementation does not divide the sum by three; its range is zero to two. It measures the quality of the full probability distribution, not calibration alone.
 
-Die aktuelle Genauigkeit umfasst auch enthaltende Zeilen. Ergänzend die Genauigkeit akzeptierter Entscheidungen gegen deren Abdeckung auswerten. Schwellen oder nachträgliche Kalibrierung ausschließlich auf Trainings-/Validierungsdaten bestimmen. Künstliche Fallback-Verteilungen separat halten. Weder niedriger ECE noch niedriger Brier-Wert belegen positive Handelserträge.
+ECE groups the highest class probability into equal-width bins, then weights the absolute difference between average confidence and observed accuracy by each bin's size. This follows the approach described by [Guo et al.](https://proceedings.mlr.press/v70/guo17a/guo17a.pdf). ECE depends on the grouping and sample. Report a reliability plot, bin counts, class counts, a confusion matrix, and sensitivity to predetermined binning choices. Ten bins is an implementation default.
 
-## 4. Zeittrennung und faire Vergleiche
+The current accuracy calculation includes abstained rows. Also report accuracy among accepted decisions against their coverage. Fit thresholds and any calibration adjustment on training or validation data only. Keep application-generated fallback distributions out of model-quality results. Interpret Jev's confidence according to its [documented meaning](https://docs.typesafe.ai/confidence); do not assume it equals the maximum class probability. Neither ECE nor Brier measures trading returns.
 
-Ein handelbares Signal darf frühestens nach Quellenverfügbarkeit, abgeschlossener Extraktion und Prüfung berücksichtigt werden. Seine Gültigkeit wird durch spätes Einlesen nicht verlängert. Bei historischen Nachberechnungen ohne damalige Erfassungsnachweise ausdrücklich eine rekonstruierte Studie ausweisen. Ein rückwirkend gesetztes Datum ist kein Nachweis damaliger Verfügbarkeit.
+## Preserve the information available at each decision
 
-Walk-forward bedeutet: ausschließlich frühere Daten zur Auswahl verwenden, danach das nächste Zeitfenster mit unveränderter Variante auswerten. Trainingsbeispiele entfernen, deren Zielintervalle in die Validierungs- oder Testphase reichen. Einen vorab festgelegten Abstand entsprechend Zielhorizont und Veröffentlichungsverzögerungen einhalten. Datenaufbereitung und Schwellenwahl ebenfalls innerhalb der jeweiligen Trainingsphase halten. Moderne LLMs könnten spätere Ereignisse aus ihrem Training kennen; zeitlich gefilterte Prompts beseitigen dieses Risiko nicht. Prospektive Beobachtung bleibt deshalb eine eigene Evidenzstufe.
+A setup becomes usable only after its source is available and extraction and review have completed. Late ingestion must not extend its original expiry. Label historical reconstructions as reconstructions when no contemporaneous acquisition record exists.
 
-| Variante | Information für die Signalentscheidung | Prüfzweck |
+In walk-forward evaluation, choose a strategy using earlier data and evaluate it unchanged in the next time window. Remove training examples whose outcome intervals reach into validation or test periods. Set the gap between partitions from outcome horizons and publication delays. Fit preprocessing and thresholds within the training period too.
+
+Modern LLMs may know later events from their training data. Filtering the supplied prompt by date cannot remove that knowledge. A prospective trial therefore provides evidence that historical replay cannot supply.
+
+## Compare the same trading problem
+
+| Variant | Information used for signals | Purpose |
 |---|---|---|
-| Quelle | Geprüfte Aussagen und ihre ausdrücklichen Auslöser | Eigenständiger Quellenbeitrag |
-| Preis | Vorab festgelegte Regeln auf vergangenen Kursen | Vergleich ohne Finfluencer |
-| Kombination | Quellen- und Preisregeln | Zusätzlicher Nutzen der Quelle |
-| Jeweils mit Jeff | Dieselben Fakten, zusätzlicher Regelentscheid | Nutzen und Kosten des Modells |
+| Source | Reviewed claims and their stated triggers | Measure the source's contribution |
+| Price | Predetermined rules on past prices | Establish a baseline without creator input |
+| Combined | Source and price rules | Measure the source's added value |
+| Each variant with Jev | The same facts, with an additional model decision | Measure model benefit and cost |
 
-Alle Varianten benötigen Kurse für Auslöser, Risikoprüfung und Fills. Die Quellenvariante erhält dabei keine zusätzlichen technischen Indikatoren. Handelsfreiheit, Gebühren, Risikobudget und Zeitfenster bleiben vergleichbar. Jede getestete Variante wird erfasst; die Auswahl des besten Backtests aus vielen Versuchen ist selbst eine Überanpassungsquelle ([Bailey et al.](https://www.davidhbailey.com/dhbpapers/backtest-prob.pdf)).
+Every variant needs prices for triggers, risk checks, and fills. The source-only variant gets no extra technical indicators. Keep trade permissions, costs, risk budgets, and dates comparable. Log every variant tested: selecting the best of many backtests is itself a source of overfitting ([Bailey et al.](https://www.davidhbailey.com/dhbpapers/backtest-prob.pdf)).
 
-## 5. Wirtschaftliche und betriebliche Ergebnisse
+## Report financial and operational results
 
-Nettorendite, maximalen Drawdown, marktbewertetes Eigenkapital, Exposition, Umschlag, Zahl unabhängiger Trades und Kosten ausweisen. Cash und Buy-and-hold im selben Zeitraum als Referenzen zeigen. Gebühren und Slippage variieren; Funding, Leihe und Liquidität müssen vor entsprechenden Derivatebehauptungen modelliert werden. Der aktuelle Simulator bildet diese zusätzlichen Markteffekte nicht vollständig ab.
+Report net return, maximum drawdown, marked-to-market equity, exposure, turnover, independent trades, and costs. Include cash and buy-and-hold over the same dates. Vary fees and slippage. Before making claims about derivatives, account for funding, borrowing, liquidity, and liquidation; the current simulator does not model these fully.
 
-Entscheidungen verwenden abgeschlossene Kerzen; frühester Einstieg ist die nächste zulässige Eröffnung. Mehrdeutige Reihenfolgen innerhalb einer Kerze bleiben konservativ behandelt. Zeitlich zusammenhängende Blöcke für Unsicherheitsschätzungen verwenden; dünne Daten und Regimeabhängigkeit offenlegen. Nach Öffnung des Tests bleiben Strategiewahl und Bewertungsregel gesperrt.
+Decisions use completed bars. Entry can occur no earlier than the next eligible open. Keep conservative assumptions for ambiguous intrabar ordering. Use time blocks when estimating uncertainty, and explain sparse samples and dependence on market conditions. Strategy selection stays frozen after the test is opened.
 
-Der abschließende Bericht enthält außerdem Abrufausfälle, Prüfaufwand, Modellkosten und Laufzeitquantile. Jeder Befund nennt Datensatzversion, Code-Commit, Konfiguration, Ausschlüsse und Grenzen. Fehlende Evidenz ergibt ein offenes Ergebnis und keine Handelsfreigabe.
+The report should also record retrieval failures, review effort, model spend, and latency percentiles. Attach the dataset version, code commit, configuration, exclusions, and unresolved limitations so another researcher can reproduce the experiment.

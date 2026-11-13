@@ -237,7 +237,7 @@
       "Expiry exits at the first observed bar open at/after deadline; gaps can delay exits.",
       "End-of-data positions remain open and marked at last close; no fictitious liquidation.",
       "Drawdown is measured at completed closes; a halt queues liquidation at the next observed open, including gaps.",
-      "Jeff confidence concerns rule selection, never the probability of a profitable trade."
+      "The model gate uses the selected action's probability. Calibration on these inputs has not been measured."
     ],
     "summary": {
       "initial_equity": 10000.0,

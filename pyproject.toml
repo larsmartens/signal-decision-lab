@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "signal-decision-lab"
 version = "0.1.0"
-description = "Evidence-preserving transcript signals, Jeff decisions and paper replay"
+description = "Transcript-based trading research with Jev and paper replay"
 requires-python = ">=3.11"
 dependencies = []
 
