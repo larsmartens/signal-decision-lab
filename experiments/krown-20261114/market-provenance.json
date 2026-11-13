@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "venue": "Binance",
+  "market": "spot",
+  "symbol": "BTCUSDT",
+  "base_asset": "BTC",
+  "quote_asset": "USDT",
+  "price_unit": "USDT per BTC",
+  "volume_unit": "BTC",
+  "interval": "1h",
+  "timezone": "UTC",
+  "requested_start": "2026-07-01T00:00:00Z",
+  "requested_end_exclusive": "2026-11-13T23:00:00Z",
+  "exchange_server_time": "2026-11-13T23:09:20.093000Z",
+  "fetched_at": "2026-11-13T23:09:46.763254Z",
+  "first_open": "2026-07-01T00:00:00Z",
+  "last_open": "2026-11-13T22:00:00Z",
+  "last_close_exclusive": "2026-11-13T23:00:00Z",
+  "bar_count": 3263,
+  "expected_bars": 3263,
+  "gaps": [],
+  "imputed_bars": 0,
+  "normalization": "Raw API milliseconds; close_time + 1ms is the exclusive hourly boundary. No candles filled.",
+  "documentation": [
+    "https://developers.binance.com/en/docs/products/spot/faqs/market_data_only",
+    "https://developers.binance.com/en/docs/catalog/core-trading-spot-trading/api/rest-api/market#klinecandlestick-data"
+  ],
+  "requests": [
+    {
+      "url": "https://data-api.binance.vision/api/v3/time",
+      "file": "raw/server-time.json",
+      "sha256": "6a472991b8fe78161f61fab223ad7836c09cd065f57ec544a4a231337c294d9a",
+      "bytes": 28
+    },
+    {
+      "url": "https://data-api.binance.vision/api/v3/exchangeInfo?symbol=BTCUSDT",
+      "file": "raw/exchange-info.json",
+      "sha256": "e929eb56dd158eb31b20d11d4c8ab6eec04b2765bd44cb69a23137be3bfe66fe",
+      "bytes": 5349
+    },
+    {
+      "url": "https://data-api.binance.vision/api/v3/klines?symbol=BTCUSDT&interval=1h&startTime=1782864000000&endTime=1794610799999&limit=1000&timeZone=0",
+      "file": "raw/klines-001.json",
+      "sha256": "7ac08e2d567210112ab748bfbb03e89fa88a6638e7fed8ab7804fdf9eaa77700",
+      "bytes": 178204
+    },
+    {
+      "url": "https://data-api.binance.vision/api/v3/klines?symbol=BTCUSDT&interval=1h&startTime=1786464000000&endTime=1794610799999&limit=1000&timeZone=0",
+      "file": "raw/klines-002.json",
+      "sha256": "f27a70f0c5a05f47c8bceb05951da8bd4d430b55c71665df5e5e0b0b8b58543c",
+      "bytes": 178521
+    },
+    {
+      "url": "https://data-api.binance.vision/api/v3/klines?symbol=BTCUSDT&interval=1h&startTime=1790064000000&endTime=1794610799999&limit=1000&timeZone=0",
+      "file": "raw/klines-003.json",
+      "sha256": "48d752c4879e1472dc8a6a51d44e3820b23f4659a9c004b1982ee0c4628164a0",
+      "bytes": 178462
+    },
+    {
+      "url": "https://data-api.binance.vision/api/v3/klines?symbol=BTCUSDT&interval=1h&startTime=1793664000000&endTime=1794610799999&limit=1000&timeZone=0",
+      "file": "raw/klines-004.json",
+      "sha256": "99deea5cecca2f1f24299536bb721ded09daa9aea2d7eeba2a0250ab66e2006d",
+      "bytes": 46973
+    }
+  ],
+  "outputs": {
+    "json": {
+      "file": "bars.json",
+      "sha256": "19844ddef21c303881ab27d509b88fb7f28f739ded3ca3ea7745c4f889e37e58"
+    },
+    "csv": {
+      "file": "bars.csv",
+      "sha256": "c764e5ddbef8bcca557964d924ce2b369d1f1d24c6e9bd21587cf17109f36e27"
+    }
+  }
+}

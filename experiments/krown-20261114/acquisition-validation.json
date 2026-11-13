@@ -1,0 +1,33 @@
+{
+  "checked_at": "2026-11-13T23:15:56.401732+00:00",
+  "successful": 36,
+  "failed": 0,
+  "all_canonical_transcripts_valid": true,
+  "all_content_hashes_match": true,
+  "selection_sha256": "bcf100cae62d27c5b1958453968113f540b9ff9190b2e9c91627ad80613003b3",
+  "acquisition_summary_sha256": "9564de3c01051482c7b29bce10b75d2dfb860ac7f653f8f18a33de8216608245",
+  "retrieval_start": "2026-11-13T23:14:40.727434Z",
+  "retrieval_end": "2026-11-13T23:15:41.771485Z",
+  "languages": {
+    "en": 36
+  },
+  "generated_count": 27,
+  "split_counts": {
+    "development": {
+      "sources": 12,
+      "normal_videos": 6,
+      "completed_livestreams": 6,
+      "duration_seconds": 48939,
+      "segments": 22425,
+      "minimum_final_caption_ratio": 0.9793443983402489
+    },
+    "holdout": {
+      "sources": 24,
+      "normal_videos": 12,
+      "completed_livestreams": 12,
+      "duration_seconds": 90159,
+      "segments": 44567,
+      "minimum_final_caption_ratio": 0.9821453287197232
+    }
+  }
+}
