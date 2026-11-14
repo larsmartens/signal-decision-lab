@@ -1,0 +1,56 @@
+{
+  "reviewed_at": "2026-11-14T02:08:36.906079+00:00",
+  "reviewer": "independent assistant contextual review",
+  "method": "Read the complete Nov13 stream and the complete Nov11 and Nov12 daily caption tracks. Reviewed specific Nov9 RDW, CRSP, XMR, INJ, LINK and UI passages with surrounding context. No audio or video-frame inspection.",
+  "verdict": "PASS_WITH_LIMITS",
+  "artifact_hashes": {
+    "semantic-reading.md": "966356c75459d9753038b0d78da7d97cc3b562b40afd434152639b0a032ba3d1",
+    "semantic-claims.json": "ab834bcd689f109f3a49cb4f7abf8c93bc47c4f63bc39bcdc3bf701a870d3043"
+  },
+  "claim_count": 8,
+  "exact_caption_references_checked": 275,
+  "exact_reference_errors": 0,
+  "semantic_material_errors_found": 0,
+  "scope": "Contextual source interpretation only; not model accuracy, audio transcription accuracy, current price status or trading edge.",
+  "required_publication_limits": [
+    "Keep extensive quote-bearing semantic-claims.json private/ignored. Publish source IDs, time references, hashes and paraphrases.",
+    "Date each source. Nov9 additional tickers are older and not reaffirmed in Nov13 stream.",
+    "Treat daily/weekly/monthly close conditions separately; no claimed activation without price data.",
+    "Unknown invalidation stays unstated rather than inventing an order stop.",
+    "BE 218 versus282 conflict, ZTS stock/crypto identity, final unnamed stock, IREN/ENVX/CAPR/LUNR captions need chart/audio confirmation.",
+    "Do not present Krown historical rates or timing windows as this project's independently verified probabilities.",
+    "No paid Jev inference was performed by this review."
+  ],
+  "core_verified_cases": [
+    {
+      "ticker": "BTC",
+      "source_id": "09poJg_Fm1w",
+      "meaning": "Long-term accumulation is separate from an unconfirmed daily bounce or reversal. Daily bullish divergence is absent; the macro low of $57,750 belongs to a different scenario."
+    },
+    {
+      "ticker": "TSLA",
+      "source_id": "09poJg_Fm1w",
+      "meaning": "Daily support at $380 and a correction to $369–370 are separate from full bullish confirmation after reclaiming $413.15."
+    },
+    {
+      "ticker": "HYPE",
+      "source_id": "09poJg_Fm1w",
+      "meaning": "A daily close below $69 is pending breakdown confirmation. The $61–63 bounce zone and $50 worst case remain distinct."
+    },
+    {
+      "ticker": "RDW",
+      "source_id": "_vVNNnKqdDw",
+      "meaning": "The source corrects daily to weekly: a weekly close above $12 would make him abandon the bearish bias."
+    },
+    {
+      "ticker": "CRSP",
+      "source_id": "_vVNNnKqdDw",
+      "meaning": "A reclaim of $63.50 gives a chance to test $91.50; below $38 undermines the accumulation interpretation. Timing remains unknown."
+    },
+    {
+      "ticker": "XMR",
+      "source_id": "_vVNNnKqdDw",
+      "meaning": "The $540–550 pullback refers to Monero. He explicitly separates this view from a Bitcoin short inference."
+    }
+  ]
+}

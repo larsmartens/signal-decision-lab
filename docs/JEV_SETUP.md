@@ -1,149 +1,132 @@
-# Jev setup
+# Jev through OpenRouter
 
-This adapter uses **Jev from TypeSafe**, through the hosted System One API. It has no
-local model runtime and does not load weights. The default model is `jev-1.14.0`, which
-TypeSafe lists as released on 14 October 2026. The version is pinned so that a replay
-experiment does not silently change when a moving alias is updated.
+Use this page to validate contextual claims locally and submit a bounded batch to
+TypeSafe's Jev through OpenRouter. The current integration has passed controlled
+HTTP tests. An authenticated provider call has not yet been completed.
 
-Sources checked on 13 November 2026:
+## Provider contract
 
-- [Model versions](https://docs.typesafe.ai/models)
-- [Choice primitive](https://docs.typesafe.ai/primitives/choice)
-- [Confidence definition](https://docs.typesafe.ai/confidence)
-- [Official OpenAPI schema](https://api.typesafe.ai/openapi.json)
-- [Official Python SDK at f36e685](https://github.com/typesafe-ai/typesafe-sdk-python/tree/f36e68549ceca3191e5791e5f99ea1baa1a258b5)
+The [OpenRouter Jev guide](https://openrouter.ai/docs/guides/community/jev) documents
+access with an OpenRouter API key. Jev accepts state and typed questions, and returns
+answers with probabilities. It does not generate the prose interpretation stored
+in a claim. A person or assistant supplies that interpretation first.
 
-## Configure and run
+| Setting | Pinned value |
+| --- | --- |
+| Endpoint | `POST https://openrouter.ai/api/alpha/decisions` |
+| Request model | `typesafe/jev-1.14` |
+| Expected resolved model | `typesafe/jev-1.14-20261014` |
+| Provider | TypeSafe |
+| Credential variable | `OPENROUTER_API_KEY` |
+| Supported question type in this client | Choice |
 
-The client uses Python's standard library. Set your own TypeSafe key in the shell:
+The [Decisions API reference](https://openrouter.ai/docs/api/api-reference/alphadecisions/submit-a-decisions-request)
+documents the request and response. The [decision-model catalog](https://openrouter.ai/api/v1/models?output_modalities=decisions)
+identifies the canonical snapshot. The default model catalog filters for text output;
+use the `output_modalities=decisions` query when checking Jev's availability.
 
-```bash
-export TYPESAFE_API_KEY='<your TypeSafe key>'
-export TYPESAFE_BASE_URL='https://api.typesafe.ai'
-export TYPESAFE_MODEL='jev-1.14.0'
-python -m signal_lab demo --judge jev --out artifacts/jev --format json
-```
+## Prepare the source records
 
-The base URL and model shown above are defaults. `.env.example` documents the variables
-but is not loaded automatically. Use a versioned ID if overriding the model; aliases such
-as `jev-latest` are rejected. The CLI makes requests only when `--judge jev` is selected
-and a reviewed setup passes the deterministic checks.
-
-For your own reviewed input:
+Validate the supplied synthetic example without credentials:
 
 ```bash
-python -m signal_lab replay --signals artifacts/reviewed.json \
-  --bars path/to/matching-bars.csv --judge jev \
-  --out artifacts/jev-replay.json --report artifacts/jev-replay.html
+python scripts/check_semantic_claims.py \
+  --claims examples/semantic-claims.json \
+  --transcripts examples/semantic-transcripts
 ```
 
-These calls send the signal, its supporting quotes and the current completed price bar
-to TypeSafe. The provider's account limits and billing apply. No API key was configured
-for this implementation, so live Jev inference remains untested.
-
-## Request and response
-
-The client sends `POST /v1/systemone` with Bearer authentication. Its single Choice question
-asks whether the evidence supports the candidate entry at the completed bar close:
-
-```json
-{
-  "model": "jev-1.14.0",
-  "state": {
-    "decision_time": "<completed bar close>",
-    "signal": "<structured signal and quoted evidence>",
-    "completed_bar": "<structured OHLC bar>"
-  },
-  "questions": {
-    "direction": {
-      "type": "choice",
-      "instructions": "<fixed decision instructions>",
-      "criteria": {
-        "buy": "The evidence supports this long candidate and its trigger is satisfied.",
-        "sell": "The evidence supports this short candidate and its trigger is satisfied.",
-        "hold": "The evidence does not support an entry, or its conditions are not satisfied."
-      }
-    }
-  }
-}
-```
-
-This is a schema illustration: the actual `signal` and `completed_bar` values are objects.
-The complete question text and serialization are in [jev.py](../signal_lab/jev.py). No future
-bars or realized returns are included. Source quotes are identified as data in the question.
-The model is being asked to check evidence and a condition, not to forecast a return.
-
-The response must identify the requested model, contain exactly the requested `direction`
-answer, and provide a Choice label, confidence, probabilities and non-negative token counts.
-The client rejects missing or duplicate JSON fields, non-finite scores, unknown labels,
-invalid probability sums and a selected label below the largest probability. An opposite
-direction is also rejected: a long signal cannot authorize a short entry.
-
-## The two scores
-
-TypeSafe defines Choice confidence as a rescaling of the largest probability:
-
-`provider_confidence = (p_max - 1 / n) / (1 - 1 / n)`
-
-For three choices with probabilities `buy=0.8`, `sell=0.1`, `hold=0.1`, the provider's
-confidence is `0.7`. Confusing these values would apply a different decision threshold.
-The normalized adapter result keeps both:
-
-| Field | Meaning |
-|---|---|
-| `value` | The selected action: `buy`, `sell` or `hold`. |
-| `confidence` | The selected action's probability, used by the replay threshold. |
-| `confidence_basis` | `selected_label_probability`. |
-| `provider_confidence` | TypeSafe's separate confidence value. |
-| `probabilities` | The complete distribution over the three actions. |
-| `provider`, `model` | `typesafe` and the exact model version returned. |
-| `calibrated` | `false`; this project's inputs have not been evaluated for calibration. |
-| `calibration_source` | `provider_claim_not_locally_validated`. |
-| `probability_source` | `jev_model` for a validated model answer. |
-
-The default policy requires a selected probability of at least `0.8`. This is an experimental
-threshold, not one fitted to a trading validation set. Replay permits the explicitly selected
-Jev experiment while preserving `calibrated: false` and the provider provenance. Other
-uncalibrated callbacks do not receive that exception. Both scores and the model identity
-appear in each valid `model_judgment` event.
-
-The provider's confidence formula is documented but is not independently recomputed as an
-acceptance condition. Both values must be finite and within `[0, 1]`; the selected probability
-must agree with the selected label. No score is treated as the probability of a profitable trade.
-
-## Failure behavior
-
-A missing key returns a local hold without an HTTP request. HTTP errors, timeouts, redirects,
-oversized responses and invalid JSON also produce a hold. The result sets `abstained: true`
-and `probability_source: fail_closed_policy`. Its `hold=1` distribution describes the
-application's no-entry action; it is not a Jev prediction.
-
-Replay records a bounded error code and discards raw provider error text. It never falls
-back to rule-approved trading after a failed Jev call. To run the independent rule baseline,
-select `--judge rules` explicitly or omit `--judge`.
-
-When Jev chooses the opposite direction, the audit also retains the validated original
-prediction under `model_decision`, including both scores and its probability distribution.
-The effective action remains a policy hold. This preserves the rejected prediction for
-later error analysis without copying arbitrary provider diagnostics into the run file.
-
-Remote endpoints require HTTPS. HTTP is allowed only for loopback test servers. Redirects
-are disabled, keeping evidence and credentials at the configured endpoint. The default
-request timeout is ten seconds; the response limit is one MiB.
-
-## What has been tested
-
-[The adapter tests](../tests/test_jev.py) use a real local HTTP server with controlled
-responses. They check the official request shape, authentication header, model pin,
-score handling, rejection cases and integration with paper replay. These tests exercise
-the client and transport; the server does not run Jev.
-
-Run the complete suite:
+For the real captured annotations, substitute:
 
 ```bash
-python -W error::ResourceWarning -m unittest discover -s tests -v
+python scripts/check_semantic_claims.py \
+  --claims annotations/krown-20261114/claims.json \
+  --transcripts data/krown-latest/transcripts
 ```
 
-A real provider call, task-specific decision accuracy and calibration remain to be measured.
-Use the protocol in [EVALUATION.md](EVALUATION.md) before interpreting acceptance rates or
-comparing strategy results.
+The real command needs the exact canonical captions from the recorded acquisition.
+The public manifest stores source identities, hashes, segment references and character
+offsets. The loader reconstructs the evidence from those local captions and rejects a
+mismatched capture. A new download is a new acquisition, even if its words look similar.
+Full captions are not committed.
+
+Validation checks the input schema, exact evidence, source identity and complete
+request size. It makes no model call and does not certify the interpretation's meaning.
+
+## Configure the credential and run
+
+Store the OpenRouter key as `OPENROUTER_API_KEY` in your 1Password environment and inject
+it into the process using your configured secret-management integration. The program
+reads that environment variable directly. It does not load `.env`, write a key file
+or accept the key as a command argument. The 1Password connection must be available
+before this setup can be completed; it was unavailable in the implementation session.
+
+```bash
+python scripts/run_semantic_jev.py \
+  --claims annotations/krown-20261114/claims.json \
+  --transcripts data/krown-latest/transcripts \
+  --out artifacts/jev-semantic \
+  --max-requests 8 --cost-stop-usd 1
+```
+
+The runner requires Python 3.11 or later on a Unix system for its process lock. It
+sends the selected passages, surrounding captions and authored interpretations to
+OpenRouter and TypeSafe. No market prices, subsequent returns or trading orders are
+part of this review.
+
+`--max-requests` caps reserved requests across the saved run, including a restart.
+`--cost-stop-usd` stops further calls after observed spend reaches the threshold.
+The request that reaches it can exceed it, so use a provider-side key limit for a
+hard dollar ceiling. Reported costs are retained; an unknown cost stops the run.
+There is no automatic retry after an uncertain network outcome.
+
+The [model page](https://openrouter.ai/typesafe/jev-1.14), checked on 14 November 2026,
+lists $0.042 per million input tokens and free output tokens. Use actual `usage.cost`
+from each response when reporting a run. Request byte counts are not token or billing
+estimates.
+
+## How the questions are used
+
+The fixed questions check subject, expected move, stance, conditions, invalidation,
+timeframe, targets and sufficient context. Each answer is `faithful`, `unsupported`
+or `unclear`. Null fields mean the selected passage does not state that information;
+they do not assert that it is absent from the entire video.
+
+The runner reports `model_supported` only when every check selects `faithful` at or
+above the fixed selected-probability threshold. A sufficiently confident unsupported
+answer produces `model_disagreed`; unresolved or low-probability answers produce
+`uncertain`. The default threshold is 0.8 and has not been calibrated on this task.
+
+A Choice answer includes both class probabilities and a provider confidence value.
+[TypeSafe's confidence formula](https://docs.typesafe.ai/confidence) rescales the largest
+probability relative to a uniform distribution. With three choices, a maximum
+probability of 0.8 corresponds to confidence 0.7. The runner thresholds the selected
+probability and retains both fields. Neither value measures the chance of a trade
+making money.
+
+## Request records and failure behavior
+
+The runner validates every prepared request before sending the first one. The client
+limits the complete UTF-8 payload to 32,768 bytes by default, including the question
+text. The selected context has a separate limit. Oversized context must be reviewed
+and split into coherent scenarios; it is not silently truncated.
+
+The saved protocol fixes source and request hashes, model identities, questions,
+thresholds and run limits. Endpoint and transport distinguish OpenRouter inference
+from loopback HTTP tests. Completed matching receipts are reused. Changed inputs or
+configuration require a new output directory, and an interrupted in-flight receipt
+requires investigation before any retry.
+
+The client validates the exact model snapshot, provider, answer and choice sets,
+probabilities, request ID, token usage and cost. Invalid responses contain no invented
+semantic answers. Missing credentials stop the command. Provider errors and timeouts
+are recorded without copying raw response text or authorization headers into output.
+Redirects are refused. The default socket timeout is 30 seconds and the response limit
+is one MiB.
+
+## Separate direct-TypeSafe paper adapter
+
+The original [paper adapter](../signal_lab/jev.py) remains available through
+`python -m signal_lab demo --judge jev`. It expects `TYPESAFE_API_KEY`, calls
+`https://api.typesafe.ai/v1/systemone` and uses `jev-1.14.0`. It judges an eligible
+reviewed setup in the synthetic execution harness. The OpenRouter semantic command
+above is the path for the new caption-interpretation review.

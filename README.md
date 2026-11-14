@@ -1,195 +1,113 @@
 # Signal Decision Lab
 
-Process Krown's regular Bitcoin videos and completed livestreams, retain source timestamps,
-and test what the extracted views do under fixed trading rules. A separate workflow handles
-complete, reviewed trade setups. The optional **Jev adapter uses TypeSafe's System One API**
-to judge a narrowly defined buy, sell or hold decision.
+Read Krown's market commentary as separate, sourced scenarios: which ticker he means,
+what he expects to happen, the conditions for that move, its timeframe, and what would
+invalidate it. Keep the passage and its surrounding context attached to the interpretation.
 
-The [first channel study](docs/experiments/krown-20261114/README.md) covers **36 videos,
-six strategies and two cost levels**, with separate September development and
-October–November holdout sets. Five strategies lost money in holdout. The strict rule's
-two profitable trades failed a subsequent source-context review. The project has a
-reproducible experiment, not an established trading advantage.
+The [latest source reading](docs/research/krown-latest-20261114.md) covers two regular
+videos and two completed livestreams available on 14 November 2026. It includes ticker
+views, conditional branches, unresolved details and links to the relevant timestamps.
+The [claim records](annotations/krown-20261114/claims.json) preserve the structured
+interpretations; the [source manifest](datasets/krown-latest-20261114/sources.json)
+records the acquisition.
 
-![Holdout returns and drawdowns](docs/experiments/krown-20261114/charts/holdout-results.png)
+The previous word-based directional analysis, backtest results and charts have been
+removed from the current repository. Source metadata and market data remain available
+for a future evaluation built on faithful interpretations.
 
-## Run it
+## What the current workflow does
 
-Python 3.11 or later is enough to reproduce the published study, run the synthetic demo
-and execute the tests. These paths need no API keys or third-party packages.
+Claims are currently authored by a person or assistant after reading a passage in
+context. The code checks their source references, preserves unknown fields, and can
+ask **TypeSafe's Jev through OpenRouter** to assess each interpretation. It does not
+automatically read and extract every scenario in a full video.
+
+| Part | Current behavior |
+| --- | --- |
+| Source acquisition | Fetches public channel metadata and timestamped captions; records publication and actual retrieval separately. |
+| Contextual claims | Records the subject, expected move, prerequisites, invalidation, timeframe, targets and interpretation author. |
+| Evidence checks | Validates exact source references and retains a contiguous passage with surrounding context. |
+| Jev review | Asks separate questions about subject, meaning, conditions, invalidation, timeframe, targets and context. |
+| Run records | Saves model identity, request hashes, answers, usage, reported cost and failures; resumes completed requests without resending them. |
+| Paper mechanics | A separate synthetic demo exercises reviewed setups, fees, risk limits and next-open fills. |
+
+No authenticated Jev call or new semantic backtest has been completed. The current
+source interpretations are assistant-authored and are not independent human labels.
+See [validation](docs/VALIDATION.md) for the observed tests and remaining gaps.
+
+## Run the offline checks
+
+Use Python 3.11 or later on Linux or macOS. No API key or third-party package is
+needed for these commands:
 
 ```bash
 git clone https://github.com/larsmartens/signal-decision-lab.git
 cd signal-decision-lab
-python -m signal_lab krown-study --out artifacts/krown-replay --format json
-python scripts/check_study_reproduction.py
+python scripts/check_semantic_claims.py \
+  --claims examples/semantic-claims.json \
+  --transcripts examples/semantic-transcripts
 python -m unittest discover -s tests -v
+python -m signal_lab demo --out artifacts/demo --format json
 ```
 
-The replay writes all strategy and control results, trades, hourly equity and source
-references. Its input is the committed feature snapshot and actual BTCUSDT candles.
-Read the [report](docs/experiments/krown-20261114/README.md) for the assumptions and the
-known extraction failures. No full third-party captions are redistributed.
+The semantic example uses synthetic captions. Passing its evidence checks establishes
+that the references and input structure are valid; it does not prove an interpretation
+is correct. The demo's trade return tests accounting on artificial prices.
 
-To regenerate the charts:
+## Review the captured claims with Jev
+
+Configure `OPENROUTER_API_KEY` in 1Password and inject it into the process through your
+secret-management setup. The application reads the environment variable; it does not
+load `.env` files. Keep credentials out of the repository and command arguments.
+
+With the canonical captions available locally:
 
 ```bash
-python -m pip install -e '.[research]'
-python -m signal_lab krown-study --out artifacts/krown-replay \
-  --charts artifacts/krown-replay/charts
+python scripts/run_semantic_jev.py \
+  --claims annotations/krown-20261114/claims.json \
+  --transcripts data/krown-latest/transcripts \
+  --out artifacts/jev-semantic \
+  --max-requests 8 --cost-stop-usd 1
 ```
 
-`python -m signal_lab demo` also creates `artifacts/demo/report.html`: six synthetic
-claims, one reviewed setup and one completed trade. That fixture checks the stricter
-setup workflow; its return is not a strategy performance estimate.
+This sends the selected caption passages and proposed interpretations to OpenRouter
+and TypeSafe. The runner checks the whole batch before sending requests. Its request
+limit applies across resumed runs. The cost setting stops further requests after
+reported spend reaches the threshold; use an OpenRouter key limit for a hard billing
+ceiling. An uncertain request outcome stops the run rather than retrying automatically.
 
-`python -m pip install -e '.[dev]'` also installs the `signal-lab` command, Ruff and Mypy.
-Commands print compact TOON by default; append `--format json` for JSON. Saved run files
-always contain the full JSON record.
+Jev's answers assess fidelity to the supplied source. Its probabilities do not estimate
+trade success. A faithful interpretation can still contain no entry, no target, or no
+stated invalidation. [Setup and response contract](docs/JEV_SETUP.md).
 
-## What works
+Full captions stay in the ignored `data/` directory. Public annotations contain source
+references rather than redistributed transcripts. A fresh caption download may differ
+from the recorded capture; check its provenance before reusing an annotation.
 
-| Component | Current behavior | Validation limit |
-|---|---|---|
-| Transcript import | Reads JSON, WebVTT and SRT with source metadata | Publication and availability times must be supplied accurately. |
-| YouTube captions | Channel discovery, verified metadata and 36 acquired caption tracks | Current captions do not prove unchanged historical availability. |
-| Krown study | Four extractors, six trading rules, two cost settings, separate cohorts and matched controls | Heuristic source attribution has known failures; no source-accuracy or trading-edge claim. |
-| Study charts | Matplotlib PNG/SVG figures for source dates, coverage, returns and hourly equity | Shows the declared retrospective experiments, including failed interpretations and losses. |
-| Audio and video transcription | Optional `faster-whisper` adapter for local files | No actual ASR model run was completed here. |
-| Rule extraction | Recognizes a small set of English BTC/ETH setup patterns | Other wording and unsupported conditions remain unreviewed. |
-| LLM extraction | Accepts structured output from a chat-completions endpoint | HTTP and schema tests passed; external model inference is untested. |
-| Evidence review | Checks quoted text, price roles and supported conditions | Human approval records a review; it does not prove the claim is correct. |
-| Jev | Calls the official API with a pinned model and records both scores | Tested against local HTTP fixtures. Live Jev inference and calibration on these inputs are unverified. |
-| Paper replay | Uses completed bars, next-open fills, fees, slippage and risk limits | One asset and one position; no liquidity or order-book model. |
-| Evaluation | Computes Brier score, ECE, accuracy and coverage | These measure decision labels, not investment returns. |
-| HTML report | Shows evidence, decisions, trades and equity without external assets | Data and escaping tested; visual browser review remains incomplete. |
-
-See [validation](docs/VALIDATION.md) for the tests actually run and the remaining gaps.
-
-## How decisions flow
-
-```mermaid
-flowchart TD
-  A["Captions or transcription"] --> B["Claims with evidence and timestamps"]
-  B --> C{"Complete and reviewed?"}
-  C -->|No| D["Keep claim and review issues"]
-  C -->|Yes| E["Check trigger and policy"]
-  E --> F{"Jev enabled?"}
-  F -->|Yes| G["Model veto"]
-  F -->|No| H["Recheck risk at next open"]
-  G --> H
-  H --> I["Paper trade and audit record"]
-```
-
-The rule engine controls eligibility and risk. Jev can veto an eligible entry; it cannot
-supply a missing stop, approve an unreviewed claim or override a failed risk check.
-
-The channel study is a separate research path. It combines a coarse video-level direction
-with a researcher-chosen holding period. It does not approve those views as executable
-source claims or feed them to Jev. [Study protocol](experiments/krown-20261114/PROTOCOL.md).
-
-## Use your own transcript
-
-Start with the JSON format in `examples/synthetic-transcript.json`, or supply metadata
-alongside a subtitle file:
-
-```bash
-python -m signal_lab extract examples/captions.vtt \
-  --metadata examples/captions-metadata.json --out artifacts/claims.json
-python -m signal_lab show artifacts/claims.json --full --format json
-```
-
-Extraction leaves every claim unreviewed. A supported setup looks like this synthetic example:
-
-> Buy BTC if the 1h candle closes above 100; stop at 95; target 120; valid for 4 hours.
-
-Missing stops, unresolved corrections, price ranges, ambiguous attribution and extra
-conditions prevent approval. Extending that vocabulary requires schema changes and tests.
-The LLM adapter uses the same evidence checks.
-
-After checking the source, approve a complete claim and replay it against matching bars:
-
-```bash
-python -m signal_lab review --input artifacts/claims.json \
-  --signal '<signal ID from show>' --reviewer '<reviewer name>' \
-  --out artifacts/reviewed.json
-python -m signal_lab replay --signals artifacts/reviewed.json \
-  --bars path/to/matching-bars.csv --policy examples/policy.json \
-  --out artifacts/replay.json --report artifacts/replay.html
-```
-
-Bars must match the asset, venue, period and candle interval of the claim. The example
-transcripts are deliberately dated in the past, so importing them today does not make
-them current. `--as-of` permits an explicit historical processing assumption for experiments;
-that assumption is recorded and does not establish that the information was available then.
-
-## Optional sources and extraction
-
-### YouTube captions
+## Source capture
 
 ```bash
 python -m pip install -e '.[youtube]'
-python -m signal_lab import-youtube \
-  --url 'https://www.youtube.com/watch?v=78k4GmOT2KE' \
-  --channel 'Krown / @ECKrown' \
-  --published-at '2026-11-10T17:56:42Z' --out data/krown-video.json
+python scripts/collect_krown.py --help
 ```
 
-The [channel acquisition record](docs/research/krown-corpus.md) contains the exact
-36-source inventory, publication evidence, actual retrieval times, generated-caption
-flags and download hashes. `scripts/collect_krown.py` discovers normal videos and
-completed streams and acquires a selected cohort. Publication and actual retrieval
-remain separate. An earlier [interview smoke test](docs/validation/youtube-smoke.json)
-is retained as a separate source record.
+The collector uses Krown's own Videos and Live tabs, validates the channel ID, and
+records failed acquisitions. [Corpus notes](docs/research/krown-corpus.md) explain
+selection, caption hashes and timestamp semantics.
 
-### Generative extraction
+The existing `extract` command supports a small explicit English setup grammar and
+an optional chat-completions adapter. It remains a harness for complete, reviewed
+setups; it is not the method used for the current Krown reading. Chart interpretation,
+full-video model extraction and automatic conversion of scenarios into orders remain
+unimplemented.
 
-```bash
-export SIGNAL_LLM_BASE_URL='http://127.0.0.1:11434/v1'
-export SIGNAL_LLM_MODEL='<installed model>'
-python -m signal_lab extract data/krown-video.json --provider llm \
-  --out artifacts/llm-claims.json
-```
+## Project notes
 
-The endpoint must support chat completions with `response_format: json_object`. Remote
-endpoints require HTTPS; credentials come from `SIGNAL_LLM_API_KEY`. `.env.example` is a
-reference and is not loaded automatically. A failed request produces an error, not
-replacement claims.
+- [Implementation plan](docs/PLAN.md): remaining work and its acceptance criteria.
+- [Evaluation protocol](docs/EVALUATION.md): source accuracy, Jev checks and a future backtest.
+- [Jev research](docs/research/decision-models.md): interfaces, inspected code and papers.
+- [Video systems](docs/research/video-signals.md): related implementations and ingestion approaches.
+- [Market data](docs/research/market-data.md): retained BTCUSDT candles and provenance.
+- [Specification](docs/SPEC.md), [validation](docs/VALIDATION.md) and [review record](docs/REVIEW.md).
 
-For local audio or video, install `.[asr]` and use `python -m signal_lab transcribe --help`.
-The first call downloads the chosen Whisper model. Chart images and OCR are not implemented.
-
-## Try Jev
-
-The adapter targets `POST https://api.typesafe.ai/v1/systemone` and pins `jev-1.14.0`.
-See [Jev setup](docs/JEV_SETUP.md) for the request format, score definitions and failure handling.
-
-```bash
-export TYPESAFE_API_KEY='<your TypeSafe key>'
-python -m signal_lab demo --judge jev --out artifacts/jev
-```
-
-This explicitly enables a paper experiment. The transcript evidence and current completed
-bar are sent to TypeSafe. A missing key, provider error, malformed answer, hold decision or
-low selected probability prevents the entry. The default `--judge rules` stays offline.
-
-TypeSafe's `confidence` and the selected label's probability are different values. Both
-are retained. The replay threshold applies to the selected probability; the adapter records
-`calibrated: false` because calibration has not been measured on this task. No live Jev
-request was made during this implementation because no TypeSafe API key was configured.
-
-## Research and next steps
-
-- [Krown channel experiment](docs/experiments/krown-20261114/README.md): measured results, charts, source failures and reproduction commands.
-- [Implementation plan](docs/PLAN.md): staged work and acceptance criteria.
-- [Evaluation plan](docs/EVALUATION.md): source labeling, chronological splits and comparisons.
-- [Jev and decision models](docs/research/decision-models.md): official API, implementations and papers.
-- [Video and transcript systems](docs/research/video-signals.md): source audits and relevant research.
-- [Validation](docs/VALIDATION.md): observed results and limits.
-- [Specification](docs/SPEC.md) and [coding standards](docs/CODING_STANDARDS.md).
-
-The next step is to measure source interpretation against independent labels: which asset
-is being discussed, whether a view is conditional, and which time horizon it concerns.
-The current study exposed failures in all three areas. A revised extractor needs fresh
-unseen sources before another performance claim; the existing holdout has been examined.
-Jev can then be tested as a separate decision filter over reviewed facts.
+There is no broker connection or live order execution.

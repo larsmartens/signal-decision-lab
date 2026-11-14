@@ -1,73 +1,99 @@
 # Evaluation protocol
 
-## Completed channel study
+Evaluate whether an interpretation preserves the source's meaning before measuring
+anything about trading. A successful HTTP request, a valid schema and a profitable
+outcome can all coexist with a false interpretation.
 
-The [November 2026 experiment](experiments/krown-20261114/README.md) applies a fixed
-12-source development / 24-source holdout split to Krown's own regular videos and
-completed streams. It publishes all 24 strategy runs, matched controls, source references
-and charts. The [protocol](../experiments/krown-20261114/PROTOCOL.md) records its actual
-execution assumptions. A post-outcome source audit rejected both profitable strict-rule
-interpretations. This is a reproducible negative research result; a blind labeled
-extraction benchmark and a prospective performance trial remain outstanding.
+## Current evidence
 
-Use this protocol for the experiments in [PLAN.md](PLAN.md). Record metrics and acceptance thresholds before opening the test data. Changing a threshold after reading the results creates a new hypothesis.
+The [latest reading](research/krown-latest-20261114.md) contains assistant-authored
+interpretations of four recent sources. The code validates evidence references and
+can submit selected interpretations to Jev. No authenticated Jev call, independent
+human labeling study or semantic strategy backtest has been completed.
 
-## What has been demonstrated
+The former word-based analysis and its result files have been removed. The retained
+[source acquisition](../datasets/krown-20261113/sources.json) and
+[market candles](../datasets/krown-20261113/market-bars.csv) are inputs for future
+research. Existing examined sources are development material, even where their saved
+metadata uses an earlier development/holdout split.
 
-The [recorded import](validation/youtube-smoke.json) of the [Cointelegraph interview with Krown](https://www.youtube.com/watch?v=EdXslFg3u38) retrieved 646 automatically generated English caption segments. The YouTube page gives both publication and upload as 2 September 2026 at 15:01:27 UTC. Retrieval took place on 13 November, so the application cannot claim to have observed these captions in September.
+Keep five kinds of evidence distinct: source acquisition, contextual reading,
+software behavior tests, actual model inference and market evaluation. The
+[validation record](VALIDATION.md) states which have been observed.
 
-The baseline produced 46 unreviewed claims classified as commentary and no complete supported setups. This confirms ingestion and records the baseline's output. It does not measure extraction accuracy. The captions have not been independently checked against the audio.
+## 1. Measure interpretation fidelity
 
-The intended decision model is Jev from TypeSafe. Live inference through the corrected Jev integration has not yet been demonstrated. An earlier revision tested the unrelated firelex/Jeff model; those eight CPU calls are documented in [the historical validation record](https://github.com/larsmartens/signal-decision-lab/blob/f883ace43922c73bffb553fc3aed7a89e7b4562f/docs/VALIDATION.md). They provide no evidence about Jev. Use [JEV_SETUP.md](JEV_SETUP.md) and [VALIDATION.md](VALIDATION.md) for the current integration status and test results.
+Select complete discussion sections before examining later prices. Include statements
+about different instruments, conditional branches, retractions and passages that need
+an unseen chart. Two readers should annotate independently, then record disagreements
+and their resolution. Assistant-authored annotations alone are not a human reference set.
 
-Keep evidence categories separate: synthetic behavior tests, controlled HTTP responses, real model calls, source retrieval, and trading experiments. No custom Decision Transformer or validated Krown trading edge exists in this project.
+| Dimension | Error to detect |
+| --- | --- |
+| Subject | Assigning an indicator, comparison asset or related ETF to the wrong ticker. |
+| Expected move | Reversing direction, overstating certainty or merging incompatible scenarios. |
+| Conditions | Dropping a prerequisite, changing a candle-close condition or missing a branch. |
+| Invalidation | Inventing a stop, reversing a trigger or borrowing another scenario's level. |
+| Timeframe | Confusing the chart interval with the forecast horizon or supplying an unstated duration. |
+| Targets | Treating a current price, prior extreme or indicator value as a stated destination. |
+| Context | Resolving pronouns or chart references without enough evidence. |
+| Completeness | Missing an expressed scenario while correctly describing the few selected cases. |
 
-## Measure source understanding
+Report claim precision and recall as well as field accuracy and unresolved cases.
+Measure numbers together with their role and qualifier: an approximate area is not an
+exact price, and a conditional target is not an unconditional forecast. Group results
+by video; many overlapping snippets from one stream are not independent observations.
 
-Create reference labels before examining later prices. Put videos about the same event and overlapping excerpts in the same data partition. Keep test videos closed while changing prompts, grammar, or schemas. Include usable claims, incomplete forecasts, and difficult negative examples.
+An evidence-reference check verifies text identity, offsets and timestamps. It cannot
+establish that the passage supports the interpretation. Regression tests should retain
+known interpretation failures as cases for subsequent model evaluation, without
+pretending that local fixtures measure a model's understanding.
 
-Report the following for each extractor:
+## 2. Evaluate Jev's added value
 
-- Claim precision and recall, broken down by statement type and instrument.
-- Field accuracy for both a number and its role: entry, target, stop, horizon, or candle interval. Unstated values should remain absent.
-- Evidence accuracy, including negation, hypothetical conditions, retrospective statements, corrections, and speaker attribution.
-- False executable setups and coverage of genuinely executable reference cases, alongside the number and reasons for abstentions.
+Freeze the selected claims, complete passages, question text, model snapshot and
+acceptance threshold before making the comparison. The current runner asks eight
+Choice questions and records `faithful`, `unsupported` or `unclear` per question.
+Compare those decisions against the independent labels, including cases where an
+incorrect candidate was written fluently and confidently.
 
-Aggregate results by video and report uncertainty. Many segments from one video are not independent observations. Give each known false-entry failure a behavioral regression test. Overall accuracy can conceal poor extraction when most statements are commentary.
+Report disagreement detection, missed errors, unnecessary rejection and accepted
+coverage. The default selected-answer threshold of 0.8 is an experimental setting;
+it has not been calibrated on Krown commentary. Keep the provider's confidence and
+choice probabilities separate, following the [TypeSafe definition](https://docs.typesafe.ai/confidence).
 
-## Measure decision accuracy and calibration
+For a future calibration study, use held-out labels and report a multiclass Brier
+score, reliability plots, bin counts and sensitivity to predeclared binning choices.
+[Guo et al.](https://proceedings.mlr.press/v70/guo17a/guo17a.pdf) describe expected
+calibration error and its bin-based construction. The existing
+[evaluation module](../signal_lab/evaluate.py) supports the older `buy`/`sell`/`hold`
+paper harness; it is not yet an evaluator for the new semantic review labels.
 
-The current evaluation target is the action `buy`, `sell`, or `hold` under a specified rule. A correct rule decision is distinct from a profitable trade. Record prediction and label-observation times. The [evaluation module](../signal_lab/evaluate.py) computes accuracy, coverage, expected calibration error (ECE), and a multiclass Brier score.
+Retain API failures, uncertain outcomes, resolved model, request identity, latency,
+input/output usage and reported cost. Local HTTP fixtures and cached test replies
+must remain identifiable as tests. A missing key is a blocked run, not a model answer.
 
-The Brier score averages the sum of `(p − y)²` across all three classes, with `y = 1` for the correct class and zero otherwise. This implementation does not divide the sum by three; its range is zero to two. It measures the quality of the full probability distribution, not calibration alone.
+## 3. Define a separate trading experiment
 
-ECE groups the highest class probability into equal-width bins, then weights the absolute difference between average confidence and observed accuracy by each bin's size. This follows the approach described by [Guo et al.](https://proceedings.mlr.press/v70/guo17a/guo17a.pdf). ECE depends on the grouping and sample. Report a reliability plot, bin counts, class counts, a confusion matrix, and sensitivity to predetermined binning choices. Ten bins is an implementation default.
+Only after source review, specify which scenarios can be evaluated under explicit
+rules. State how conditions become observable, which instrument and venue are used,
+and how entries, exits and conflicting scenarios are handled. If a source omits an
+exit or horizon, either leave it outside the executable subset or label the additional
+rule as researcher-authored.
 
-The current accuracy calculation includes abstained rows. Also report accuracy among accepted decisions against their coverage. Fit thresholds and any calibration adjustment on training or validation data only. Keep application-generated fallback distributions out of model-quality results. Interpret Jev's confidence according to its [documented meaning](https://docs.typesafe.ai/confidence); do not assume it equals the maximum class probability. Neither ECE nor Brier measures trading returns.
+Use actual acquisition and interpretation times when available. A retrospective
+availability assumption must remain separate from those timestamps. Modern models
+may know subsequent events from training; filtering prompt dates cannot eliminate
+that risk. Prospective observation is needed to test what the workflow would have
+produced as new videos arrived.
 
-## Preserve the information available at each decision
+Compare reviewed source rules, market-only rules, their combination, and the same
+inputs with Jev review. Match sample dates, transaction costs, trade permissions and
+risk limits. Include cash, buy-and-hold, exposure and inactivity. Freeze every variant
+before opening a fresh test period and record rejected variants too; selecting from
+many trials contributes to backtest overfitting ([Bailey et al.](https://www.davidhbailey.com/dhbpapers/backtest-prob.pdf)).
 
-A setup becomes usable only after its source is available and extraction and review have completed. Late ingestion must not extend its original expiry. Label historical reconstructions as reconstructions when no contemporaneous acquisition record exists.
-
-In walk-forward evaluation, choose a strategy using earlier data and evaluate it unchanged in the next time window. Remove training examples whose outcome intervals reach into validation or test periods. Set the gap between partitions from outcome horizons and publication delays. Fit preprocessing and thresholds within the training period too.
-
-Modern LLMs may know later events from their training data. Filtering the supplied prompt by date cannot remove that knowledge. A prospective trial therefore provides evidence that historical replay cannot supply.
-
-## Compare the same trading problem
-
-| Variant | Information used for signals | Purpose |
-|---|---|---|
-| Source | Reviewed claims and their stated triggers | Measure the source's contribution |
-| Price | Predetermined rules on past prices | Establish a baseline without creator input |
-| Combined | Source and price rules | Measure the source's added value |
-| Each variant with Jev | The same facts, with an additional model decision | Measure model benefit and cost |
-
-Every variant needs prices for triggers, risk checks, and fills. The source-only variant gets no extra technical indicators. Keep trade permissions, costs, risk budgets, and dates comparable. Log every variant tested: selecting the best of many backtests is itself a source of overfitting ([Bailey et al.](https://www.davidhbailey.com/dhbpapers/backtest-prob.pdf)).
-
-## Report financial and operational results
-
-Report net return, maximum drawdown, marked-to-market equity, exposure, turnover, independent trades, and costs. Include cash and buy-and-hold over the same dates. Vary fees and slippage. Before making claims about derivatives, account for funding, borrowing, liquidity, and liquidation; the current simulator does not model these fully.
-
-Decisions use completed bars. Entry can occur no earlier than the next eligible open. Keep conservative assumptions for ambiguous intrabar ordering. Use time blocks when estimating uncertainty, and explain sparse samples and dependence on market conditions. Strategy selection stays frozen after the test is opened.
-
-The report should also record retrieval failures, review effort, model spend, and latency percentiles. Attach the dataset version, code commit, configuration, exclusions, and unresolved limitations so another researcher can reproduce the experiment.
+Report net returns, drawdowns, independent trades, turnover, costs and uncertainty.
+Use completed bars and causally available inputs. Describe gaps and ambiguous intrabar
+ordering. Derivative claims additionally require funding, borrowing, collateral and
+liquidation assumptions. The current semantic workflow has no such result to report.

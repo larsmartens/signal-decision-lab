@@ -1,101 +1,53 @@
-# Historical software review
+# Review record
 
-Recorded on 13 November 2026, before the model identity was corrected from firelex/Jeff to TypeSafe's Jev. This review record appeared in [commit f883ace](https://github.com/larsmartens/signal-decision-lab/tree/f883ace43922c73bffb553fc3aed7a89e7b4562f). Model-specific findings below concern the former Jeff integration. They provide no evidence about Jev.
+The semantic revision is reviewed against parent
+`4582f5620efba053411879646bd6c727e82d2b41`. It removes the word-based Krown experiment
+and adds contextual annotations with a bounded OpenRouter/Jev fidelity check.
 
-Two separate reviewers checked the implementation against the specification and coding standards. They started from the first local specification commit and then retested the reported findings. Current validation results belong in [VALIDATION.md](VALIDATION.md).
+## Source interpretation
 
-## Coding standards
+A non-author assistant read the complete November 13 stream, both November 11 and 12
+daily videos, and the November 9 RDW, CRSP, XMR, INJ, LINK and UI passages with context.
+It found no material interpretation errors in the reading or the eight candidate records.
+All 275 cited caption references matched the captured text.
 
-| Finding | Original severity | Resolution recorded at the time |
+That verdict applies to the captions. The reviewer did not inspect audio, chart frames,
+subsequent prices or whether a conditional setup later activated. The
+[receipt](validation/semantic-context-review.json) records those boundaries and the
+reviewed artifact hashes.
+
+Examples that distinguish faithful interpretation from a direction label:
+
+- BTC's long-term spot accumulation is separate from a daily trading entry that still
+  requires bullish divergence. Its macro-low failure case belongs to another horizon.
+- TSLA's daily support at $380 is separate from the $413.15 bullish confirmation.
+- HYPE's daily close below $69 is a pending condition, despite the speaker expecting it.
+- RDW's invalidation uses a weekly close; the speaker explicitly corrects an earlier
+  mention of a daily close.
+- XMR's pullback forecast concerns Monero even though Bitcoin appears in the question.
+- Conflicting BE levels and ambiguous instrument identities remain unresolved.
+
+## Software review
+
+Separate non-author reviews exercised the client and semantic runner through their public
+interfaces. The client review used a local HTTP server and malformed-response probes.
+The runner review used the actual eight-claim input and verified that missing credentials
+return an error without creating a completed run.
+
+Two concrete review findings were addressed:
+
+| Finding | Change | Distinguishing check |
 |---|---|---|
-| Unchecked statistics could inject HTML into the report | P1 | Restricted statistics to nonnegative integers and escaped output. A malicious-bundle test confirmed that invalid input produced no report file. |
-| Reviewing a signal overwrote its original extraction time | P2 | Added separate `extracted_at` and `reviewed_at` fields. Decision availability remained the latest required timestamp. |
-| A Jeff abstention appeared in the audit as a malformed response | P2 | Handled the exact policy-fallback form separately and preserved the bounded reason code and probability source. This fix applied to the old Jeff adapter. |
+| A later oversized request could fail after an earlier request had already been charged | Preflight the complete serialized request for every declared claim before the first call | A valid first claim followed by an oversized second claim must send zero HTTP requests. |
+| Fixture and production receipts did not identify their transport | Record endpoint and transport mode in the protocol and cached request identity | Loopback receipts identify `loopback_test`; they cannot be reused as OpenRouter results. |
 
-The standards reviewer confirmed all three fixes with three targeted regression tests and reported no further material design findings within that review's scope.
+Public annotation manifests contain paraphrases, segment references and hashes. A separate
+loader restores exact quotes only from matching local transcripts. Tests reject changed
+source content, invalid offsets and altered hashes. Full captions stay outside Git.
 
-## Specification
+The final verification commands and observed results are recorded in
+[offline-tests.json](validation/offline-tests.json). Hosted-model behavior remains
+unverified until an authenticated provider request succeeds. No amount of local contract
+testing establishes semantic accuracy or a profitable strategy.
 
-| Finding | Original severity | Resolution recorded at the time |
-|---|---|---|
-| A drawdown alarm closed a position at the just-observed closing price | P1 | Deferred the risk exit to the next observed open. Gap and end-of-data regression tests passed. |
-| The consolidated validation report was missing | P2 | Added `docs/VALIDATION.md`, separating evidence types and listing uncompleted checks. |
-| The CPU test description said four threads while measurements reported eight | P3 | Documented four requested threads and eight reported after loading; preserved the raw measurements. These were tests of firelex/Jeff. |
-
-The specification reviewer confirmed the execution fix and corrected thread description. The missing validation report was added afterward. All six reported findings were addressed; P1 was the highest original severity. This was a software review, with no strategy-performance audit.
-
-## Jev integration review, 13 November 2026
-
-A reviewer who did not write the revised implementation checked the working tree against
-`f883ace43922c73bffb553fc3aed7a89e7b4562f`. The review covered the Jev adapter, CLI selection,
-replay gate, and report changes, using TypeSafe's [OpenAPI contract](https://api.typesafe.ai/openapi.json)
-and [confidence definition](https://docs.typesafe.ai/confidence).
-
-The request uses the pinned model and Choice question format. The client preserves the
-selected probability separately from provider confidence. Replay records `calibrated: false`
-and the provider's unvalidated calibration claim. Jev requires explicit selection; the default
-remains the deterministic rule. Model approval cannot override source eligibility or risk checks.
-
-Two audit defects were fixed and verified:
-
-| Finding | Severity | Verified resolution |
-|---|---|---|
-| An oversized provider score from an abstaining custom callback could raise an overflow error during audit construction | P2 | `_jev_experiment` checks bounds before converting the score for a finiteness check. The replay rejects the entry and omits the invalid score. |
-| Replay discarded the valid model prediction when the adapter rejected its direction | P2 | `_rejected_jev_evidence` validates and retains a fixed set of fields under `model_decision`, separately from the effective policy hold. Invalid nested evidence and raw diagnostics are excluded. |
-
-The fixes are in [replay.py](../signal_lab/replay.py), with regression cases in
-[test_replay.py](../tests/test_replay.py). Focused runs passed 19 adapter tests, 38 replay
-tests, and nine CLI tests. Commands:
-
-```bash
-python -W error::ResourceWarning -m unittest discover -s tests -p 'test_jev.py' -v
-python -W error::ResourceWarning -m unittest discover -s tests -p 'test_replay.py' -v
-python -W error::ResourceWarning -m unittest discover -s tests -p 'test_cli.py' -v
-```
-
-An independent local HTTP probe returned a valid `sell` answer for a long candidate. Replay
-made no entry, retained the model's `sell=0.9` distribution and `provider_confidence=0.85`,
-and kept a future signal out of the request. A separate oversized-score probe completed
-without an exception and produced finite JSON. The rule demo made one synthetic entry;
-the Jev demo with no key made none and recorded `missing_api_key`.
-
-No unresolved behavioral findings remain in the reviewed scope. These checks used controlled
-local responses; they did not call hosted Jev or measure its decision quality or calibration.
-## Krown channel experiment, November 2026
-
-This addition was reviewed as a reproducible research artifact against main commit
-`3bd0400145cc7452b64297e2e4d2410a7c5d464f`. It does not claim that the heuristic labels
-meet a production signal contract. The [study report](experiments/krown-20261114/README.md)
-and [validation receipt](../experiments/krown-20261114/validation.json) retain the evidence.
-
-A non-author reviewed the runner with synthetic captions and prices. The review found
-missing saved-feature provenance enforcement and a path for nested caption text to reach
-public features. Both were fixed and covered by the fifteen new runner tests. Separate
-non-author checks exercised engine timing and hand-calculated long/short costs, open P&L,
-drawdowns and exposure.
-
-The numeric audit reconstructed all 36 strategy/control blocks, 284 completed trades and
-28,638 hourly equity observations. It also rebuilt all twelve controls from market bars
-and source clocks. The offline command reproduces the published outcome rows exactly.
-
-The source interpretation review reached a different conclusion: both profitable strict
-holdout outputs are unsupported. It examined all six accepted units with surrounding
-captions and confirmed wrong-subject, missed-condition and repeated-proposition errors.
-The report and charts disclose this failure. Rules and outcomes were not changed after
-the audit. This selected post-outcome check is not a blind accuracy benchmark.
-
-The appropriate release scope is the experiment, its code, data references and negative
-findings. Promoting the extracted directions into reviewed live decisions remains blocked
-by the source-interpretation failures. Actual GitHub head checks and merge state must be
-read from the associated pull request; this document does not certify a future commit.
-
-### Python-version reproduction check
-
-The first GitHub run exposed seven last-bit differences in `profit_factor` on Python
-3.11. Its built-in float summation predates the change documented in
-[Python 3.12](https://docs.python.org/3.12/whatsnew/3.12.html#other-language-changes).
-Using `math.fsum` for the two reporting totals restores the original output hashes.
-A synthetic regression failed before the patch on actual CPython 3.11.18 and passes
-after it. The 41 frozen result files reproduce on CPython 3.11, 3.12 and 3.13, with
-the same source features, decisions, trades, returns and equity. The checker retains
-exact comparisons. The full suite now contains 233 passing tests.
+The [independent software receipt](validation/semantic-software-review.json) pins the reviewed code and fixture blobs. It records the public CLI runs, parent comparison, 210-test suite, malformed-manifest rejection and the remaining limits.
