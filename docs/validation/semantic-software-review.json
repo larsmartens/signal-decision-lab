@@ -1,0 +1,40 @@
+{
+  "recorded_at": "2026-11-14T02:15:31.183138+00:00",
+  "reviewer": "Independent non-author assistant",
+  "parent": "4582f5620efba053411879646bd6c727e82d2b41",
+  "verdict": "PASS_WITH_NOTES",
+  "reviewed_blobs": {
+    "signal_lab/openrouter_jev.py": "dbbeffa1ef3bb58c2f42f565ddd024c2646073e5",
+    "signal_lab/semantic_claims.py": "a7b27b6d8587cc30e5e3841adc2c09ede5c31869",
+    "signal_lab/claim_manifest.py": "77308be876ffcf34396652ffece0f49e4e48db9d",
+    "scripts/run_semantic_jev.py": "f82cf20780412ffa26743903efcf8eb5ee0254c0",
+    "scripts/check_semantic_claims.py": "2baf7934de08dec5cdf1a0ea8d00dcba79e053b4",
+    "signal_lab/cli.py": "af299fb1674fb87e3533205277b43df2df939341",
+    "tests/test_openrouter_jev.py": "3e4dd2d42e5d544da8f18ff2906107670492825e",
+    "tests/test_semantic_claims.py": "7dd495adafbe88e6820ba3fa60fc6724c5c131c2",
+    "tests/test_claim_manifest.py": "521ca3b46d1fed351db7bd2fcbbca790dbd49506",
+    "examples/semantic-claims.json": "857e2572667d46d3e4083c90e3c7ca5f863dd417",
+    "examples/semantic-transcripts/semantic-demo.json": "fdbae8387497e06e5e95c2bf5ca8fbdeaea9a8f6",
+    "annotations/krown-20261114/claims.json": "088e46efcd38688a9a87aba388532d24ba89c8d2"
+  },
+  "observed": {
+    "full_suite_tests": 210,
+    "synthetic_reference_claims": 1,
+    "real_reference_claims": 8,
+    "real_reference_sources": 2,
+    "missing_key_exit": 1,
+    "missing_key_output_created": false,
+    "oversized_second_claim_http_requests": 0,
+    "transport_change_reuses_cache": false,
+    "removed_command_exit": 2,
+    "synthetic_demo_identical_to_parent": true
+  },
+  "limits": [
+    "No authenticated Jev inference",
+    "No hosted-model accuracy or calibration measurement",
+    "No new semantic backtest",
+    "Source interpretation review used captions; no audio or video frames"
+  ],
+  "documentation_finding": "One stale source-manifest link identified for correction before publication.",
+  "documentation_finding_resolution": "Corrected source-manifest links to datasets/krown-20261113; final local link scan passed."
+}

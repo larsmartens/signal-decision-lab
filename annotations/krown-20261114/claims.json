@@ -1,0 +1,2626 @@
+{
+  "schema_version": 1,
+  "format": "semantic_claim_references",
+  "selection_basis": "Purposive contextual selection after reading all four latest selected Krown caption tracks (two newest normal videos and two newest completed streams, discovered 2026-11-14 at 01:07 UTC). Eight examples cover instrument identity, pending conditions, self-correction, invalidation and distinct horizons. Interpretations are assistant-authored from automatic captions; no video/audio verification or independent human labels. The XMR case is a previously diagnosed failure, and the November 9 source was already examined in earlier research. This is a semantic integration/diagnostic set, not a blind accuracy evaluation, not exhaustive extraction, and not a trading backtest.",
+  "sources": {
+    "09poJg_Fm1w": {
+      "canonical_transcript_sha256": "b2ea23a28d8ab756457c146a482b0e52248686dc62e2cceddb25f39ef1afc007",
+      "url": "https://www.youtube.com/watch?v=09poJg_Fm1w",
+      "channel": "Krown",
+      "kind": "youtube",
+      "published_at": "2026-11-13T17:57:23Z",
+      "captions_available_at": "2026-11-14T01:07:41.262675Z"
+    },
+    "_vVNNnKqdDw": {
+      "canonical_transcript_sha256": "80a0c250ff1fa26a4ba468c41cc35a097b6297204fa8697bd2ddc9f75f27c861",
+      "url": "https://www.youtube.com/watch?v=_vVNNnKqdDw",
+      "channel": "Krown",
+      "kind": "youtube",
+      "published_at": "2026-11-09T18:31:16Z",
+      "captions_available_at": "2026-11-14T01:07:45.900742Z"
+    }
+  },
+  "claims": [
+    {
+      "id": "hype-pending-daily-breakdown",
+      "source_id": "09poJg_Fm1w",
+      "context": {
+        "first_segment_id": "s2337",
+        "last_segment_id": "s2380"
+      },
+      "ticker": {
+        "value": "HYPE",
+        "evidence": [
+          {
+            "segment_id": "s2338",
+            "start_char": 0,
+            "end_char": 35,
+            "quote_sha256": "d4ea507a09c9426d8e95952e37566a663b2371c262076511f0fa38230d50efb3",
+            "start_seconds": 4464.0,
+            "end_seconds": 4468.56
+          }
+        ]
+      },
+      "stance": "conditional",
+      "expected_move": {
+        "value": "He expects another downward leg, but treats a daily close below $69 as the confirmation. A short-term bounce can occur first; the larger move is not confirmed merely because he expects it.",
+        "evidence": [
+          {
+            "segment_id": "s2349",
+            "start_char": 0,
+            "end_char": 36,
+            "quote_sha256": "f9615c670a676b6d58ea7a581dd9b56152f6231b448ada25bfa9b06e2621cede",
+            "start_seconds": 4485.76,
+            "end_seconds": 4489.679
+          },
+          {
+            "segment_id": "s2350",
+            "start_char": 0,
+            "end_char": 37,
+            "quote_sha256": "163f6eef70d5f2d4e45f59cdadecbf88824eb20bbef306fcd6f75b3299960d1d",
+            "start_seconds": 4487.12,
+            "end_seconds": 4491.76
+          },
+          {
+            "segment_id": "s2351",
+            "start_char": 0,
+            "end_char": 37,
+            "quote_sha256": "efbfe06a665bab96bc3a6d190ed45dbb6f6b018021fca8b6cefdaa702b68cb4f",
+            "start_seconds": 4489.679,
+            "end_seconds": 4493.36
+          },
+          {
+            "segment_id": "s2352",
+            "start_char": 0,
+            "end_char": 37,
+            "quote_sha256": "113b5c22b3492a9033ddf21b7fffc2a41cef034be87f31cea22ca2f85559667a",
+            "start_seconds": 4491.76,
+            "end_seconds": 4495.360000000001
+          },
+          {
+            "segment_id": "s2353",
+            "start_char": 0,
+            "end_char": 37,
+            "quote_sha256": "decc5d46254f139669beb7800c46d9abfb108defe2a2db578a2bfb031a0d69a7",
+            "start_seconds": 4493.36,
+            "end_seconds": 4498.239
+          },
+          {
+            "segment_id": "s2354",
+            "start_char": 0,
+            "end_char": 35,
+            "quote_sha256": "955ec4a41ab9f1429f90c2fd556dea065746fb1307d7bdaac6ed9cbe766cdfcc",
+            "start_seconds": 4495.36,
+            "end_seconds": 4500.32
+          },
+          {
+            "segment_id": "s2355",
+            "start_char": 0,
+            "end_char": 39,
+            "quote_sha256": "3b3165c037f93a9dc37f5b4613706f8fdf63c4738eaab001f6929a3fe3143510",
+            "start_seconds": 4498.239,
+            "end_seconds": 4502.5599999999995
+          },
+          {
+            "segment_id": "s2357",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "e1b46bc5af4eb3495d210bee04736d79cef8de97ce2c2c771cde4a08b7003771",
+            "start_seconds": 4502.56,
+            "end_seconds": 4506.159000000001
+          },
+          {
+            "segment_id": "s2358",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "510c8d74dcb748569bf5ed38e4c0f9eef5efce4ce674adbc5c2b5265507c6a23",
+            "start_seconds": 4503.84,
+            "end_seconds": 4507.84
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "value": "A daily candle must close below $69 to confirm the break of the daily 200 SMA.",
+          "evidence": [
+            {
+              "segment_id": "s2351",
+              "start_char": 0,
+              "end_char": 37,
+              "quote_sha256": "efbfe06a665bab96bc3a6d190ed45dbb6f6b018021fca8b6cefdaa702b68cb4f",
+              "start_seconds": 4489.679,
+              "end_seconds": 4493.36
+            },
+            {
+              "segment_id": "s2352",
+              "start_char": 0,
+              "end_char": 37,
+              "quote_sha256": "113b5c22b3492a9033ddf21b7fffc2a41cef034be87f31cea22ca2f85559667a",
+              "start_seconds": 4491.76,
+              "end_seconds": 4495.360000000001
+            },
+            {
+              "segment_id": "s2353",
+              "start_char": 0,
+              "end_char": 37,
+              "quote_sha256": "decc5d46254f139669beb7800c46d9abfb108defe2a2db578a2bfb031a0d69a7",
+              "start_seconds": 4493.36,
+              "end_seconds": 4498.239
+            },
+            {
+              "segment_id": "s2354",
+              "start_char": 0,
+              "end_char": 35,
+              "quote_sha256": "955ec4a41ab9f1429f90c2fd556dea065746fb1307d7bdaac6ed9cbe766cdfcc",
+              "start_seconds": 4495.36,
+              "end_seconds": 4500.32
+            }
+          ]
+        },
+        {
+          "value": "A brief rebound toward roughly $70–80 can precede the bearish move; it is not the larger reversal being discussed.",
+          "evidence": [
+            {
+              "segment_id": "s2357",
+              "start_char": 0,
+              "end_char": 38,
+              "quote_sha256": "e1b46bc5af4eb3495d210bee04736d79cef8de97ce2c2c771cde4a08b7003771",
+              "start_seconds": 4502.56,
+              "end_seconds": 4506.159000000001
+            },
+            {
+              "segment_id": "s2358",
+              "start_char": 0,
+              "end_char": 38,
+              "quote_sha256": "510c8d74dcb748569bf5ed38e4c0f9eef5efce4ce674adbc5c2b5265507c6a23",
+              "start_seconds": 4503.84,
+              "end_seconds": 4507.84
+            },
+            {
+              "segment_id": "s2359",
+              "start_char": 0,
+              "end_char": 39,
+              "quote_sha256": "d12db053b9b769724bd197a47007ec1e0d04061a33bdc597278b9c9b4a44e0f5",
+              "start_seconds": 4506.159,
+              "end_seconds": 4509.28
+            },
+            {
+              "segment_id": "s2360",
+              "start_char": 0,
+              "end_char": 36,
+              "quote_sha256": "41a9749e6660427ab41e911e2670faef2afd751ae188a91b36ce105f5e464761",
+              "start_seconds": 4507.84,
+              "end_seconds": 4510.32
+            },
+            {
+              "segment_id": "s2364",
+              "start_char": 0,
+              "end_char": 37,
+              "quote_sha256": "9d3bb2f94395dbe792c4ae549811dc1b1e18b4973072a0e96ee067bae79e583b",
+              "start_seconds": 4513.04,
+              "end_seconds": 4517.6
+            },
+            {
+              "segment_id": "s2365",
+              "start_char": 0,
+              "end_char": 33,
+              "quote_sha256": "753d1727f0469147f20be510f4fa8e15df9b6edbd3e656c283883d605f383376",
+              "start_seconds": 4516.56,
+              "end_seconds": 4519.1990000000005
+            }
+          ]
+        }
+      ],
+      "invalidation": {
+        "value": null,
+        "evidence": []
+      },
+      "timeframe": {
+        "value": "Weekly and monthly chart context, a daily-close confirmation, and a possible very short-term bounce; no fixed deadline for the downside target.",
+        "evidence": [
+          {
+            "segment_id": "s2339",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "891c8d6f8391651667f04e3efc09c7bd2edc4e42944e63709cdc19959b92cb63",
+            "start_seconds": 4466.96,
+            "end_seconds": 4471.199
+          },
+          {
+            "segment_id": "s2353",
+            "start_char": 0,
+            "end_char": 37,
+            "quote_sha256": "decc5d46254f139669beb7800c46d9abfb108defe2a2db578a2bfb031a0d69a7",
+            "start_seconds": 4493.36,
+            "end_seconds": 4498.239
+          },
+          {
+            "segment_id": "s2357",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "e1b46bc5af4eb3495d210bee04736d79cef8de97ce2c2c771cde4a08b7003771",
+            "start_seconds": 4502.56,
+            "end_seconds": 4506.159000000001
+          },
+          {
+            "segment_id": "s2361",
+            "start_char": 0,
+            "end_char": 36,
+            "quote_sha256": "00f7d0dfcdf022dd972ed71e899e10141c0428ffd52b9ce8aa8fa7e0204064be",
+            "start_seconds": 4509.28,
+            "end_seconds": 4511.84
+          }
+        ]
+      },
+      "targets": [
+        {
+          "value": "Roughly $60 on another downward leg; he refines the likely major bounce region to $61–63.",
+          "evidence": [
+            {
+              "segment_id": "s2349",
+              "start_char": 0,
+              "end_char": 36,
+              "quote_sha256": "f9615c670a676b6d58ea7a581dd9b56152f6231b448ada25bfa9b06e2621cede",
+              "start_seconds": 4485.76,
+              "end_seconds": 4489.679
+            },
+            {
+              "segment_id": "s2350",
+              "start_char": 0,
+              "end_char": 37,
+              "quote_sha256": "163f6eef70d5f2d4e45f59cdadecbf88824eb20bbef306fcd6f75b3299960d1d",
+              "start_seconds": 4487.12,
+              "end_seconds": 4491.76
+            },
+            {
+              "segment_id": "s2371",
+              "start_char": 0,
+              "end_char": 35,
+              "quote_sha256": "5d72e1fb891cf85e68d9a9301c2577ecc7b5a1b08d196f9fc7f211a3674e732c",
+              "start_seconds": 4529.44,
+              "end_seconds": 4534.0
+            },
+            {
+              "segment_id": "s2372",
+              "start_char": 0,
+              "end_char": 39,
+              "quote_sha256": "fcec64842eadf054fbf26b530aa72ba45408bc2a179ba0ddc03a5caf009f7b81",
+              "start_seconds": 4531.28,
+              "end_seconds": 4535.599999999999
+            },
+            {
+              "segment_id": "s2373",
+              "start_char": 0,
+              "end_char": 39,
+              "quote_sha256": "645efd0a29df2b2132e8d2285b02eb0068d37d18fafedba65cc7ecc337f58479",
+              "start_seconds": 4534.0,
+              "end_seconds": 4537.44
+            }
+          ]
+        },
+        {
+          "value": "$50 is a worse-case extension, not his primary bounce target.",
+          "evidence": [
+            {
+              "segment_id": "s2368",
+              "start_char": 0,
+              "end_char": 38,
+              "quote_sha256": "6eba43d1210e14aee6fa73d789ae95d5b4eb4c23b8f3ba84571b9228c3b3c620",
+              "start_seconds": 4520.4,
+              "end_seconds": 4525.599999999999
+            },
+            {
+              "segment_id": "s2369",
+              "start_char": 0,
+              "end_char": 37,
+              "quote_sha256": "daa56051cee99a7cdd1e5b739312c4f7af7d0da629d87a92f8c81f75b227afad",
+              "start_seconds": 4524.159,
+              "end_seconds": 4529.44
+            },
+            {
+              "segment_id": "s2370",
+              "start_char": 0,
+              "end_char": 34,
+              "quote_sha256": "6c91ef576de5eaad5287555d95f587ee90fa8e43ba631bd4387c5dbe13dc556e",
+              "start_seconds": 4525.6,
+              "end_seconds": 4531.280000000001
+            }
+          ]
+        }
+      ],
+      "interpretation": "The conditional activation, near-term bounce and larger bearish scenario are separate. The source does not state a stop loss or an opposite-direction price invalidation. These are automatic captions; no audio/chart verification has been performed.",
+      "author": {
+        "kind": "assistant",
+        "name": "ChatGPT contextual review"
+      },
+      "created_at": "2026-11-14T01:15:18.010453Z"
+    },
+    {
+      "id": "tsla-daily-support-and-correction",
+      "source_id": "09poJg_Fm1w",
+      "context": {
+        "first_segment_id": "s1436",
+        "last_segment_id": "s1497"
+      },
+      "ticker": {
+        "value": "TSLA",
+        "evidence": [
+          {
+            "segment_id": "s1436",
+            "start_char": 0,
+            "end_char": 40,
+            "quote_sha256": "65b0ccbc5fb26edfd8b31017d65cedf1f74e5fc5de904e05afc15d48d4334dbb",
+            "start_seconds": 2677.52,
+            "end_seconds": 2681.28
+          }
+        ]
+      },
+      "stance": "current",
+      "expected_move": {
+        "value": "He is relatively optimistic while Tesla maintains daily closes above $380. Losing that level on the daily would imply a short-term correction toward $369–370, which could still be a higher low.",
+        "evidence": [
+          {
+            "segment_id": "s1479",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "256a876f2cf840f85567db32d41f576c82a5756d91d7ff203219256d3c478e33",
+            "start_seconds": 2759.2,
+            "end_seconds": 2763.359
+          },
+          {
+            "segment_id": "s1480",
+            "start_char": 0,
+            "end_char": 37,
+            "quote_sha256": "d98df74d0c757932e574c00043bc7a012397bff9b231adeaac212e88d9f1834e",
+            "start_seconds": 2761.2,
+            "end_seconds": 2764.56
+          },
+          {
+            "segment_id": "s1481",
+            "start_char": 0,
+            "end_char": 37,
+            "quote_sha256": "4e2b1473b020fb5155e41db2cd79b76ac0e4d5e572b446490fcb341ef101fdb0",
+            "start_seconds": 2763.359,
+            "end_seconds": 2767.5989999999997
+          },
+          {
+            "segment_id": "s1482",
+            "start_char": 0,
+            "end_char": 40,
+            "quote_sha256": "29b7093cbad22e1a81330b3560f360f2062aa469dbfe22da01bcf9f4d09087bb",
+            "start_seconds": 2764.56,
+            "end_seconds": 2769.359
+          },
+          {
+            "segment_id": "s1484",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "90891a078826a4b6d88109213a78fd12d3a81c39a3f62875e64a7f7d1923ae3c",
+            "start_seconds": 2769.359,
+            "end_seconds": 2772.319
+          },
+          {
+            "segment_id": "s1485",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "4e4fb403ec67538e006755eb4a1e3259567f833c5b7d2832a92a5f172831517e",
+            "start_seconds": 2770.96,
+            "end_seconds": 2773.839
+          },
+          {
+            "segment_id": "s1486",
+            "start_char": 0,
+            "end_char": 37,
+            "quote_sha256": "0359a8d0bd67f97e852bf437abd16e19b80ce2b3263d58bcc152dfa8bfc21c1a",
+            "start_seconds": 2772.319,
+            "end_seconds": 2775.92
+          },
+          {
+            "segment_id": "s1487",
+            "start_char": 0,
+            "end_char": 37,
+            "quote_sha256": "afa1835d451fe23718a7fc9f895c89bd8cb4f51ae040692091f1bbff6c3f9e2c",
+            "start_seconds": 2773.839,
+            "end_seconds": 2777.04
+          },
+          {
+            "segment_id": "s1488",
+            "start_char": 0,
+            "end_char": 37,
+            "quote_sha256": "870aa9788b20ec8468748db946ab34f0c5aececa9ac5ca436a1a824d6dc9dff6",
+            "start_seconds": 2775.92,
+            "end_seconds": 2778.96
+          },
+          {
+            "segment_id": "s1489",
+            "start_char": 0,
+            "end_char": 40,
+            "quote_sha256": "328de3038ce9c7a99d8d0c8a5aa81efa1f17aad4ebd7a3f175e5ea450cb65ec0",
+            "start_seconds": 2777.04,
+            "end_seconds": 2780.56
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "value": "Maintain the $380 level on a daily closing basis for the near-term optimistic view.",
+          "evidence": [
+            {
+              "segment_id": "s1481",
+              "start_char": 0,
+              "end_char": 37,
+              "quote_sha256": "4e2b1473b020fb5155e41db2cd79b76ac0e4d5e572b446490fcb341ef101fdb0",
+              "start_seconds": 2763.359,
+              "end_seconds": 2767.5989999999997
+            },
+            {
+              "segment_id": "s1482",
+              "start_char": 0,
+              "end_char": 40,
+              "quote_sha256": "29b7093cbad22e1a81330b3560f360f2062aa469dbfe22da01bcf9f4d09087bb",
+              "start_seconds": 2764.56,
+              "end_seconds": 2769.359
+            }
+          ]
+        },
+        {
+          "value": "The corrective alternative applies if that daily level is lost.",
+          "evidence": [
+            {
+              "segment_id": "s1484",
+              "start_char": 0,
+              "end_char": 38,
+              "quote_sha256": "90891a078826a4b6d88109213a78fd12d3a81c39a3f62875e64a7f7d1923ae3c",
+              "start_seconds": 2769.359,
+              "end_seconds": 2772.319
+            },
+            {
+              "segment_id": "s1485",
+              "start_char": 0,
+              "end_char": 38,
+              "quote_sha256": "4e4fb403ec67538e006755eb4a1e3259567f833c5b7d2832a92a5f172831517e",
+              "start_seconds": 2770.96,
+              "end_seconds": 2773.839
+            },
+            {
+              "segment_id": "s1486",
+              "start_char": 0,
+              "end_char": 37,
+              "quote_sha256": "0359a8d0bd67f97e852bf437abd16e19b80ce2b3263d58bcc152dfa8bfc21c1a",
+              "start_seconds": 2772.319,
+              "end_seconds": 2775.92
+            }
+          ]
+        }
+      ],
+      "invalidation": {
+        "value": "A loss of $380 on the daily changes his near-term expectation toward a correction; he does not call it a guaranteed new macro low.",
+        "evidence": [
+          {
+            "segment_id": "s1482",
+            "start_char": 0,
+            "end_char": 40,
+            "quote_sha256": "29b7093cbad22e1a81330b3560f360f2062aa469dbfe22da01bcf9f4d09087bb",
+            "start_seconds": 2764.56,
+            "end_seconds": 2769.359
+          },
+          {
+            "segment_id": "s1484",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "90891a078826a4b6d88109213a78fd12d3a81c39a3f62875e64a7f7d1923ae3c",
+            "start_seconds": 2769.359,
+            "end_seconds": 2772.319
+          },
+          {
+            "segment_id": "s1485",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "4e4fb403ec67538e006755eb4a1e3259567f833c5b7d2832a92a5f172831517e",
+            "start_seconds": 2770.96,
+            "end_seconds": 2773.839
+          },
+          {
+            "segment_id": "s1486",
+            "start_char": 0,
+            "end_char": 37,
+            "quote_sha256": "0359a8d0bd67f97e852bf437abd16e19b80ce2b3263d58bcc152dfa8bfc21c1a",
+            "start_seconds": 2772.319,
+            "end_seconds": 2775.92
+          },
+          {
+            "segment_id": "s1487",
+            "start_char": 0,
+            "end_char": 37,
+            "quote_sha256": "afa1835d451fe23718a7fc9f895c89bd8cb4f51ae040692091f1bbff6c3f9e2c",
+            "start_seconds": 2773.839,
+            "end_seconds": 2777.04
+          },
+          {
+            "segment_id": "s1488",
+            "start_char": 0,
+            "end_char": 37,
+            "quote_sha256": "870aa9788b20ec8468748db946ab34f0c5aececa9ac5ca436a1a824d6dc9dff6",
+            "start_seconds": 2775.92,
+            "end_seconds": 2778.96
+          },
+          {
+            "segment_id": "s1489",
+            "start_char": 0,
+            "end_char": 40,
+            "quote_sha256": "328de3038ce9c7a99d8d0c8a5aa81efa1f17aad4ebd7a3f175e5ea450cb65ec0",
+            "start_seconds": 2777.04,
+            "end_seconds": 2780.56
+          }
+        ]
+      },
+      "timeframe": {
+        "value": "Short-term daily-chart assessment; he separately applies $380 to weekly, monthly and year-end closes, rather than specifying a holding period.",
+        "evidence": [
+          {
+            "segment_id": "s1459",
+            "start_char": 0,
+            "end_char": 39,
+            "quote_sha256": "58a036f868598df9d87d374ff8d53dc640ebf0aa258933d1c29a2793be777109",
+            "start_seconds": 2721.839,
+            "end_seconds": 2724.7999999999997
+          },
+          {
+            "segment_id": "s1463",
+            "start_char": 0,
+            "end_char": 35,
+            "quote_sha256": "c634f8a6e98b01fcd1ac0d37e4f5b78764e664e0c0ad9c75c9b96650ba1e6977",
+            "start_seconds": 2728.24,
+            "end_seconds": 2731.7599999999998
+          },
+          {
+            "segment_id": "s1464",
+            "start_char": 0,
+            "end_char": 39,
+            "quote_sha256": "818cd68c9c9b707d4507cb9c13c75508ce275b4c8c254b03d35d6559bf3db8f2",
+            "start_seconds": 2729.92,
+            "end_seconds": 2734.64
+          },
+          {
+            "segment_id": "s1466",
+            "start_char": 0,
+            "end_char": 40,
+            "quote_sha256": "0c33892d7cc165e1a910f2d4b10c1595d6806f4545ed0859669ac4370717906d",
+            "start_seconds": 2734.64,
+            "end_seconds": 2738.16
+          },
+          {
+            "segment_id": "s1467",
+            "start_char": 0,
+            "end_char": 36,
+            "quote_sha256": "ed1a5c61ac262aa80b031bbb74748bbd12a8d3be0d3e6335a333a0028a502fd5",
+            "start_seconds": 2735.92,
+            "end_seconds": 2739.52
+          },
+          {
+            "segment_id": "s1471",
+            "start_char": 0,
+            "end_char": 40,
+            "quote_sha256": "aaf8a5bb92e95115c8022fbb7d5fb0d5794f28d5a32f77cf910d056edf47b025",
+            "start_seconds": 2745.04,
+            "end_seconds": 2748.64
+          },
+          {
+            "segment_id": "s1472",
+            "start_char": 0,
+            "end_char": 40,
+            "quote_sha256": "b11e1ab2a9766c086168dba371266b5cc5ce6f8ebed8679b42ff6b95f07ebcfe",
+            "start_seconds": 2747.119,
+            "end_seconds": 2750.2400000000002
+          },
+          {
+            "segment_id": "s1473",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "a8935d42c4ad89d7708dd3ad3c6074f1b414c4fa0da6f3f5f4955b189a1dc2d7",
+            "start_seconds": 2748.64,
+            "end_seconds": 2752.319
+          },
+          {
+            "segment_id": "s1475",
+            "start_char": 0,
+            "end_char": 35,
+            "quote_sha256": "688595bdc700f5ea9e5cf4d805ce6ab3576e8d41cb550917fba48620bb95f59b",
+            "start_seconds": 2752.319,
+            "end_seconds": 2756.079
+          },
+          {
+            "segment_id": "s1476",
+            "start_char": 0,
+            "end_char": 35,
+            "quote_sha256": "5bb756e6833dff8b3ae4e2ab16471f82d5d90a07df31aefb17418081ee7f703f",
+            "start_seconds": 2753.359,
+            "end_seconds": 2757.52
+          }
+        ]
+      },
+      "targets": [
+        {
+          "value": "About $369–370 is the conditional correction destination if the daily $380 level is lost.",
+          "evidence": [
+            {
+              "segment_id": "s1484",
+              "start_char": 0,
+              "end_char": 38,
+              "quote_sha256": "90891a078826a4b6d88109213a78fd12d3a81c39a3f62875e64a7f7d1923ae3c",
+              "start_seconds": 2769.359,
+              "end_seconds": 2772.319
+            },
+            {
+              "segment_id": "s1485",
+              "start_char": 0,
+              "end_char": 38,
+              "quote_sha256": "4e4fb403ec67538e006755eb4a1e3259567f833c5b7d2832a92a5f172831517e",
+              "start_seconds": 2770.96,
+              "end_seconds": 2773.839
+            },
+            {
+              "segment_id": "s1486",
+              "start_char": 0,
+              "end_char": 37,
+              "quote_sha256": "0359a8d0bd67f97e852bf437abd16e19b80ce2b3263d58bcc152dfa8bfc21c1a",
+              "start_seconds": 2772.319,
+              "end_seconds": 2775.92
+            },
+            {
+              "segment_id": "s1487",
+              "start_char": 0,
+              "end_char": 37,
+              "quote_sha256": "afa1835d451fe23718a7fc9f895c89bd8cb4f51ae040692091f1bbff6c3f9e2c",
+              "start_seconds": 2773.839,
+              "end_seconds": 2777.04
+            }
+          ]
+        }
+      ],
+      "interpretation": "This is the daily support scenario, not full bullish breakout confirmation. Nearby comments require $413.15 to be reclaimed for that separate scenario. No broker order or stop has been inferred.",
+      "author": {
+        "kind": "assistant",
+        "name": "ChatGPT contextual review"
+      },
+      "created_at": "2026-11-14T01:15:18.010453Z"
+    },
+    {
+      "id": "tsla-bullish-reclaim",
+      "source_id": "09poJg_Fm1w",
+      "context": {
+        "first_segment_id": "s1436",
+        "last_segment_id": "s1523"
+      },
+      "ticker": {
+        "value": "TSLA",
+        "evidence": [
+          {
+            "segment_id": "s1436",
+            "start_char": 0,
+            "end_char": 40,
+            "quote_sha256": "65b0ccbc5fb26edfd8b31017d65cedf1f74e5fc5de904e05afc15d48d4334dbb",
+            "start_seconds": 2677.52,
+            "end_seconds": 2681.28
+          }
+        ]
+      },
+      "stance": "conditional",
+      "expected_move": {
+        "value": "A reclaim of the October high at $413.15 would confirm bullishness and allow a return to the prior highs, with a possible macro breakout to new highs.",
+        "evidence": [
+          {
+            "segment_id": "s1504",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "d5cfa86a3f4f5f1c5a1813f072e4a3aad120bbf61203ab305ee02e4c1888498f",
+            "start_seconds": 2803.44,
+            "end_seconds": 2808.0
+          },
+          {
+            "segment_id": "s1505",
+            "start_char": 0,
+            "end_char": 39,
+            "quote_sha256": "1e70bb61ad4ddb2322b6d83c6e1b3744e9dbfc139b02cbe7fdda17317c073cf7",
+            "start_seconds": 2806.4,
+            "end_seconds": 2809.599
+          },
+          {
+            "segment_id": "s1506",
+            "start_char": 0,
+            "end_char": 36,
+            "quote_sha256": "d956fd44cacf9f4f971918900b60b330dd4bf2865f3886cfe98bae288403303e",
+            "start_seconds": 2808.0,
+            "end_seconds": 2814.319
+          },
+          {
+            "segment_id": "s1507",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "69567956a400ee7c8d959600c468a68559d60e14c2593cc635028de50a867a17",
+            "start_seconds": 2809.599,
+            "end_seconds": 2816.0
+          },
+          {
+            "segment_id": "s1508",
+            "start_char": 0,
+            "end_char": 36,
+            "quote_sha256": "e8c8196dc3966121f004a346497705cf6e14b2ac31a666b7ff2257fcf57856d1",
+            "start_seconds": 2814.319,
+            "end_seconds": 2817.7599999999998
+          },
+          {
+            "segment_id": "s1509",
+            "start_char": 0,
+            "end_char": 40,
+            "quote_sha256": "04632348454171273b4b9a576002bac6ce6e3e4ff48f014a802454bc7b37d8c5",
+            "start_seconds": 2816.0,
+            "end_seconds": 2819.28
+          },
+          {
+            "segment_id": "s1510",
+            "start_char": 0,
+            "end_char": 39,
+            "quote_sha256": "0a383411f9a7aceb8aceeebd46bf06ad77692c3c9c44cc4c19bc17443fb9e6bd",
+            "start_seconds": 2817.76,
+            "end_seconds": 2820.6400000000003
+          },
+          {
+            "segment_id": "s1511",
+            "start_char": 0,
+            "end_char": 40,
+            "quote_sha256": "74eff80dcb686fe7dd6bcef8d17a3b9bf1e3a2d003cb58f2be33453c33ed15e2",
+            "start_seconds": 2819.28,
+            "end_seconds": 2821.52
+          },
+          {
+            "segment_id": "s1512",
+            "start_char": 0,
+            "end_char": 37,
+            "quote_sha256": "f64263d4ff7d0999abcf5a5b974e28a26c56330ab9219051a36b86ca91c24eea",
+            "start_seconds": 2820.64,
+            "end_seconds": 2822.4
+          },
+          {
+            "segment_id": "s1513",
+            "start_char": 0,
+            "end_char": 36,
+            "quote_sha256": "01957ce662f4b17ab962cd7f737f25482981a982ab576f833c1a23d1838983ef",
+            "start_seconds": 2821.52,
+            "end_seconds": 2824.0
+          },
+          {
+            "segment_id": "s1514",
+            "start_char": 0,
+            "end_char": 40,
+            "quote_sha256": "2853012fb19f49a83e1f1876b178183f24dd4d908f80a7faa4f996fb1fb23ba5",
+            "start_seconds": 2822.4,
+            "end_seconds": 2826.319
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "value": "Reclaim the prior October high at $413.15; the passage does not specify a precise candle-close convention for this reclaim.",
+          "evidence": [
+            {
+              "segment_id": "s1504",
+              "start_char": 0,
+              "end_char": 38,
+              "quote_sha256": "d5cfa86a3f4f5f1c5a1813f072e4a3aad120bbf61203ab305ee02e4c1888498f",
+              "start_seconds": 2803.44,
+              "end_seconds": 2808.0
+            },
+            {
+              "segment_id": "s1505",
+              "start_char": 0,
+              "end_char": 39,
+              "quote_sha256": "1e70bb61ad4ddb2322b6d83c6e1b3744e9dbfc139b02cbe7fdda17317c073cf7",
+              "start_seconds": 2806.4,
+              "end_seconds": 2809.599
+            },
+            {
+              "segment_id": "s1506",
+              "start_char": 0,
+              "end_char": 36,
+              "quote_sha256": "d956fd44cacf9f4f971918900b60b330dd4bf2865f3886cfe98bae288403303e",
+              "start_seconds": 2808.0,
+              "end_seconds": 2814.319
+            },
+            {
+              "segment_id": "s1507",
+              "start_char": 0,
+              "end_char": 38,
+              "quote_sha256": "69567956a400ee7c8d959600c468a68559d60e14c2593cc635028de50a867a17",
+              "start_seconds": 2809.599,
+              "end_seconds": 2816.0
+            },
+            {
+              "segment_id": "s1508",
+              "start_char": 0,
+              "end_char": 36,
+              "quote_sha256": "e8c8196dc3966121f004a346497705cf6e14b2ac31a666b7ff2257fcf57856d1",
+              "start_seconds": 2814.319,
+              "end_seconds": 2817.7599999999998
+            }
+          ]
+        }
+      ],
+      "invalidation": {
+        "value": null,
+        "evidence": []
+      },
+      "timeframe": {
+        "value": "Macro breakout scenario, discussed alongside daily and higher-timeframe support; no exact completion date is stated.",
+        "evidence": [
+          {
+            "segment_id": "s1459",
+            "start_char": 0,
+            "end_char": 39,
+            "quote_sha256": "58a036f868598df9d87d374ff8d53dc640ebf0aa258933d1c29a2793be777109",
+            "start_seconds": 2721.839,
+            "end_seconds": 2724.7999999999997
+          },
+          {
+            "segment_id": "s1460",
+            "start_char": 0,
+            "end_char": 35,
+            "quote_sha256": "90da4978e467f2f46400fcd4431c0ee8237ea6c51ce4b0c5688a460530d2ce63",
+            "start_seconds": 2723.2,
+            "end_seconds": 2726.3999999999996
+          },
+          {
+            "segment_id": "s1465",
+            "start_char": 0,
+            "end_char": 37,
+            "quote_sha256": "73f28ff3408984e95e51c466d1cc1dd03fd7aab4e6436fb84be5cbf45229fe49",
+            "start_seconds": 2731.76,
+            "end_seconds": 2735.92
+          },
+          {
+            "segment_id": "s1513",
+            "start_char": 0,
+            "end_char": 36,
+            "quote_sha256": "01957ce662f4b17ab962cd7f737f25482981a982ab576f833c1a23d1838983ef",
+            "start_seconds": 2821.52,
+            "end_seconds": 2824.0
+          },
+          {
+            "segment_id": "s1514",
+            "start_char": 0,
+            "end_char": 40,
+            "quote_sha256": "2853012fb19f49a83e1f1876b178183f24dd4d908f80a7faa4f996fb1fb23ba5",
+            "start_seconds": 2822.4,
+            "end_seconds": 2826.319
+          }
+        ]
+      },
+      "targets": [
+        {
+          "value": "The previous highs and then potentially new highs; no numerical breakout target is supplied.",
+          "evidence": [
+            {
+              "segment_id": "s1510",
+              "start_char": 0,
+              "end_char": 39,
+              "quote_sha256": "0a383411f9a7aceb8aceeebd46bf06ad77692c3c9c44cc4c19bc17443fb9e6bd",
+              "start_seconds": 2817.76,
+              "end_seconds": 2820.6400000000003
+            },
+            {
+              "segment_id": "s1511",
+              "start_char": 0,
+              "end_char": 40,
+              "quote_sha256": "74eff80dcb686fe7dd6bcef8d17a3b9bf1e3a2d003cb58f2be33453c33ed15e2",
+              "start_seconds": 2819.28,
+              "end_seconds": 2821.52
+            },
+            {
+              "segment_id": "s1512",
+              "start_char": 0,
+              "end_char": 37,
+              "quote_sha256": "f64263d4ff7d0999abcf5a5b974e28a26c56330ab9219051a36b86ca91c24eea",
+              "start_seconds": 2820.64,
+              "end_seconds": 2822.4
+            },
+            {
+              "segment_id": "s1513",
+              "start_char": 0,
+              "end_char": 36,
+              "quote_sha256": "01957ce662f4b17ab962cd7f737f25482981a982ab576f833c1a23d1838983ef",
+              "start_seconds": 2821.52,
+              "end_seconds": 2824.0
+            }
+          ]
+        }
+      ],
+      "interpretation": "The $380 support discussion is a different preconfirmation scenario. It is not automatically the stop for a future $413.15 breakout. The source distinguishes optimism from confirmed bullishness.",
+      "author": {
+        "kind": "assistant",
+        "name": "ChatGPT contextual review"
+      },
+      "created_at": "2026-11-14T01:15:18.010453Z"
+    },
+    {
+      "id": "rdw-weekly-bearish-invalidation",
+      "source_id": "_vVNNnKqdDw",
+      "context": {
+        "first_segment_id": "s572",
+        "last_segment_id": "s633"
+      },
+      "ticker": {
+        "value": "RDW",
+        "evidence": [
+          {
+            "segment_id": "s573",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "0d3ee2f056ddc77249b0f8552c088d7fd92054abeb935d244f556fbf5910bac4",
+            "start_seconds": 1067.76,
+            "end_seconds": 1071.2
+          }
+        ]
+      },
+      "stance": "current",
+      "expected_move": {
+        "value": "He remains strongly bearish and does not see a confirmed bottom. A bounce toward $10 can still be a lower high. Reclaiming $12 on a weekly close would make him abandon that bearish bias.",
+        "evidence": [
+          {
+            "segment_id": "s577",
+            "start_char": 0,
+            "end_char": 40,
+            "quote_sha256": "e9b3b2e900b967ce0b9efd19b0a82baf57119916e85952377b6c6beaffbd4a54",
+            "start_seconds": 1078.16,
+            "end_seconds": 1083.44
+          },
+          {
+            "segment_id": "s579",
+            "start_char": 0,
+            "end_char": 36,
+            "quote_sha256": "b5445b9522fc6680ad1a72e82b3248783f7d01aa47f662557d476ec11b1dc0e2",
+            "start_seconds": 1083.44,
+            "end_seconds": 1090.0800000000002
+          },
+          {
+            "segment_id": "s580",
+            "start_char": 0,
+            "end_char": 39,
+            "quote_sha256": "7288bb76e99a89dd9927bfb35d89dfb0656fa75a945c956dbfb3a7b4c58f772e",
+            "start_seconds": 1084.88,
+            "end_seconds": 1091.8400000000001
+          },
+          {
+            "segment_id": "s598",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "1d41908601ca2daed9bcb9e17dc27cb95770353f66cdf740b589952592604d9e",
+            "start_seconds": 1120.48,
+            "end_seconds": 1123.679
+          },
+          {
+            "segment_id": "s617",
+            "start_char": 0,
+            "end_char": 37,
+            "quote_sha256": "c9b6fe0ecb6115c61df8d06d5aa06cc73aa96e4b57fabc9c0dde705b6f49156b",
+            "start_seconds": 1155.44,
+            "end_seconds": 1157.919
+          },
+          {
+            "segment_id": "s618",
+            "start_char": 0,
+            "end_char": 37,
+            "quote_sha256": "c5aba0bd2f369cc5a560e33a39df55afde0659ca879733e12ee33c4533a2044e",
+            "start_seconds": 1156.64,
+            "end_seconds": 1160.48
+          },
+          {
+            "segment_id": "s619",
+            "start_char": 0,
+            "end_char": 39,
+            "quote_sha256": "ad1b75abfb61b2a215bf7c846db721c28b30333898eb7b53305719c4b781932e",
+            "start_seconds": 1157.919,
+            "end_seconds": 1163.2
+          },
+          {
+            "segment_id": "s620",
+            "start_char": 0,
+            "end_char": 39,
+            "quote_sha256": "2e92ea2dcdd9b7be521cab1dc9bda361dae0e2365b45a815e80883f69525b51a",
+            "start_seconds": 1160.48,
+            "end_seconds": 1164.72
+          },
+          {
+            "segment_id": "s621",
+            "start_char": 0,
+            "end_char": 36,
+            "quote_sha256": "640f3c2590d7d4822e1dc5e02958f825eda7a2f0e6f1e29872efed2e26467911",
+            "start_seconds": 1163.2,
+            "end_seconds": 1166.96
+          },
+          {
+            "segment_id": "s622",
+            "start_char": 0,
+            "end_char": 35,
+            "quote_sha256": "179a68451e6fa3f8ac95f5234033ecef0f3441655f7fa1a23971577dff106aff",
+            "start_seconds": 1164.72,
+            "end_seconds": 1169.52
+          },
+          {
+            "segment_id": "s627",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "395a76acaa56430df49b6d3af677f4e19ce11f19d28f9e31941733f764a0ca6b",
+            "start_seconds": 1175.12,
+            "end_seconds": 1178.7199999999998
+          },
+          {
+            "segment_id": "s628",
+            "start_char": 0,
+            "end_char": 39,
+            "quote_sha256": "abbfa9743bbe629eb664e9741c081d94e494f4dc63355c31ff1135e08522ad8e",
+            "start_seconds": 1177.039,
+            "end_seconds": 1180.4
+          },
+          {
+            "segment_id": "s629",
+            "start_char": 0,
+            "end_char": 40,
+            "quote_sha256": "21ac966395b4002b074275e5953b93044278f7a30751b78b643439600f4d5901",
+            "start_seconds": 1178.72,
+            "end_seconds": 1182.559
+          },
+          {
+            "segment_id": "s630",
+            "start_char": 0,
+            "end_char": 39,
+            "quote_sha256": "03dce088703fb4b53c42a13036a8ab2021ce88a144f71014ca967fdd1ac47d9b",
+            "start_seconds": 1180.4,
+            "end_seconds": 1184.96
+          },
+          {
+            "segment_id": "s631",
+            "start_char": 0,
+            "end_char": 40,
+            "quote_sha256": "45a45a0aed91c030ac88c7d6176d24dc7c76c402673251c3f8d3591809322514",
+            "start_seconds": 1182.559,
+            "end_seconds": 1186.08
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "value": "The bearish view remains while below $12; a possible rebound does not by itself establish reversal.",
+          "evidence": [
+            {
+              "segment_id": "s620",
+              "start_char": 0,
+              "end_char": 39,
+              "quote_sha256": "2e92ea2dcdd9b7be521cab1dc9bda361dae0e2365b45a815e80883f69525b51a",
+              "start_seconds": 1160.48,
+              "end_seconds": 1164.72
+            },
+            {
+              "segment_id": "s621",
+              "start_char": 0,
+              "end_char": 36,
+              "quote_sha256": "640f3c2590d7d4822e1dc5e02958f825eda7a2f0e6f1e29872efed2e26467911",
+              "start_seconds": 1163.2,
+              "end_seconds": 1166.96
+            },
+            {
+              "segment_id": "s622",
+              "start_char": 0,
+              "end_char": 35,
+              "quote_sha256": "179a68451e6fa3f8ac95f5234033ecef0f3441655f7fa1a23971577dff106aff",
+              "start_seconds": 1164.72,
+              "end_seconds": 1169.52
+            }
+          ]
+        }
+      ],
+      "invalidation": {
+        "value": "A weekly close above $12 would make him abandon the bearish bias. He explicitly corrects his initial mention of a daily close to weekly.",
+        "evidence": [
+          {
+            "segment_id": "s627",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "395a76acaa56430df49b6d3af677f4e19ce11f19d28f9e31941733f764a0ca6b",
+            "start_seconds": 1175.12,
+            "end_seconds": 1178.7199999999998
+          },
+          {
+            "segment_id": "s628",
+            "start_char": 0,
+            "end_char": 39,
+            "quote_sha256": "abbfa9743bbe629eb664e9741c081d94e494f4dc63355c31ff1135e08522ad8e",
+            "start_seconds": 1177.039,
+            "end_seconds": 1180.4
+          },
+          {
+            "segment_id": "s629",
+            "start_char": 0,
+            "end_char": 40,
+            "quote_sha256": "21ac966395b4002b074275e5953b93044278f7a30751b78b643439600f4d5901",
+            "start_seconds": 1178.72,
+            "end_seconds": 1182.559
+          },
+          {
+            "segment_id": "s630",
+            "start_char": 0,
+            "end_char": 39,
+            "quote_sha256": "03dce088703fb4b53c42a13036a8ab2021ce88a144f71014ca967fdd1ac47d9b",
+            "start_seconds": 1180.4,
+            "end_seconds": 1184.96
+          },
+          {
+            "segment_id": "s631",
+            "start_char": 0,
+            "end_char": 40,
+            "quote_sha256": "45a45a0aed91c030ac88c7d6176d24dc7c76c402673251c3f8d3591809322514",
+            "start_seconds": 1182.559,
+            "end_seconds": 1186.08
+          }
+        ]
+      },
+      "timeframe": {
+        "value": "Longer-term bearish assessment with an explicit weekly closing test; no fixed trade duration is stated.",
+        "evidence": [
+          {
+            "segment_id": "s587",
+            "start_char": 0,
+            "end_char": 40,
+            "quote_sha256": "07ef695d79f72c2ecea0641b528a1b3e643502430b6d9df3f13b82b6b9c2da7d",
+            "start_seconds": 1100.08,
+            "end_seconds": 1103.52
+          },
+          {
+            "segment_id": "s598",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "1d41908601ca2daed9bcb9e17dc27cb95770353f66cdf740b589952592604d9e",
+            "start_seconds": 1120.48,
+            "end_seconds": 1123.679
+          },
+          {
+            "segment_id": "s599",
+            "start_char": 0,
+            "end_char": 39,
+            "quote_sha256": "2ec72c2545eb4356cf189a61c29d91889608a0fc2f008036d3a64f311b790ba2",
+            "start_seconds": 1122.559,
+            "end_seconds": 1127.039
+          },
+          {
+            "segment_id": "s600",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "73185669b5107fadb3bf36a56eb793e896b1f9892c864093c29bda100bc1e096",
+            "start_seconds": 1123.679,
+            "end_seconds": 1128.0800000000002
+          },
+          {
+            "segment_id": "s629",
+            "start_char": 0,
+            "end_char": 40,
+            "quote_sha256": "21ac966395b4002b074275e5953b93044278f7a30751b78b643439600f4d5901",
+            "start_seconds": 1178.72,
+            "end_seconds": 1182.559
+          }
+        ]
+      },
+      "targets": [
+        {
+          "value": "A countertrend rebound toward $10 is possible, but is still described as a lower high.",
+          "evidence": [
+            {
+              "segment_id": "s617",
+              "start_char": 0,
+              "end_char": 37,
+              "quote_sha256": "c9b6fe0ecb6115c61df8d06d5aa06cc73aa96e4b57fabc9c0dde705b6f49156b",
+              "start_seconds": 1155.44,
+              "end_seconds": 1157.919
+            },
+            {
+              "segment_id": "s618",
+              "start_char": 0,
+              "end_char": 37,
+              "quote_sha256": "c5aba0bd2f369cc5a560e33a39df55afde0659ca879733e12ee33c4533a2044e",
+              "start_seconds": 1156.64,
+              "end_seconds": 1160.48
+            },
+            {
+              "segment_id": "s619",
+              "start_char": 0,
+              "end_char": 39,
+              "quote_sha256": "ad1b75abfb61b2a215bf7c846db721c28b30333898eb7b53305719c4b781932e",
+              "start_seconds": 1157.919,
+              "end_seconds": 1163.2
+            },
+            {
+              "segment_id": "s620",
+              "start_char": 0,
+              "end_char": 39,
+              "quote_sha256": "2e92ea2dcdd9b7be521cab1dc9bda361dae0e2365b45a815e80883f69525b51a",
+              "start_seconds": 1160.48,
+              "end_seconds": 1164.72
+            }
+          ]
+        }
+      ],
+      "interpretation": "The correction from daily to weekly is decisive. The viewer asks whether a bottom is already in; Krown rejects that. This is the Nov9 view and was not updated for RDW in the Nov13 stream.",
+      "author": {
+        "kind": "assistant",
+        "name": "ChatGPT contextual review"
+      },
+      "created_at": "2026-11-14T01:15:18.010453Z"
+    },
+    {
+      "id": "crsp-conditional-range-breakout",
+      "source_id": "_vVNNnKqdDw",
+      "context": {
+        "first_segment_id": "s1331",
+        "last_segment_id": "s1399"
+      },
+      "ticker": {
+        "value": "CRSP",
+        "evidence": [
+          {
+            "segment_id": "s1332",
+            "start_char": 0,
+            "end_char": 36,
+            "quote_sha256": "6585f7bf65ce4b6cb130ee46864e0190c931662bb4cd54611844d1681921cae8",
+            "start_seconds": 2541.119,
+            "end_seconds": 2545.52
+          }
+        ]
+      },
+      "stance": "conditional",
+      "expected_move": {
+        "value": "A possible accumulation range does not establish an immediate rise. Reclaiming about $63.50 would give a chance to test $91.50; clearing $91.50 is the larger breakout. The range could persist for an unknown period.",
+        "evidence": [
+          {
+            "segment_id": "s1336",
+            "start_char": 0,
+            "end_char": 40,
+            "quote_sha256": "c2f3e69904c0c1ef943dab07ac2411f5854d31c4abf7ed055dcc642c149fab87",
+            "start_seconds": 2550.56,
+            "end_seconds": 2554.319
+          },
+          {
+            "segment_id": "s1337",
+            "start_char": 0,
+            "end_char": 37,
+            "quote_sha256": "5383b0785e9855c46bfe5591b2b416cdf737532b77fce4a9914b3c28471a50a3",
+            "start_seconds": 2553.04,
+            "end_seconds": 2555.68
+          },
+          {
+            "segment_id": "s1356",
+            "start_char": 0,
+            "end_char": 40,
+            "quote_sha256": "841a16d10e85a3d4fe5f375754c293c99a9e850df67ad711f334de173d92c6f1",
+            "start_seconds": 2586.56,
+            "end_seconds": 2591.52
+          },
+          {
+            "segment_id": "s1357",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "c9d29fc399c7554d2e16a3d9a5579d4dc72e3ec029d28dbb56150b1dc36f0963",
+            "start_seconds": 2588.48,
+            "end_seconds": 2592.96
+          },
+          {
+            "segment_id": "s1360",
+            "start_char": 0,
+            "end_char": 40,
+            "quote_sha256": "0048686a06b2d45c5106bb706148edb325c6a6f8225985910d4dc7a1764e34b4",
+            "start_seconds": 2594.319,
+            "end_seconds": 2599.2799999999997
+          },
+          {
+            "segment_id": "s1361",
+            "start_char": 0,
+            "end_char": 35,
+            "quote_sha256": "99ab18f5f2f670dfc0bdd8776d0a5b41deb30077317fe837885cd03a91452fec",
+            "start_seconds": 2596.64,
+            "end_seconds": 2601.1189999999997
+          },
+          {
+            "segment_id": "s1362",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "b4985fb3a833b9c570491711f9df92a9418aef89e69cd157d6bb5291f177cb09",
+            "start_seconds": 2599.28,
+            "end_seconds": 2602.8
+          },
+          {
+            "segment_id": "s1364",
+            "start_char": 0,
+            "end_char": 39,
+            "quote_sha256": "d2f86c6c7f6f92c9f73da641919109422e9af7894eab0d1684198f546014ad05",
+            "start_seconds": 2602.8,
+            "end_seconds": 2606.48
+          },
+          {
+            "segment_id": "s1365",
+            "start_char": 0,
+            "end_char": 34,
+            "quote_sha256": "87981baaceeb9ddd42f1574268f991c24d5bbbe6d1b927447c1a2489ff53a5c5",
+            "start_seconds": 2604.64,
+            "end_seconds": 2607.92
+          },
+          {
+            "segment_id": "s1366",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "e2c2b43150dcf2e234c282dee75159310b16b1dd69d2f14552f12d9b4cf22aeb",
+            "start_seconds": 2606.48,
+            "end_seconds": 2609.92
+          },
+          {
+            "segment_id": "s1367",
+            "start_char": 0,
+            "end_char": 40,
+            "quote_sha256": "6a728f3542b888d6f120f1e2b9219bf806f807d2186356102ba82b45f8c6619b",
+            "start_seconds": 2607.92,
+            "end_seconds": 2611.04
+          },
+          {
+            "segment_id": "s1368",
+            "start_char": 0,
+            "end_char": 34,
+            "quote_sha256": "535d21af39eaf74ac81125977fdcb5a774a997fd93e00d3e9a9b224043bf327b",
+            "start_seconds": 2609.92,
+            "end_seconds": 2612.7200000000003
+          },
+          {
+            "segment_id": "s1369",
+            "start_char": 0,
+            "end_char": 36,
+            "quote_sha256": "3331edb3c897d14d18e9c908d626de3552458e7a4adcf15f2a5d56d8d98e1247",
+            "start_seconds": 2611.04,
+            "end_seconds": 2614.64
+          },
+          {
+            "segment_id": "s1390",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "e94595c683c491aa5816da71c456d2af86978e5dc40ab5056bff2060c87edab8",
+            "start_seconds": 2650.96,
+            "end_seconds": 2654.56
+          },
+          {
+            "segment_id": "s1391",
+            "start_char": 0,
+            "end_char": 37,
+            "quote_sha256": "68731e4a6ce76c16df2694d0cd9ccfdbcb1ca4289fbfa3b1a1a0c15502757d21",
+            "start_seconds": 2652.56,
+            "end_seconds": 2656.4
+          },
+          {
+            "segment_id": "s1393",
+            "start_char": 0,
+            "end_char": 40,
+            "quote_sha256": "28d2969e428aaae28807e273306cb7e4d6b30cb39f0fda4019d3623368b03fe3",
+            "start_seconds": 2656.4,
+            "end_seconds": 2660.079
+          },
+          {
+            "segment_id": "s1394",
+            "start_char": 0,
+            "end_char": 39,
+            "quote_sha256": "7a89d80d5bad4ca3a58677a669c58d1aa0ca445bfdd75bea07276d145945cb24",
+            "start_seconds": 2658.96,
+            "end_seconds": 2661.52
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "value": "Reclaim about $63.50 for a potential move toward $91.50.",
+          "evidence": [
+            {
+              "segment_id": "s1364",
+              "start_char": 0,
+              "end_char": 39,
+              "quote_sha256": "d2f86c6c7f6f92c9f73da641919109422e9af7894eab0d1684198f546014ad05",
+              "start_seconds": 2602.8,
+              "end_seconds": 2606.48
+            },
+            {
+              "segment_id": "s1365",
+              "start_char": 0,
+              "end_char": 34,
+              "quote_sha256": "87981baaceeb9ddd42f1574268f991c24d5bbbe6d1b927447c1a2489ff53a5c5",
+              "start_seconds": 2604.64,
+              "end_seconds": 2607.92
+            },
+            {
+              "segment_id": "s1366",
+              "start_char": 0,
+              "end_char": 38,
+              "quote_sha256": "e2c2b43150dcf2e234c282dee75159310b16b1dd69d2f14552f12d9b4cf22aeb",
+              "start_seconds": 2606.48,
+              "end_seconds": 2609.92
+            },
+            {
+              "segment_id": "s1367",
+              "start_char": 0,
+              "end_char": 40,
+              "quote_sha256": "6a728f3542b888d6f120f1e2b9219bf806f807d2186356102ba82b45f8c6619b",
+              "start_seconds": 2607.92,
+              "end_seconds": 2611.04
+            }
+          ]
+        },
+        {
+          "value": "Above $91.50 would be the larger breakout; a range alone is not confirmation.",
+          "evidence": [
+            {
+              "segment_id": "s1356",
+              "start_char": 0,
+              "end_char": 40,
+              "quote_sha256": "841a16d10e85a3d4fe5f375754c293c99a9e850df67ad711f334de173d92c6f1",
+              "start_seconds": 2586.56,
+              "end_seconds": 2591.52
+            },
+            {
+              "segment_id": "s1357",
+              "start_char": 0,
+              "end_char": 38,
+              "quote_sha256": "c9d29fc399c7554d2e16a3d9a5579d4dc72e3ec029d28dbb56150b1dc36f0963",
+              "start_seconds": 2588.48,
+              "end_seconds": 2592.96
+            },
+            {
+              "segment_id": "s1360",
+              "start_char": 0,
+              "end_char": 40,
+              "quote_sha256": "0048686a06b2d45c5106bb706148edb325c6a6f8225985910d4dc7a1764e34b4",
+              "start_seconds": 2594.319,
+              "end_seconds": 2599.2799999999997
+            },
+            {
+              "segment_id": "s1361",
+              "start_char": 0,
+              "end_char": 35,
+              "quote_sha256": "99ab18f5f2f670dfc0bdd8776d0a5b41deb30077317fe837885cd03a91452fec",
+              "start_seconds": 2596.64,
+              "end_seconds": 2601.1189999999997
+            },
+            {
+              "segment_id": "s1362",
+              "start_char": 0,
+              "end_char": 38,
+              "quote_sha256": "b4985fb3a833b9c570491711f9df92a9418aef89e69cd157d6bb5291f177cb09",
+              "start_seconds": 2599.28,
+              "end_seconds": 2602.8
+            },
+            {
+              "segment_id": "s1367",
+              "start_char": 0,
+              "end_char": 40,
+              "quote_sha256": "6a728f3542b888d6f120f1e2b9219bf806f807d2186356102ba82b45f8c6619b",
+              "start_seconds": 2607.92,
+              "end_seconds": 2611.04
+            }
+          ]
+        }
+      ],
+      "invalidation": {
+        "value": "Trading below roughly $38 would undermine the accumulation interpretation; no candle-close convention is stated for this level.",
+        "evidence": [
+          {
+            "segment_id": "s1395",
+            "start_char": 0,
+            "end_char": 39,
+            "quote_sha256": "d9adb032221a8a81ed1eb21f132b43ca9da66d7950bc3fa25542e2faf9124c4d",
+            "start_seconds": 2660.079,
+            "end_seconds": 2664.1600000000003
+          },
+          {
+            "segment_id": "s1396",
+            "start_char": 0,
+            "end_char": 27,
+            "quote_sha256": "3e9937d180cc805b42dacdfe9b63e5df231dbf0f9abaced5196a064a7ac2b8a8",
+            "start_seconds": 2661.52,
+            "end_seconds": 2665.7599999999998
+          },
+          {
+            "segment_id": "s1397",
+            "start_char": 0,
+            "end_char": 40,
+            "quote_sha256": "66b17d8423fbb1c6cc6cc498ea3bbbccca78a8ed452a5afd83ea309409955e73",
+            "start_seconds": 2664.16,
+            "end_seconds": 2668.64
+          },
+          {
+            "segment_id": "s1398",
+            "start_char": 0,
+            "end_char": 37,
+            "quote_sha256": "96193cc7969ceea39a5c33e933ac133b50ea086316c5a482ffbddb185ef72478",
+            "start_seconds": 2665.76,
+            "end_seconds": 2671.44
+          }
+        ]
+      },
+      "timeframe": {
+        "value": "He distinguishes the nearer $63.50 reclaim from the larger breakout and says the consolidation duration is unknown.",
+        "evidence": [
+          {
+            "segment_id": "s1362",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "b4985fb3a833b9c570491711f9df92a9418aef89e69cd157d6bb5291f177cb09",
+            "start_seconds": 2599.28,
+            "end_seconds": 2602.8
+          },
+          {
+            "segment_id": "s1363",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "e7dae4820f064c42c2d4525f35ebf8e146547abbe8793d6cbc95ad4f2ac7122f",
+            "start_seconds": 2601.119,
+            "end_seconds": 2604.6400000000003
+          },
+          {
+            "segment_id": "s1388",
+            "start_char": 0,
+            "end_char": 39,
+            "quote_sha256": "3636eb4b3bf1529c5fd987147864e9203d612823cf3b2a638e457e66798a5c74",
+            "start_seconds": 2648.24,
+            "end_seconds": 2650.9599999999996
+          },
+          {
+            "segment_id": "s1389",
+            "start_char": 0,
+            "end_char": 39,
+            "quote_sha256": "284b02d28f0635453533683111185454c29613fdf766a53a03ff22e0cf11590c",
+            "start_seconds": 2649.359,
+            "end_seconds": 2652.56
+          },
+          {
+            "segment_id": "s1390",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "e94595c683c491aa5816da71c456d2af86978e5dc40ab5056bff2060c87edab8",
+            "start_seconds": 2650.96,
+            "end_seconds": 2654.56
+          },
+          {
+            "segment_id": "s1391",
+            "start_char": 0,
+            "end_char": 37,
+            "quote_sha256": "68731e4a6ce76c16df2694d0cd9ccfdbcb1ca4289fbfa3b1a1a0c15502757d21",
+            "start_seconds": 2652.56,
+            "end_seconds": 2656.4
+          }
+        ]
+      },
+      "targets": [
+        {
+          "value": "Around $91.50 after reclaiming $63.50. No further numerical macro-breakout target is stated.",
+          "evidence": [
+            {
+              "segment_id": "s1364",
+              "start_char": 0,
+              "end_char": 39,
+              "quote_sha256": "d2f86c6c7f6f92c9f73da641919109422e9af7894eab0d1684198f546014ad05",
+              "start_seconds": 2602.8,
+              "end_seconds": 2606.48
+            },
+            {
+              "segment_id": "s1365",
+              "start_char": 0,
+              "end_char": 34,
+              "quote_sha256": "87981baaceeb9ddd42f1574268f991c24d5bbbe6d1b927447c1a2489ff53a5c5",
+              "start_seconds": 2604.64,
+              "end_seconds": 2607.92
+            },
+            {
+              "segment_id": "s1366",
+              "start_char": 0,
+              "end_char": 38,
+              "quote_sha256": "e2c2b43150dcf2e234c282dee75159310b16b1dd69d2f14552f12d9b4cf22aeb",
+              "start_seconds": 2606.48,
+              "end_seconds": 2609.92
+            },
+            {
+              "segment_id": "s1367",
+              "start_char": 0,
+              "end_char": 40,
+              "quote_sha256": "6a728f3542b888d6f120f1e2b9219bf806f807d2186356102ba82b45f8c6619b",
+              "start_seconds": 2607.92,
+              "end_seconds": 2611.04
+            }
+          ]
+        }
+      ],
+      "interpretation": "The caption initially renders the larger level as $915, but the same sentence sequence explicitly says ninety-one and a half dollars. The $91.50 interpretation uses that correction/context. Biotechnology announcement risk is discussed, not converted into a timed price forecast. This is an older Nov9 view.",
+      "author": {
+        "kind": "assistant",
+        "name": "ChatGPT contextual review"
+      },
+      "created_at": "2026-11-14T01:15:18.010453Z"
+    },
+    {
+      "id": "xmr-pullback-is-not-btc-short",
+      "source_id": "_vVNNnKqdDw",
+      "context": {
+        "first_segment_id": "s1431",
+        "last_segment_id": "s1476"
+      },
+      "ticker": {
+        "value": "XMR",
+        "evidence": [
+          {
+            "segment_id": "s1432",
+            "start_char": 0,
+            "end_char": 40,
+            "quote_sha256": "bb237c00b8e1ada1e1425a7052ffd021e63833daf326e7cc4b5e183c63bfc7b2",
+            "start_seconds": 2734.0,
+            "end_seconds": 2739.04
+          },
+          {
+            "segment_id": "s1437",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "1fb503da1dc804aebf80968e558fbb73cf2d1d8beacf07df3ae0d3f684508573",
+            "start_seconds": 2744.48,
+            "end_seconds": 2749.04
+          },
+          {
+            "segment_id": "s1470",
+            "start_char": 0,
+            "end_char": 35,
+            "quote_sha256": "56472a30e39d056ac59e586f2415b51a01d074506db3acf9b248066ff47330ef",
+            "start_seconds": 2802.72,
+            "end_seconds": 2807.2
+          }
+        ]
+      },
+      "stance": "current",
+      "expected_move": {
+        "value": "He expects Monero to pull back toward roughly $540–550, possibly forming a higher low. He does not treat that as a Bitcoin short signal and says the Monero pullback view is independent of Bitcoin.",
+        "evidence": [
+          {
+            "segment_id": "s1448",
+            "start_char": 0,
+            "end_char": 35,
+            "quote_sha256": "8f42005485ec76a9bc78f52cb104536f45f07e1372d6140ac7ea5a77c58ae863",
+            "start_seconds": 2762.24,
+            "end_seconds": 2765.04
+          },
+          {
+            "segment_id": "s1449",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "a2e8e97986a2a4d59dc7db8dfcfe4ca0c46ac87770d14fe5046158423ae7212b",
+            "start_seconds": 2763.44,
+            "end_seconds": 2766.4
+          },
+          {
+            "segment_id": "s1452",
+            "start_char": 0,
+            "end_char": 35,
+            "quote_sha256": "b7ee59e2bc172fc83150c19916cfdbd9c0c1a692e23d0375219edab4d08b0be4",
+            "start_seconds": 2767.44,
+            "end_seconds": 2771.68
+          },
+          {
+            "segment_id": "s1453",
+            "start_char": 0,
+            "end_char": 37,
+            "quote_sha256": "ac1d4dff9648fd1fb53e8367d681df433f289e0429eb875096757b80d259f365",
+            "start_seconds": 2768.96,
+            "end_seconds": 2772.7200000000003
+          },
+          {
+            "segment_id": "s1454",
+            "start_char": 0,
+            "end_char": 32,
+            "quote_sha256": "07f8c0bcac244a419134a2a6379dca9c117dd5f3e4e5c6b084caa8ee64bb2500",
+            "start_seconds": 2771.68,
+            "end_seconds": 2773.839
+          },
+          {
+            "segment_id": "s1455",
+            "start_char": 0,
+            "end_char": 40,
+            "quote_sha256": "4390ee22e3eddf0255ca5acdd3d51ca21b8954e80848ec7ccdf5212cc38b520e",
+            "start_seconds": 2772.72,
+            "end_seconds": 2777.2799999999997
+          },
+          {
+            "segment_id": "s1456",
+            "start_char": 0,
+            "end_char": 31,
+            "quote_sha256": "e6bedbff2a79f2a38922459e8b49f9ad599a58284ea1c47c885dd101acf956b8",
+            "start_seconds": 2773.839,
+            "end_seconds": 2778.96
+          },
+          {
+            "segment_id": "s1468",
+            "start_char": 0,
+            "end_char": 35,
+            "quote_sha256": "c47e4c1c40275231f83ec19c4a8bd21c9bf5e803ae7abdc38ccb9c035a6afbf4",
+            "start_seconds": 2800.157,
+            "end_seconds": 2802.7200000000003
+          },
+          {
+            "segment_id": "s1469",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "9e8840611d6ecafe3e853c1403f685da01d5ef84f65af36ac03f7e99774fe50a",
+            "start_seconds": 2801.68,
+            "end_seconds": 2804.8799999999997
+          },
+          {
+            "segment_id": "s1470",
+            "start_char": 0,
+            "end_char": 35,
+            "quote_sha256": "56472a30e39d056ac59e586f2415b51a01d074506db3acf9b248066ff47330ef",
+            "start_seconds": 2802.72,
+            "end_seconds": 2807.2
+          },
+          {
+            "segment_id": "s1471",
+            "start_char": 0,
+            "end_char": 40,
+            "quote_sha256": "7468cc77984570fb871829bcbbb6d0bb85e1986c1448738fd1ff485c16da0c2f",
+            "start_seconds": 2804.88,
+            "end_seconds": 2809.839
+          },
+          {
+            "segment_id": "s1472",
+            "start_char": 0,
+            "end_char": 40,
+            "quote_sha256": "a2d30441d08fbdb7295c14d722220eeae1402f73caf699b882291bb0fd6fda1b",
+            "start_seconds": 2807.2,
+            "end_seconds": 2811.1189999999997
+          }
+        ]
+      },
+      "conditions": [],
+      "invalidation": {
+        "value": null,
+        "evidence": []
+      },
+      "timeframe": {
+        "value": "Weekly chart context; no explicit deadline or holding period for the pullback is stated.",
+        "evidence": [
+          {
+            "segment_id": "s1445",
+            "start_char": 0,
+            "end_char": 40,
+            "quote_sha256": "04be828c4e03158fafcb084783c8169a12c550dc00566a7d05c73cf57a8832b7",
+            "start_seconds": 2758.16,
+            "end_seconds": 2760.7999999999997
+          },
+          {
+            "segment_id": "s1446",
+            "start_char": 0,
+            "end_char": 35,
+            "quote_sha256": "24756206782b9c01ae558783902991259a8a0b9f7e36c32b8247f631ded788b6",
+            "start_seconds": 2759.599,
+            "end_seconds": 2762.2400000000002
+          },
+          {
+            "segment_id": "s1450",
+            "start_char": 0,
+            "end_char": 39,
+            "quote_sha256": "8ea53d7ddf440b87429c6bceab570f4fced40e3e1d6c056362ea16be75939b81",
+            "start_seconds": 2765.04,
+            "end_seconds": 2767.44
+          },
+          {
+            "segment_id": "s1451",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "4747e4d29378fb2e0c3e94a7c27fed7ff667709b9cf999f38eda77b6d1ddde5c",
+            "start_seconds": 2766.4,
+            "end_seconds": 2768.96
+          }
+        ]
+      },
+      "targets": [
+        {
+          "value": "Approximately $540–550 as a pullback area; later phrased as $550 at minimum.",
+          "evidence": [
+            {
+              "segment_id": "s1452",
+              "start_char": 0,
+              "end_char": 35,
+              "quote_sha256": "b7ee59e2bc172fc83150c19916cfdbd9c0c1a692e23d0375219edab4d08b0be4",
+              "start_seconds": 2767.44,
+              "end_seconds": 2771.68
+            },
+            {
+              "segment_id": "s1453",
+              "start_char": 0,
+              "end_char": 37,
+              "quote_sha256": "ac1d4dff9648fd1fb53e8367d681df433f289e0429eb875096757b80d259f365",
+              "start_seconds": 2768.96,
+              "end_seconds": 2772.7200000000003
+            },
+            {
+              "segment_id": "s1470",
+              "start_char": 0,
+              "end_char": 35,
+              "quote_sha256": "56472a30e39d056ac59e586f2415b51a01d074506db3acf9b248066ff47330ef",
+              "start_seconds": 2802.72,
+              "end_seconds": 2807.2
+            },
+            {
+              "segment_id": "s1471",
+              "start_char": 0,
+              "end_char": 40,
+              "quote_sha256": "7468cc77984570fb871829bcbbb6d0bb85e1986c1448738fd1ff485c16da0c2f",
+              "start_seconds": 2804.88,
+              "end_seconds": 2809.839
+            }
+          ]
+        }
+      ],
+      "interpretation": "The viewer brings up Bitcoin, but Monero is the actual subject of the price forecast. Krown rejects the premise that the wick is a confirmed lower high, because weekly closing prices made a higher high. This case overlaps a previously diagnosed extraction failure, so it is a diagnostic example rather than unseen evaluation.",
+      "author": {
+        "kind": "assistant",
+        "name": "ChatGPT contextual review"
+      },
+      "created_at": "2026-11-14T01:15:18.010453Z"
+    },
+    {
+      "id": "btc-daily-reversal-unconfirmed",
+      "source_id": "09poJg_Fm1w",
+      "context": {
+        "first_segment_id": "s208",
+        "last_segment_id": "s239"
+      },
+      "ticker": {
+        "value": "BTC",
+        "evidence": [
+          {
+            "segment_id": "s221",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "c9937380a6dbb9f70000d57629829b0dc25120798559bf92259071e6a42320eb",
+            "start_seconds": 410.96,
+            "end_seconds": 414.96
+          },
+          {
+            "segment_id": "s222",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "c626f95395c43fc384237f6c2e5128ca13a7e4569fd6185dbadea344913b7ff8",
+            "start_seconds": 412.4,
+            "end_seconds": 416.479
+          }
+        ]
+      },
+      "stance": "conditional",
+      "expected_move": {
+        "value": "A first-touch bounce attempt is plausible, but he does not treat it as a confirmed daily reversal or an immediate long entry. He wants daily RSI bullish divergence before trading that reversal.",
+        "evidence": [
+          {
+            "segment_id": "s213",
+            "start_char": 0,
+            "end_char": 35,
+            "quote_sha256": "f8ceeaeacd9810819b7e6bab49f1bcd0584c22f9679d0ba99955f5e89657ece1",
+            "start_seconds": 395.52,
+            "end_seconds": 398.71999999999997
+          },
+          {
+            "segment_id": "s214",
+            "start_char": 0,
+            "end_char": 35,
+            "quote_sha256": "7d297c76ea3d440780da2befaa72e1a9e5803bd4588e8ced4df5020135eb04b8",
+            "start_seconds": 397.6,
+            "end_seconds": 400.8
+          },
+          {
+            "segment_id": "s215",
+            "start_char": 0,
+            "end_char": 37,
+            "quote_sha256": "65b0d7e677199b294c5bc79aa0730a91426351bccbb82a74879b16f74caea79b",
+            "start_seconds": 398.72,
+            "end_seconds": 403.03900000000004
+          },
+          {
+            "segment_id": "s216",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "f6dc6716cf418cc991c07e61e7ce15c66edf2b425c90bb440acd8e0291d8c407",
+            "start_seconds": 400.8,
+            "end_seconds": 404.88
+          },
+          {
+            "segment_id": "s217",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "820248e943cf8623a908c870b0723b269a0b2cedf6e23986c3f9511ca9fba7e4",
+            "start_seconds": 403.039,
+            "end_seconds": 406.24
+          },
+          {
+            "segment_id": "s218",
+            "start_char": 0,
+            "end_char": 39,
+            "quote_sha256": "0df768979f57c538f3f587620fe7bc35638a25807f5735ee9f3d76bab5fa1152",
+            "start_seconds": 404.88,
+            "end_seconds": 408.8
+          },
+          {
+            "segment_id": "s219",
+            "start_char": 0,
+            "end_char": 39,
+            "quote_sha256": "8896ec035fafd11cea2cdfcbbaf005cb7cd1c146f80a140f0029721e05240e53",
+            "start_seconds": 406.24,
+            "end_seconds": 410.96000000000004
+          },
+          {
+            "segment_id": "s221",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "c9937380a6dbb9f70000d57629829b0dc25120798559bf92259071e6a42320eb",
+            "start_seconds": 410.96,
+            "end_seconds": 414.96
+          },
+          {
+            "segment_id": "s222",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "c626f95395c43fc384237f6c2e5128ca13a7e4569fd6185dbadea344913b7ff8",
+            "start_seconds": 412.4,
+            "end_seconds": 416.479
+          },
+          {
+            "segment_id": "s223",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "40fd69229ab012b173683cff9d27e547b898426e98565d6e817548c39bea6562",
+            "start_seconds": 414.96,
+            "end_seconds": 417.84
+          },
+          {
+            "segment_id": "s224",
+            "start_char": 0,
+            "end_char": 36,
+            "quote_sha256": "b03efcfd24d874e1dfa49311927fcbc985dd1b51196dfe4143f7a49404101072",
+            "start_seconds": 416.479,
+            "end_seconds": 419.44
+          },
+          {
+            "segment_id": "s225",
+            "start_char": 0,
+            "end_char": 40,
+            "quote_sha256": "969df62736697fbb88adfcc9c23e9df3ea1fbaffc5f1228479c05b8828527721",
+            "start_seconds": 417.84,
+            "end_seconds": 420.79999999999995
+          },
+          {
+            "segment_id": "s236",
+            "start_char": 0,
+            "end_char": 37,
+            "quote_sha256": "4d246a53d33963857d3316cffd35acec2aee1ce200fe6e0c5c9ba3fefde8752a",
+            "start_seconds": 436.08,
+            "end_seconds": 440.4
+          },
+          {
+            "segment_id": "s237",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "d947b0d66a6f9164d64c68e7c566bdec24a0e85e383c82bf2403961d03ff7b17",
+            "start_seconds": 438.08,
+            "end_seconds": 442.24
+          },
+          {
+            "segment_id": "s238",
+            "start_char": 0,
+            "end_char": 36,
+            "quote_sha256": "7164913e8a440f8a154811046bec18ff8509cd33f637df12e7d05806c225a9ce",
+            "start_seconds": 440.4,
+            "end_seconds": 445.67999999999995
+          },
+          {
+            "segment_id": "s239",
+            "start_char": 0,
+            "end_char": 39,
+            "quote_sha256": "170ad4aa98a1f45f464045c7a255487b0b669deea55fe5714e70ce7a44dae13d",
+            "start_seconds": 442.24,
+            "end_seconds": 447.039
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "value": "Wait for daily bullish divergence: lower price lows accompanied by higher RSI lows. He explicitly says the condition is absent at recording time.",
+          "evidence": [
+            {
+              "segment_id": "s223",
+              "start_char": 0,
+              "end_char": 38,
+              "quote_sha256": "40fd69229ab012b173683cff9d27e547b898426e98565d6e817548c39bea6562",
+              "start_seconds": 414.96,
+              "end_seconds": 417.84
+            },
+            {
+              "segment_id": "s224",
+              "start_char": 0,
+              "end_char": 36,
+              "quote_sha256": "b03efcfd24d874e1dfa49311927fcbc985dd1b51196dfe4143f7a49404101072",
+              "start_seconds": 416.479,
+              "end_seconds": 419.44
+            },
+            {
+              "segment_id": "s225",
+              "start_char": 0,
+              "end_char": 40,
+              "quote_sha256": "969df62736697fbb88adfcc9c23e9df3ea1fbaffc5f1228479c05b8828527721",
+              "start_seconds": 417.84,
+              "end_seconds": 420.79999999999995
+            },
+            {
+              "segment_id": "s227",
+              "start_char": 0,
+              "end_char": 40,
+              "quote_sha256": "8e365c14fd152dcdd3f84e2428ccce97e424298d9b5aadab441032683768bdd0",
+              "start_seconds": 420.8,
+              "end_seconds": 424.479
+            },
+            {
+              "segment_id": "s228",
+              "start_char": 0,
+              "end_char": 39,
+              "quote_sha256": "93e24eb2144e3c9e887a75acd5979951134780d1f88629a6669931c4a553e821",
+              "start_seconds": 422.56,
+              "end_seconds": 426.24
+            },
+            {
+              "segment_id": "s229",
+              "start_char": 0,
+              "end_char": 40,
+              "quote_sha256": "e51401642413d69495db434e054a4832540fb6be98c106bf0086c534401be8aa",
+              "start_seconds": 424.479,
+              "end_seconds": 427.52
+            },
+            {
+              "segment_id": "s230",
+              "start_char": 0,
+              "end_char": 38,
+              "quote_sha256": "356177353996d639f35d640e068fc79a5cd38aa6bc14ef025a66f3e2b72e7b47",
+              "start_seconds": 426.24,
+              "end_seconds": 430.16
+            },
+            {
+              "segment_id": "s231",
+              "start_char": 0,
+              "end_char": 37,
+              "quote_sha256": "dad62eafd08f2e05dbc5ca4e0b7d45e521d70ac015d825825f4c091e2055ef14",
+              "start_seconds": 427.52,
+              "end_seconds": 431.44
+            },
+            {
+              "segment_id": "s232",
+              "start_char": 0,
+              "end_char": 34,
+              "quote_sha256": "b42d41a6a9585c52840c3db2e054c22332add8784c958c42b49a31cb971375f9",
+              "start_seconds": 430.16,
+              "end_seconds": 433.12
+            },
+            {
+              "segment_id": "s233",
+              "start_char": 0,
+              "end_char": 38,
+              "quote_sha256": "3f6079df1f86db70720a2e9b30c01c5873c56113281d183ecc97d9f5bf6c2274",
+              "start_seconds": 431.44,
+              "end_seconds": 434.24
+            },
+            {
+              "segment_id": "s234",
+              "start_char": 0,
+              "end_char": 38,
+              "quote_sha256": "2af8821f9af7eb81386e808d7bc79107cecb6fa68578e372c843eb961d11237d",
+              "start_seconds": 433.12,
+              "end_seconds": 436.08
+            }
+          ]
+        },
+        {
+          "value": "The first touch of the 200 SMA can produce a bounce without confirming a reversal.",
+          "evidence": [
+            {
+              "segment_id": "s236",
+              "start_char": 0,
+              "end_char": 37,
+              "quote_sha256": "4d246a53d33963857d3316cffd35acec2aee1ce200fe6e0c5c9ba3fefde8752a",
+              "start_seconds": 436.08,
+              "end_seconds": 440.4
+            },
+            {
+              "segment_id": "s237",
+              "start_char": 0,
+              "end_char": 38,
+              "quote_sha256": "d947b0d66a6f9164d64c68e7c566bdec24a0e85e383c82bf2403961d03ff7b17",
+              "start_seconds": 438.08,
+              "end_seconds": 442.24
+            },
+            {
+              "segment_id": "s238",
+              "start_char": 0,
+              "end_char": 36,
+              "quote_sha256": "7164913e8a440f8a154811046bec18ff8509cd33f637df12e7d05806c225a9ce",
+              "start_seconds": 440.4,
+              "end_seconds": 445.67999999999995
+            },
+            {
+              "segment_id": "s239",
+              "start_char": 0,
+              "end_char": 39,
+              "quote_sha256": "170ad4aa98a1f45f464045c7a255487b0b669deea55fe5714e70ce7a44dae13d",
+              "start_seconds": 442.24,
+              "end_seconds": 447.039
+            }
+          ]
+        }
+      ],
+      "invalidation": {
+        "value": null,
+        "evidence": []
+      },
+      "timeframe": {
+        "value": "Daily-chart reversal assessment with a possible immediate first-test bounce; no fixed holding period is supplied.",
+        "evidence": [
+          {
+            "segment_id": "s212",
+            "start_char": 0,
+            "end_char": 36,
+            "quote_sha256": "266c80c3364ca2f512d1994c0f805e607c908ea168e8e3b196c0d1e0fa3cd091",
+            "start_seconds": 392.4,
+            "end_seconds": 397.59999999999997
+          },
+          {
+            "segment_id": "s224",
+            "start_char": 0,
+            "end_char": 36,
+            "quote_sha256": "b03efcfd24d874e1dfa49311927fcbc985dd1b51196dfe4143f7a49404101072",
+            "start_seconds": 416.479,
+            "end_seconds": 419.44
+          },
+          {
+            "segment_id": "s225",
+            "start_char": 0,
+            "end_char": 40,
+            "quote_sha256": "969df62736697fbb88adfcc9c23e9df3ea1fbaffc5f1228479c05b8828527721",
+            "start_seconds": 417.84,
+            "end_seconds": 420.79999999999995
+          },
+          {
+            "segment_id": "s236",
+            "start_char": 0,
+            "end_char": 37,
+            "quote_sha256": "4d246a53d33963857d3316cffd35acec2aee1ce200fe6e0c5c9ba3fefde8752a",
+            "start_seconds": 436.08,
+            "end_seconds": 440.4
+          },
+          {
+            "segment_id": "s237",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "d947b0d66a6f9164d64c68e7c566bdec24a0e85e383c82bf2403961d03ff7b17",
+            "start_seconds": 438.08,
+            "end_seconds": 442.24
+          },
+          {
+            "segment_id": "s238",
+            "start_char": 0,
+            "end_char": 36,
+            "quote_sha256": "7164913e8a440f8a154811046bec18ff8509cd33f637df12e7d05806c225a9ce",
+            "start_seconds": 440.4,
+            "end_seconds": 445.67999999999995
+          },
+          {
+            "segment_id": "s239",
+            "start_char": 0,
+            "end_char": 39,
+            "quote_sha256": "170ad4aa98a1f45f464045c7a255487b0b669deea55fe5714e70ce7a44dae13d",
+            "start_seconds": 442.24,
+            "end_seconds": 447.039
+          }
+        ]
+      },
+      "targets": [],
+      "interpretation": "This record describes the daily reversal prerequisite. It does not turn low RSI into a buy, and it does not merge his separate long-term accumulation thesis into the entry decision. No fixed price target or stop is supplied within this scenario.",
+      "author": {
+        "kind": "assistant",
+        "name": "ChatGPT contextual review"
+      },
+      "created_at": "2026-11-14T01:15:18.010453Z"
+    },
+    {
+      "id": "btc-macro-higher-low-thesis",
+      "source_id": "09poJg_Fm1w",
+      "context": {
+        "first_segment_id": "s247",
+        "last_segment_id": "s270"
+      },
+      "ticker": {
+        "value": "BTC",
+        "evidence": [
+          {
+            "segment_id": "s252",
+            "start_char": 0,
+            "end_char": 39,
+            "quote_sha256": "1bb9eb19675ddcfcbb25bea49d1c3f2423c710e765ddd2e602518224d5d5fc37",
+            "start_seconds": 464.88,
+            "end_seconds": 468.479
+          },
+          {
+            "segment_id": "s259",
+            "start_char": 0,
+            "end_char": 36,
+            "quote_sha256": "391d20a6c292366988a1e29277d5f3c0db9b65bdc79a80c6adeaf34fbb184ea5",
+            "start_seconds": 480.72,
+            "end_seconds": 484.56
+          }
+        ]
+      },
+      "stance": "current",
+      "expected_move": {
+        "value": "He considers the current region a plausible place for a weekly higher low and does not expect the June/July macro low around $57,750 to break. A break would trigger a different downside scenario toward the 377 EMA.",
+        "evidence": [
+          {
+            "segment_id": "s248",
+            "start_char": 0,
+            "end_char": 39,
+            "quote_sha256": "1af686b9276c6d26dcc5b55c61b8fb7260e9f64867218904ee471222989f0aff",
+            "start_seconds": 458.88,
+            "end_seconds": 462.24
+          },
+          {
+            "segment_id": "s249",
+            "start_char": 0,
+            "end_char": 40,
+            "quote_sha256": "7c10cadd6a81dee2193baa55273fa85d8e5ae7241737caf6ed206f2da249feab",
+            "start_seconds": 460.8,
+            "end_seconds": 463.599
+          },
+          {
+            "segment_id": "s250",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "ecb496d954fbf83e85315875266e8128fa3f790438817f414d81256b57d5de81",
+            "start_seconds": 462.24,
+            "end_seconds": 464.88
+          },
+          {
+            "segment_id": "s251",
+            "start_char": 0,
+            "end_char": 36,
+            "quote_sha256": "022f22d55c0e33cf3a73b9f516c3c6e1541181116b60228a01b04783f97f295f",
+            "start_seconds": 463.599,
+            "end_seconds": 466.24
+          },
+          {
+            "segment_id": "s252",
+            "start_char": 0,
+            "end_char": 39,
+            "quote_sha256": "1bb9eb19675ddcfcbb25bea49d1c3f2423c710e765ddd2e602518224d5d5fc37",
+            "start_seconds": 464.88,
+            "end_seconds": 468.479
+          },
+          {
+            "segment_id": "s253",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "e7461827971f3be27346a7fa90a7ee042eef422bdc94c5a378b25d3e3a07efe7",
+            "start_seconds": 466.24,
+            "end_seconds": 471.919
+          },
+          {
+            "segment_id": "s254",
+            "start_char": 0,
+            "end_char": 37,
+            "quote_sha256": "a0017f1271c6b25fcf533b7aa94a8a7939b8e4861bb63e22388a8041cb0ffd8c",
+            "start_seconds": 468.479,
+            "end_seconds": 474.24
+          },
+          {
+            "segment_id": "s255",
+            "start_char": 0,
+            "end_char": 39,
+            "quote_sha256": "f51ca227fca90fee0fa904caf86900bf6fa9bb4c841d66cfd389f02dcc8144e5",
+            "start_seconds": 471.919,
+            "end_seconds": 476.56
+          },
+          {
+            "segment_id": "s256",
+            "start_char": 0,
+            "end_char": 39,
+            "quote_sha256": "2adef8a116936f2a17f038bbaf76190c11ae66972f77cad08f49bdc16af18de1",
+            "start_seconds": 474.24,
+            "end_seconds": 478.56
+          },
+          {
+            "segment_id": "s259",
+            "start_char": 0,
+            "end_char": 36,
+            "quote_sha256": "391d20a6c292366988a1e29277d5f3c0db9b65bdc79a80c6adeaf34fbb184ea5",
+            "start_seconds": 480.72,
+            "end_seconds": 484.56
+          },
+          {
+            "segment_id": "s260",
+            "start_char": 0,
+            "end_char": 39,
+            "quote_sha256": "2484a3c9161507506dc60c6005b6de16a6b2c961520ec3194c84754dc301691d",
+            "start_seconds": 481.919,
+            "end_seconds": 486.4
+          },
+          {
+            "segment_id": "s261",
+            "start_char": 0,
+            "end_char": 37,
+            "quote_sha256": "513d7605eb801f472ae985989d237cb75137bd7bc5a3d5bfd4d571e748b53426",
+            "start_seconds": 484.56,
+            "end_seconds": 487.52
+          },
+          {
+            "segment_id": "s262",
+            "start_char": 0,
+            "end_char": 40,
+            "quote_sha256": "0a762058066f3c480577596f1a95f15d78d14777f6493cfa8f61213d236a0840",
+            "start_seconds": 486.4,
+            "end_seconds": 489.35999999999996
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "value": "The bullish longer-term interpretation requires a higher low rather than a new macro low below the June/July low.",
+          "evidence": [
+            {
+              "segment_id": "s248",
+              "start_char": 0,
+              "end_char": 39,
+              "quote_sha256": "1af686b9276c6d26dcc5b55c61b8fb7260e9f64867218904ee471222989f0aff",
+              "start_seconds": 458.88,
+              "end_seconds": 462.24
+            },
+            {
+              "segment_id": "s249",
+              "start_char": 0,
+              "end_char": 40,
+              "quote_sha256": "7c10cadd6a81dee2193baa55273fa85d8e5ae7241737caf6ed206f2da249feab",
+              "start_seconds": 460.8,
+              "end_seconds": 463.599
+            },
+            {
+              "segment_id": "s250",
+              "start_char": 0,
+              "end_char": 38,
+              "quote_sha256": "ecb496d954fbf83e85315875266e8128fa3f790438817f414d81256b57d5de81",
+              "start_seconds": 462.24,
+              "end_seconds": 464.88
+            },
+            {
+              "segment_id": "s251",
+              "start_char": 0,
+              "end_char": 36,
+              "quote_sha256": "022f22d55c0e33cf3a73b9f516c3c6e1541181116b60228a01b04783f97f295f",
+              "start_seconds": 463.599,
+              "end_seconds": 466.24
+            },
+            {
+              "segment_id": "s252",
+              "start_char": 0,
+              "end_char": 39,
+              "quote_sha256": "1bb9eb19675ddcfcbb25bea49d1c3f2423c710e765ddd2e602518224d5d5fc37",
+              "start_seconds": 464.88,
+              "end_seconds": 468.479
+            },
+            {
+              "segment_id": "s253",
+              "start_char": 0,
+              "end_char": 38,
+              "quote_sha256": "e7461827971f3be27346a7fa90a7ee042eef422bdc94c5a378b25d3e3a07efe7",
+              "start_seconds": 466.24,
+              "end_seconds": 471.919
+            },
+            {
+              "segment_id": "s254",
+              "start_char": 0,
+              "end_char": 37,
+              "quote_sha256": "a0017f1271c6b25fcf533b7aa94a8a7939b8e4861bb63e22388a8041cb0ffd8c",
+              "start_seconds": 468.479,
+              "end_seconds": 474.24
+            },
+            {
+              "segment_id": "s255",
+              "start_char": 0,
+              "end_char": 39,
+              "quote_sha256": "f51ca227fca90fee0fa904caf86900bf6fa9bb4c841d66cfd389f02dcc8144e5",
+              "start_seconds": 471.919,
+              "end_seconds": 476.56
+            }
+          ]
+        }
+      ],
+      "invalidation": {
+        "value": "A new macro low below about $57,750 would overturn the base case; he then discusses downside to the 377 EMA.",
+        "evidence": [
+          {
+            "segment_id": "s253",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "e7461827971f3be27346a7fa90a7ee042eef422bdc94c5a378b25d3e3a07efe7",
+            "start_seconds": 466.24,
+            "end_seconds": 471.919
+          },
+          {
+            "segment_id": "s254",
+            "start_char": 0,
+            "end_char": 37,
+            "quote_sha256": "a0017f1271c6b25fcf533b7aa94a8a7939b8e4861bb63e22388a8041cb0ffd8c",
+            "start_seconds": 468.479,
+            "end_seconds": 474.24
+          },
+          {
+            "segment_id": "s255",
+            "start_char": 0,
+            "end_char": 39,
+            "quote_sha256": "f51ca227fca90fee0fa904caf86900bf6fa9bb4c841d66cfd389f02dcc8144e5",
+            "start_seconds": 471.919,
+            "end_seconds": 476.56
+          },
+          {
+            "segment_id": "s256",
+            "start_char": 0,
+            "end_char": 39,
+            "quote_sha256": "2adef8a116936f2a17f038bbaf76190c11ae66972f77cad08f49bdc16af18de1",
+            "start_seconds": 474.24,
+            "end_seconds": 478.56
+          },
+          {
+            "segment_id": "s257",
+            "start_char": 0,
+            "end_char": 39,
+            "quote_sha256": "9c676a807a16163bce2490debaf7b8e066d702fab9ed19faa679493c101be7f4",
+            "start_seconds": 476.56,
+            "end_seconds": 480.72
+          },
+          {
+            "segment_id": "s258",
+            "start_char": 0,
+            "end_char": 40,
+            "quote_sha256": "1f0fe5f22bbda39410312970f42e8412e0823ff79a9421f27178c75bbbb55a02",
+            "start_seconds": 478.56,
+            "end_seconds": 481.919
+          },
+          {
+            "segment_id": "s259",
+            "start_char": 0,
+            "end_char": 36,
+            "quote_sha256": "391d20a6c292366988a1e29277d5f3c0db9b65bdc79a80c6adeaf34fbb184ea5",
+            "start_seconds": 480.72,
+            "end_seconds": 484.56
+          },
+          {
+            "segment_id": "s260",
+            "start_char": 0,
+            "end_char": 39,
+            "quote_sha256": "2484a3c9161507506dc60c6005b6de16a6b2c961520ec3194c84754dc301691d",
+            "start_seconds": 481.919,
+            "end_seconds": 486.4
+          },
+          {
+            "segment_id": "s261",
+            "start_char": 0,
+            "end_char": 37,
+            "quote_sha256": "513d7605eb801f472ae985989d237cb75137bd7bc5a3d5bfd4d571e748b53426",
+            "start_seconds": 484.56,
+            "end_seconds": 487.52
+          }
+        ]
+      },
+      "timeframe": {
+        "value": "Weekly and longer-term macro interpretation, with the response to this test to be watched over the next two to four weeks.",
+        "evidence": [
+          {
+            "segment_id": "s249",
+            "start_char": 0,
+            "end_char": 40,
+            "quote_sha256": "7c10cadd6a81dee2193baa55273fa85d8e5ae7241737caf6ed206f2da249feab",
+            "start_seconds": 460.8,
+            "end_seconds": 463.599
+          },
+          {
+            "segment_id": "s252",
+            "start_char": 0,
+            "end_char": 39,
+            "quote_sha256": "1bb9eb19675ddcfcbb25bea49d1c3f2423c710e765ddd2e602518224d5d5fc37",
+            "start_seconds": 464.88,
+            "end_seconds": 468.479
+          },
+          {
+            "segment_id": "s253",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "e7461827971f3be27346a7fa90a7ee042eef422bdc94c5a378b25d3e3a07efe7",
+            "start_seconds": 466.24,
+            "end_seconds": 471.919
+          },
+          {
+            "segment_id": "s268",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "fb84b75c11927f68818c8670cabb6cd345cd83450c18c1e9279e08b9fd86bfaa",
+            "start_seconds": 496.24,
+            "end_seconds": 499.52
+          },
+          {
+            "segment_id": "s269",
+            "start_char": 0,
+            "end_char": 37,
+            "quote_sha256": "90d374beef2e23b6c43ad9d8f5fec4f511ee6cbd4ad0a503eb25cb45167c80f2",
+            "start_seconds": 498.08,
+            "end_seconds": 500.96
+          },
+          {
+            "segment_id": "s270",
+            "start_char": 0,
+            "end_char": 38,
+            "quote_sha256": "c8aa653ae0a8fa52bc14269687e04a3b96f76ce80f36ef6085e8e96332609dfa",
+            "start_seconds": 499.52,
+            "end_seconds": 502.31899999999996
+          }
+        ]
+      },
+      "targets": [
+        {
+          "value": "Only in the macro-low failure branch, the 377 EMA is the next area mentioned. Its numeric price is not reliably stated.",
+          "evidence": [
+            {
+              "segment_id": "s256",
+              "start_char": 0,
+              "end_char": 39,
+              "quote_sha256": "2adef8a116936f2a17f038bbaf76190c11ae66972f77cad08f49bdc16af18de1",
+              "start_seconds": 474.24,
+              "end_seconds": 478.56
+            },
+            {
+              "segment_id": "s259",
+              "start_char": 0,
+              "end_char": 36,
+              "quote_sha256": "391d20a6c292366988a1e29277d5f3c0db9b65bdc79a80c6adeaf34fbb184ea5",
+              "start_seconds": 480.72,
+              "end_seconds": 484.56
+            },
+            {
+              "segment_id": "s260",
+              "start_char": 0,
+              "end_char": 39,
+              "quote_sha256": "2484a3c9161507506dc60c6005b6de16a6b2c961520ec3194c84754dc301691d",
+              "start_seconds": 481.919,
+              "end_seconds": 486.4
+            },
+            {
+              "segment_id": "s261",
+              "start_char": 0,
+              "end_char": 37,
+              "quote_sha256": "513d7605eb801f472ae985989d237cb75137bd7bc5a3d5bfd4d571e748b53426",
+              "start_seconds": 484.56,
+              "end_seconds": 487.52
+            }
+          ]
+        }
+      ],
+      "interpretation": "The caption contains a broken fragment before 377 EMA. It is not evidence for a $33,000 target. This macro invalidation is separate from the absent daily bullish-divergence entry prerequisite.",
+      "author": {
+        "kind": "assistant",
+        "name": "ChatGPT contextual review"
+      },
+      "created_at": "2026-11-14T01:15:18.010453Z"
+    }
+  ]
+}

@@ -79,12 +79,7 @@ def parser() -> Parser:
     report = commands.add_parser("report", help="Render an existing replay bundle as HTML")
     report.add_argument("input")
     report.add_argument("--out", required=True)
-    study = commands.add_parser("krown-study", help="Replay the frozen Krown video study without network or model calls")
-    study.add_argument("--study-dir", default="experiments/krown-20261114", help="Frozen inputs and published features")
-    study.add_argument("--out", default="artifacts/krown-replay", help="Output directory")
-    study.add_argument("--transcripts", help="Re-extract from the exact acquired canonical captions instead of saved features")
-    study.add_argument("--charts", help="Optional chart directory; requires the research extra")
-    for child in (demo, extract, review, replay, youtube, asr, evaluate, show, report, study):
+    for child in (demo, extract, review, replay, youtube, asr, evaluate, show, report):
         _format_argument(child, sub=True)
     return root
 
@@ -138,11 +133,6 @@ def _summary(bundle, path) -> dict:
 
 
 def execute(args) -> dict:
-    if args.command == "krown-study":
-        from .krown_study import run_study
-        return run_study(Path(args.study_dir), Path(args.out),
-                         transcript_dir=Path(args.transcripts) if args.transcripts else None,
-                         charts_out=Path(args.charts) if args.charts else None)
     if args.command is None:
         return {"bin": sys.executable, "description": "Transcript evidence, conditional setups and paper decisions", "mode": "paper_only", "live_orders": "not implemented", "help": ["python -m signal_lab demo", "python -m signal_lab extract --help", "python -m signal_lab replay --help"]}
     if args.command == "demo":

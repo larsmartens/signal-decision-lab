@@ -1,69 +1,92 @@
 {
-  "recorded_at": "2026-11-13T23:54:51.477669Z",
+  "checked_at": "2026-11-14T02:14:17.202975+00:00",
+  "parent_revision": "4582f5620efba053411879646bd6c727e82d2b41",
   "python": "3.12.14",
-  "command": "python -W error::ResourceWarning -m unittest discover -s tests -q",
-  "tests": 233,
-  "failures": 0,
-  "errors": 0,
-  "skipped": 0,
-  "elapsed_seconds": 1.748,
-  "checks": {
-    "ruff": {
+  "scope": "Local software behavior, reference hydration and explicitly synthetic mechanics. No authenticated Jev inference or semantic backtest.",
+  "checks": [
+    {
+      "command": "python -W error::ResourceWarning -m unittest discover -s tests -q",
       "exit_code": 0,
-      "output": "All checks passed!"
+      "tests": 210,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
     },
-    "mypy": {
+    {
+      "command": ".venv/bin/ruff check signal_lab tests scripts",
+      "exit_code": 0
+    },
+    {
+      "command": ".venv/bin/mypy signal_lab",
       "exit_code": 0,
-      "output": "Success: no issues found in 16 source files"
+      "source_files": 15
     },
-    "study_reproduction": {
-      "status": "identical",
-      "strategy_runs": 24,
-      "benchmark_runs": 12,
-      "checked_files": 41,
-      "python_versions": [
-        "3.11.18",
-        "3.12.14",
-        "3.13.5"
-      ]
+    {
+      "command": "python scripts/check_semantic_claims.py --claims examples/semantic-claims.json --transcripts examples/semantic-transcripts",
+      "exit_code": 0,
+      "status": "validated",
+      "claims": 1,
+      "sources": 1,
+      "maximum_request_bytes": 11624,
+      "model_requests": 0
+    },
+    {
+      "command": "python scripts/check_semantic_claims.py --claims annotations/krown-20261114/claims.json --transcripts data/krown-latest/transcripts",
+      "exit_code": 0,
+      "status": "validated",
+      "claims": 8,
+      "sources": 2,
+      "maximum_request_bytes": 23659,
+      "model_requests": 0
+    },
+    {
+      "command": "python scripts/run_semantic_jev.py --claims annotations/krown-20261114/claims.json --transcripts data/krown-latest/transcripts --out artifacts/jev-semantic --max-requests 8 --cost-stop-usd 1",
+      "exit_code": 1,
+      "expected": "Explicit missing-credential failure",
+      "error_code": "missing_api_key",
+      "output_directory_created": false,
+      "model_requests": 0
+    },
+    {
+      "command": "python -m signal_lab demo --out artifacts/semantic-revision-demo --format json",
+      "exit_code": 0,
+      "kind": "synthetic",
+      "claims": 6,
+      "reviewed": 1,
+      "completed_trades": 1,
+      "model_calls": 0
     }
-  },
-  "scope": "Offline behavior, loopback HTTP contract fixtures, and frozen real-data study replay. No live Jev inference and no claim of corpus-wide extraction accuracy.",
-  "jev_live_inference": {
-    "run": false,
-    "reason": "No TypeSafe API credential configured"
-  },
-  "source_sha256": {
-    "scripts/check_study_reproduction.py": "0d4fc0676e48ec285998765d560cacd5717ddda75a66bb3ac6c8adecbda5e0af",
-    "scripts/collect_krown.py": "66604fcec9dba4f43dc6562ec5413d221a62dbd7af43ab7ec06950ce074f9c43",
-    "scripts/fetch_market_bars.py": "9511d938f5d81d230e26f766cdf7e6238cf887bcabe8e9b4490ae4c762851122",
+  ],
+  "code_sha256": {
+    "scripts/check_semantic_claims.py": "7550b2f19fa1003e83a61b1675559c84656a05a0a25b8b0555e7ede31ab6a38f",
+    "scripts/run_semantic_jev.py": "b009cd0dde2d5594eca9b1a80f51faf2877cf4e1f1af8e86e7f2217e21c6eadc",
     "signal_lab/__init__.py": "1afb8a7482714f9184b54c7c5a80dfde774e5f4587d1c875da9714c16f6115fb",
     "signal_lab/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
-    "signal_lab/cli.py": "bb84051ca9c0f9e3aaef8f96173fa887321351fac8727c7d204fdf1d896d12d5",
+    "signal_lab/claim_manifest.py": "594b990f6dc5947efd7a8953b960130dc247d90e6e27123e578d5c52384f266a",
+    "signal_lab/cli.py": "1f64156f344c9cb7705433f3bc8640ff701798e300b5394d89e9a9dfce892d57",
     "signal_lab/engine.py": "a06c4087fa6d221ada6045af84b0da79a296c660debbeb36cc6d3f04c02e4fc6",
     "signal_lab/evaluate.py": "a35929aa1c6a5584376ea28640c50b1b6538843dcc4478941ffa0377eb2b4613",
     "signal_lab/extract.py": "5c5e5a53a91459098e4921deacd8bcc662908dd637d7b38944bac45a9a16d206",
     "signal_lab/ingest.py": "68652b96fb07154bbb49a338bf471f19ab540e13d6ceb3a5cdd47febd80e65b3",
     "signal_lab/jev.py": "a78c6714e6e8976900ca08e7f8f06e74c313c867a6dcd54c20d40aac9c956b24",
-    "signal_lab/krown_charts.py": "9a488eb767c1155273d6161400f7c9634e2046796ee1a1e256a5d4864cfdcc2b",
-    "signal_lab/krown_extract.py": "d14bdd6e2cbf1e09541cdbc28d25582a5a5427995548cbf78678099621ae8d62",
-    "signal_lab/krown_study.py": "0603f4d656d5c5028b7aec92697c7bbef5528ba862c6b4c913712d9e3d42c360",
     "signal_lab/llm.py": "b6bd6b79a29be4e1591106c76522f4a9d9f27d79c8958d9451a5d31c731cd5c0",
     "signal_lab/models.py": "a8b4ecb0680c9c20b52ab2cbb0f41560ad834e8641cda296aaa045c61502c5e5",
+    "signal_lab/openrouter_jev.py": "6bfef585385f2eb24ebee5898b0af8404b08f1ed9b99a317978c0fda1c4457f3",
     "signal_lab/replay.py": "c88d7e684eebd9e16c38325cb93061a6362e3ebec9456ca9ca5871226661c995",
     "signal_lab/report.py": "06fc87dfad1f9b3b77f51971a575cdfc8e93c645cc9c74224ea24498a2a36f63",
-    "signal_lab/research_backtest.py": "fc4fecb2c0f4170f65fe012e7f8b2a64c54795f276ca0c9e57e1b131d7c03c25",
-    "tests/test_cli.py": "941b57ee9eab0a8cea85cef2c8cd018dc753075e68a49710e38579aec0576725",
-    "tests/test_engine.py": "a5033b8ed8777f62a646f549b41300cd2bdf2082d3425c9fc1a838f51a3c037b",
-    "tests/test_evaluate.py": "49be417527799e30193802831da46eacee0492ab754698932bc0f981a2ab4df2",
-    "tests/test_extract.py": "79eb05c988b430d91b5190c3f9be2129ae869ec8f0f0f65d5b45709b710727d7",
-    "tests/test_ingest.py": "55a4f509e1bc79db849a3d83daa1bbbe2b615dafb32c6500aaa40717184cea76",
-    "tests/test_jev.py": "fe4e7a5ed6987ded099b5aeac1db89ee314e6a9875587a9ad7a4611e67f9b0b8",
-    "tests/test_krown_extract.py": "803ff6a1678c110aaa34e0542071062f14feaea4accd440bd3305847e8da0048",
-    "tests/test_krown_study.py": "b18f7c03fd35d9262cf0eb7a7da44aaeaab312697f124daded8800c7c4bfeae3",
-    "tests/test_llm.py": "071026500b9aebbd4cbce5ac8aea7a3491b0a23e78716ce6f5120dd9ab1cd194",
-    "tests/test_replay.py": "57f6b02ee391c9549a99222064f60d35aa3d23576e949b66f3782b4f80ba9a23",
-    "tests/test_research_backtest.py": "f20d26df4bac589b4aede360abc97071d90217f44e462f4f39b076c26d1851c1"
+    "signal_lab/semantic_claims.py": "8e697fb282960913c1cdf27948bb8cb9e1ca63485e22456d73fbcf1db29c52d6",
+    "tests/test_claim_manifest.py": "30d620931d9348070a4b4f9cf90028011fbb3c9f7d26d0931edbaa7c92d79315",
+    "tests/test_openrouter_jev.py": "2102e11692d52129c90efaf877996dfaf7e4907c7a759efcc654b1f18dad767a",
+    "tests/test_semantic_claims.py": "37e131249c073b37f2c72422f39c6cc373147d8a25bec05c46ba93dc49049650"
   },
-  "test_output": "Ran 233 tests in 1.748s\n\nOK"
+  "public_claim_manifest_sha256": "b9427e311a787396cb35425b1f65f6716dc61a6c531c770995e017194b79deec",
+  "removed": [
+    "word-based Krown classifiers",
+    "video-level direction scores",
+    "fixed-hold study runner",
+    "derived results and performance figures"
+  ],
+  "live_inference": "not_run",
+  "credentials_created": false,
+  "credentials_stored_in_1password": false
 }

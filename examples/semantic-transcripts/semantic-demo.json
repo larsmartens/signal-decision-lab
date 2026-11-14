@@ -1,0 +1,28 @@
+{
+  "source_id": "semantic-demo",
+  "channel": "Synthetic semantic test author",
+  "url": "",
+  "kind": "synthetic",
+  "published_at": "2026-01-01T00:00:00Z",
+  "available_at": "2026-01-01T00:05:00Z",
+  "segments": [
+    {
+      "id": "s1",
+      "start": 0,
+      "end": 12,
+      "text": "On BTC, I expect a rebound toward 105 if the daily candle closes above 100."
+    },
+    {
+      "id": "s2",
+      "start": 12,
+      "end": 23,
+      "text": "That bullish scenario fails on a daily close below 95. I have not seen the 100 close yet."
+    },
+    {
+      "id": "s3",
+      "start": 23,
+      "end": 40,
+      "text": "I am talking about the next week, not a long-term reversal. ETH is a separate chart."
+    }
+  ]
+}

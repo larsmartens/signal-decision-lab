@@ -1,28 +1,56 @@
-# Prototype specification
+# Specification
 
-Requested on 13 November 2026 by Lars Martens. Repository: [signal-decision-lab](https://github.com/larsmartens/signal-decision-lab/tree/main).
+Updated 14 November 2026. Repository: [signal-decision-lab](https://github.com/larsmartens/signal-decision-lab/tree/main).
 
 ## Goal
 
-Build a tested research prototype for extracting claims from trading videos and evaluating them under explicit trading rules. Start with BTCUSDT, English transcript conditions, and a simulator that holds one position at a time. Compare a deterministic baseline with optional LLM extraction and Jev from TypeSafe. Extraction accuracy and model confidence must be evaluated separately from trading returns.
+Represent the meaning of Krown's statements about individual tickers, including
+expected moves, conditions, invalidations and timeframes. Keep the evidence visible
+so a reader can check the interpretation before any trading experiment uses it.
 
 ## Required behavior
 
-1. Import timestamped JSON, WebVTT, and SRT transcripts with publication and actual availability metadata. Preserve source evidence and distinguish commentary, conditional setups, instructions, negation, and retrospective claims.
-2. Extract only supported fields. Leave unstated stops, targets, candle intervals, and validity horizons unknown. Reject fields that the cited evidence does not support. Require explicit review before a paper entry; synthetic demo fixtures must identify their review as synthetic.
-3. Provide a deterministic baseline, an optional structured LLM extractor, and an optional Jev client using [TypeSafe's documented interface](https://docs.typesafe.ai/). Record the model identity and request format used. Service failures, malformed answers, and abstentions must produce no model-approved entry. Validate any returned probability distribution before using it; evaluate decision thresholds on the project's own labeled data.
-4. Keep source evidence, interpretation, strategy policy, numerical risk, and execution separate. Code controls numerical limits. Jev may judge a narrow decision question; it cannot supply missing source facts or override risk limits. Its current setup and verification status belong in [JEV_SETUP.md](JEV_SETUP.md).
-5. Replay in chronological order. Use only completed bars and signals available at decision time. Decide at close and fill no earlier than the next eligible open. Do not pass future data to decision callbacks. Charge fees and adverse slippage on entry and exit. Use conservative gap-stop and intrabar-ordering assumptions, and mark open positions to market.
-6. Hold at most one position. Apply risk-based sizing, an exposure cap, an optional short-simulation setting, a drawdown veto, setup expiry, and one entry per signal. The prototype has no broker or exchange order integration.
-7. Provide CLI commands and a self-contained HTML report that expose examples, decisions, evidence, and blockers. The offline demo and behavior tests must run on Python 3.11 or later without third-party packages. Document optional providers' additional requirements.
-8. Maintain source references, a development plan, evaluation criteria, CI, setup instructions, and an accurate validation record. Distinguish controlled HTTP tests, synthetic scenarios, genuine source retrieval, real model calls, and market evaluation.
+1. Acquire Krown's own regular analysis videos and completed livestreams. Record
+   exact source identity, publication metadata, actual retrieval time, caption type
+   and content hashes. Preserve incomplete and failed acquisitions explicitly.
+2. Represent each subject and scenario separately. Distinguish an asset's price
+   from an indicator, a comparison asset or a related instrument. Preserve conditional
+   branches, uncertainty, negation and corrections.
+3. Record expected movement, prerequisites, invalidation, forecast timeframe and
+   target areas only when the source supports them. Unstated fields remain unknown.
+   Do not infer an invalidation by reversing a trigger or turn a chart interval into
+   a holding period.
+4. Separate source evidence from the author's interpretation. Retain timestamped
+   segment references and enough continuous context to understand the scenario.
+   Record whether an interpretation was written by a human or assistant.
+5. Validate evidence before making model requests. Ask Jev narrow fidelity questions
+   through a documented provider interface. Pin the model snapshot, preserve usage
+   and cost, bound the run, and stop on an uncertain request outcome.
+6. Treat model uncertainty and unsupported interpretations as unresolved. A typed
+   answer or high confidence does not create missing source facts, an approved
+   trading setup or a probability of investment success.
+7. Keep trading policy, numerical risk and execution separate from source meaning.
+   Future backtests must use explicit availability times, completed bars, eligible
+   fills and transaction costs. Researcher-authored rules must be identified.
+8. Keep documentation, examples and source references in English and publish changes
+   on `main`. Report actual tests, source review, live model calls and backtests
+   separately, with reproducible inputs and limitations.
 
-## Scope limits
+## Current implementation boundary
 
-The prototype does not train a Decision Transformer, interpret complete charts, optimize a portfolio, infer unspoken price levels, scrape channels unattended, or place live orders. Follow-up work and its acceptance criteria belong in [PLAN.md](PLAN.md).
+Contextual claims are authored by reading captions; the software validates and submits
+them for optional Jev review. Automatic full-video extraction and chart interpretation
+are future work. No authenticated Jev call or new semantic backtest has been completed.
+
+The earlier strict grammar, reviewed `Signal` model and synthetic paper demo remain
+available for testing execution mechanics. Semantic claims are not converted into
+those signals automatically. The removed word-based video analysis is outside the
+current workflow. There is no broker connection or live order execution.
 
 ## Acceptance
 
-The offline workflow must run end to end. Behavioral tests must cover unknown and negated signals, forged evidence, model failure, future-data leakage, next-open fills, short accounting, fees, gaps, intrabar ambiguity, expired signals, review requirements, and size limits.
-
-Public-source examples must state whether anyone checked them against the recording or labeled their trading meaning. Report actual CI results and model-call status. Historical tests of firelex/Jeff are not Jev validation.
+The offline examples must validate without credentials, and malformed evidence must
+fail before a model request. Tests must distinguish real provider results from missing
+credentials, local HTTP fixtures and uncertain failures. A source-quality claim needs
+independent contextual labels; a trading claim additionally needs a frozen market
+evaluation. Detailed criteria belong in [EVALUATION.md](EVALUATION.md).
